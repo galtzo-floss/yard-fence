@@ -43,7 +43,19 @@ require "version_gem"
 
 # includes gem files
 require_relative "fence/version"
-require_relative "fence/kramdown_gfm_document"
+begin
+  require_relative "fence/kramdown_gfm_document"
+# :nocov:
+# Not covering, because kramdown support is tested, so this rescue is not hit in test runs.
+rescue LoadError => error
+  # check the error message, and re-raise if not what is expected
+  if error.message.include?("kramdown")
+    warn("Yard::Fence: Kramdown GFM provider not loaded: #{error.class}: #{error.message}") if ENV.fetch("YARD_DEBUG", "false").casecmp?("true")
+  else
+    raise error
+  end
+end
+# :nocov:
 
 module Yard
   module Fence
@@ -57,7 +69,10 @@ module Yard
     SINGLE_BRACE_PLACEHOLDER_REGEX = /{([A-Za-z0-9_:\-]+)}/
 
     class Error < StandardError; end
+    # :nocov:
+    # This is a runtime sanity check to ensure our fullwidth braces differ from ASCII braces.
     raise Error, "ASCII braces are not the same as Unicode Fullwidth braces" if ASCII_BRACES == FULLWIDTH_BRACES
+    # :nocov:
 
     module_function
 
@@ -139,6 +154,12 @@ module Yard
     # require warnings when YARD is in the middle of loading itself. Call this
     # from a file loaded via .yardopts (e.g. `-e 'require "yard/fence/kramdown_gfm"; Yard::Fence.use_kramdown_gfm!'`).
     def use_kramdown_gfm!
+      # :nocov:
+      # Not covering, because kramdown support is tested, so this rescue is not hit in test runs.
+      unless defined?(Yard::Fence::KramdownGfmDocument)
+        raise Error, "Yard::Fence: Kramdown GFM provider not loaded. Add kramdown and kramdown-parser-gfm to your Gemfile."
+      end
+      # :nocov:
       providers = ::YARD::Templates::Helpers::MarkupHelper::MARKUP_PROVIDERS[:markdown]
       providers.unshift(KRAMDOWN_PROVIDER)
       providers.uniq! { |p| [p[:lib].to_s, p[:const].to_s] }

@@ -47,7 +47,6 @@ This document captures project-specific knowledge to streamline setup, testing, 
   - RSpec 3.13 with custom spec/spec_helper.rb configuration:
     - silent_stream: STDOUT is silenced by default for examples to keep logs clean.
       - To explicitly test console output, tag the example or group with :check_output.
-    - Global state hygiene: Around each example, FlossFunding.namespaces and FlossFunding.silenced are snapshotted and restored to prevent cross-test pollution.
     - DEBUG toggle: Set DEBUG=true to require 'debug' and avoid silencing output during your run.
     - ENV seeding: The suite sets ENV["FLOSS_FUNDING_FLOSS_FUNDING"] = "Free-as-in-beer" so that the library’s own namespace is considered activated (avoids noisy warnings).
     - Coverage: kettle-soup-cover integrates SimpleCov; .simplecov is invoked from spec_helper when enabled by Kettle::Soup::Cover::DO_COV, which is controlled by K_SOUP_COV_DO being set to true / false.

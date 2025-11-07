@@ -20,6 +20,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+- 100% test coverage, lines and branches
+
 ### Changed
 
 ### Deprecated
@@ -27,6 +29,10 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Removed
 
 ### Fixed
+
+- handling of optional dependencies
+  - kramdown
+  - kramdown-parser-gfm
 
 ### Security
 

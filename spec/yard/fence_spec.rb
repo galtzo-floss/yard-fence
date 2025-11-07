@@ -134,6 +134,17 @@ RSpec.describe Yard::Fence do
         end
       end
     end
+
+    describe "error path" do
+      it "rescues and warns if an exception occurs during processing", :check_output do
+        # Force the method past the early return and then raise inside the loop
+        allow(Dir).to receive(:exist?).and_return(true)
+        allow(Dir).to receive(:glob).and_raise(StandardError, "boom from glob")
+
+        output = capture(:stderr) { described_class.postprocess_html_docs }
+        expect(output).to include("Yard::Fence.postprocess_html_docs failed: StandardError: boom from glob")
+      end
+    end
   end
 
   describe "::use_kramdown_gfm!" do
@@ -151,6 +162,83 @@ RSpec.describe Yard::Fence do
       providers = YARD::Templates::Helpers::MarkupHelper::MARKUP_PROVIDERS[:markdown]
       count = providers.count { |p| p[:const] == "KramdownGfmDocument" }
       expect(count).to eq(1)
+    end
+
+    it "unshifts provider to the front and deduplicates using stringified keys" do
+      providers = YARD::Templates::Helpers::MarkupHelper::MARKUP_PROVIDERS[:markdown]
+      original = providers.dup
+      begin
+        # Seed providers with a different engine and two duplicates of our provider
+        providers.clear
+        providers.push(
+          {lib: :redcarpet, const: "Redcarpet"},
+          {lib: :kramdown, const: "KramdownGfmDocument"}, # exact match
+          {lib: "kramdown", const: :KramdownGfmDocument}, # mixed types; to_s should dedupe
+        )
+
+        result = described_class.use_kramdown_gfm!
+        expect(result).to be(true)
+
+        # Provider is highest priority
+        expect(providers.first[:lib]).to eq(:kramdown)
+        expect(providers.first[:const]).to eq("KramdownGfmDocument")
+
+        # Only one kramdown/GFM entry remains after uniq!
+        count = providers.count { |p| p[:lib].to_s == "kramdown" && p[:const].to_s == "KramdownGfmDocument" }
+        expect(count).to eq(1)
+
+        # Other providers are preserved
+        expect(providers.any? { |p| p[:lib] == :redcarpet }).to be(true)
+      ensure
+        providers.replace(original)
+      end
+    end
+
+    it "returns true and leaves array unchanged when already prioritized and unique" do
+      providers = YARD::Templates::Helpers::MarkupHelper::MARKUP_PROVIDERS[:markdown]
+      original = providers.dup
+      begin
+        # Ensure our provider is already first and unique
+        providers.reject! { |p| p[:lib].to_s == "kramdown" && p[:const].to_s == "KramdownGfmDocument" }
+        providers.unshift({lib: :kramdown, const: "KramdownGfmDocument"})
+        snapshot = providers.dup
+
+        result = described_class.use_kramdown_gfm!
+        expect(result).to be(true)
+        expect(providers).to eq(snapshot)
+        expect(providers.first[:const]).to eq("KramdownGfmDocument")
+      ensure
+        providers.replace(original)
+      end
+    end
+
+    describe "error path" do
+      it "rescues NameError, warns, and returns false when YARD helper constants are missing", :check_output do
+        # Ensure provider is loaded so we reach the NameError spot
+        expect(defined?(Yard::Fence::KramdownGfmDocument)).to be_truthy
+
+        # Hide the YARD::Templates constant to trigger NameError when referenced
+        hide_const("YARD::Templates")
+
+        result = nil
+        output = capture(:stderr) { result = described_class.use_kramdown_gfm! }
+        expect(result).to be(false)
+        expect(output).to match(/Yard::Fence.use_kramdown_gfm!: failed to load YARD helper: NameError:/)
+      end
+    end
+  end
+
+  describe "load-time prepare_tmp_files (error path)" do
+    it "rescues and warns when preparing tmp files fails at load time", :check_output do
+      # Make mkdir_p raise so Yard::Fence.prepare_tmp_files fails inside load
+      allow(FileUtils).to receive(:mkdir_p).and_raise(StandardError, "mkdir blew up")
+
+      root = File.expand_path("../..", __dir__)
+      fence_rb = File.join(root, "lib", "yard", "fence.rb")
+      expect(File.exist?(fence_rb)).to be(true)
+
+      output = capture(:stderr) { load fence_rb }
+      expect(output).to include("Yard::Fence: failed to prepare tmp files: StandardError: mkdir blew up")
     end
   end
 end

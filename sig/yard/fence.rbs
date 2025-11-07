@@ -1,10 +1,10 @@
 module Yard
   module Fence
-    # Constants
+    # Constants (refined literal types where possible)
     VERSION: String
-    ASCII_BRACES: String
-    FULLWIDTH_BRACES: String
-    KRAMDOWN_PROVIDER: Hash[Symbol, untyped]
+    ASCII_BRACES: "{}"
+    FULLWIDTH_BRACES: "｛｝"
+    KRAMDOWN_PROVIDER: { lib: Symbol, const: String }
     GLOB_PATTERN: String
     TRIPLE_TICK_FENCE: ::Regexp
     INLINE_TICK_FENCE: ::Regexp
@@ -15,16 +15,33 @@ module Yard
     class Error < ::StandardError
     end
 
-    # Module functions
+    # Module functions (available both as singleton and instance via module_function)
     def self.fullwidth_braces: (String str) -> String
+    def fullwidth_braces: (String str) -> String
+
     def self.sanitize_inline_code: (String line) -> String
+    def sanitize_inline_code: (String line) -> String
+
     def self.sanitize_fenced_blocks: (String text) -> String
+    def sanitize_fenced_blocks: (String text) -> String
+
+    # Accept any object; if String returns String, otherwise returns original (untyped)
     def self.sanitize_text: (String text) -> String
                           | (untyped text) -> untyped
+    def sanitize_text: (String text) -> String
+                     | (untyped text) -> untyped
+
     def self.prepare_tmp_files: () -> void
+    def prepare_tmp_files: () -> void
+
     def self.restore_ascii_braces_in_html_file: (String html_filepath) -> void
+    def restore_ascii_braces_in_html_file: (String html_filepath) -> void
+
     def self.postprocess_html_docs: () -> void
+    def postprocess_html_docs: () -> void
+
     def self.use_kramdown_gfm!: () -> bool
+    def use_kramdown_gfm!: () -> bool
 
     module Version
       VERSION: String

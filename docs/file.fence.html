@@ -59,11 +59,11 @@
 
       <div id="content"><div id='filecontents'><p>module Yard
   module Fence
-    # Constants
+    # Constants (refined literal types where possible)
     VERSION: String
-    ASCII_BRACES: String
-    FULLWIDTH_BRACES: String
-    KRAMDOWN_PROVIDER: Hash[Symbol, untyped]
+    ASCII_BRACES: “{}”
+    FULLWIDTH_BRACES: “{}”
+    KRAMDOWN_PROVIDER: { lib: Symbol, const: String }
     GLOB_PATTERN: String
     TRIPLE_TICK_FENCE: ::Regexp
     INLINE_TICK_FENCE: ::Regexp
@@ -74,16 +74,33 @@
 class Error &lt; ::StandardError
 end
 
-# Module functions
+# Module functions (available both as singleton and instance via module_function)
 def self.fullwidth_braces: (String str) -&gt; String
+def fullwidth_braces: (String str) -&gt; String
+
 def self.sanitize_inline_code: (String line) -&gt; String
+def sanitize_inline_code: (String line) -&gt; String
+
 def self.sanitize_fenced_blocks: (String text) -&gt; String
+def sanitize_fenced_blocks: (String text) -&gt; String
+
+# Accept any object; if String returns String, otherwise returns original (untyped)
 def self.sanitize_text: (String text) -&gt; String
                       | (untyped text) -&gt; untyped
+def sanitize_text: (String text) -&gt; String
+                 | (untyped text) -&gt; untyped
+
 def self.prepare_tmp_files: () -&gt; void
+def prepare_tmp_files: () -&gt; void
+
 def self.restore_ascii_braces_in_html_file: (String html_filepath) -&gt; void
+def restore_ascii_braces_in_html_file: (String html_filepath) -&gt; void
+
 def self.postprocess_html_docs: () -&gt; void
+def postprocess_html_docs: () -&gt; void
+
 def self.use_kramdown_gfm!: () -&gt; bool
+def use_kramdown_gfm!: () -&gt; bool
 
 module Version
   VERSION: String
@@ -96,7 +113,7 @@ end   end end
 </div></div>
 
       <div id="footer">
-  Generated on Fri Nov  7 11:02:44 2025 by
+  Generated on Fri Nov  7 11:44:28 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.4.7).
 </div>
