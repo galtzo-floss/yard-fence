@@ -56,6 +56,22 @@ Just the important bits:
 - Prioritizes Kramdown's GFM parser so tables and fenced code blocks render correctly.
 - After YARD finishes generating HTML, restores fullwidth braces back to normal ASCII braces so code examples are copy‑pastable.
 
+Create a `.yardopts` file like this:
+
+```text
+--plugin fence
+-e yard/fence/hoist.rb
+--readme tmp/README.md
+--markup markdown
+--output docs
+'lib/**/*.rb'
+-
+'tmp/*.md'
+'tmp/*.txt'
+```
+
+See the configuration and usage sections for more details.
+
 ## 💡 Info you can shake a stick at
 
 | Tokens to Remember      | [![Gem name][⛳️name-img]][⛳️gem-name] [![Gem namespace][⛳️namespace-img]][⛳️gem-namespace]                                                                                                                                                                                                                                                                          |
@@ -175,7 +191,7 @@ Recommended .yardopts (noise‑free):
 
 ```text
 --plugin fence
--e 'Yard::Fence.use_kramdown_gfm!'
+-e yard/fence/hoist.rb
 --readme tmp/README.md
 --markup markdown
 --output docs
@@ -195,7 +211,7 @@ CLI example that would be similar to what is accomplished by the `.yardopts` fro
 ```bash
 yard doc \
   --plugin fence \
-  -e 'Yard::Fence.use_kramdown_gfm!' \
+  -e yard/fence/hoist.rb \
   --readme tmp/README.md \
   lib/**/*.rb - tmp/*.md tmp/*.txt
 ```

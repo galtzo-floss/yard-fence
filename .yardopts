@@ -5,7 +5,7 @@
 --charset utf-8
 --markup markdown
 --output docs
--e ./yard_bootstrap.rb
+-e yard/fence/hoist.rb
 'lib/**/*.rb'
 -
 'tmp/*.md'

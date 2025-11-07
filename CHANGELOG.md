@@ -20,6 +20,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+- yard/fence/hoist.rb: Hoisting the customized GFM kramdown parser
+
 ### Changed
 
 ### Deprecated
