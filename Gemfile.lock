@@ -14,9 +14,11 @@ PATH
   remote: .
   specs:
     yard-fence (0.1.0)
+      rdoc (~> 6.11)
+      version_gem (~> 1.1, >= 1.1.9)
+      yard (~> 0.9, >= 0.9.37)
 
 GEM
-  remote: https://rubygems.org/
   remote: https://gem.coop/
   specs:
     addressable (2.8.7)
@@ -285,7 +287,7 @@ GEM
     unicode-emoji (4.1.0)
     version_gem (1.1.9)
     yard (0.9.37)
-    yard-relative_markdown_links (0.5.0)
+    yard-relative_markdown_links (0.6.0)
       nokogiri (>= 1.14.3, < 2)
     zeitwerk (2.7.3)
     zlib (3.2.2)
@@ -325,7 +327,7 @@ DEPENDENCIES
   yard (~> 0.9, >= 0.9.37)
   yard-fence!
   yard-junk (~> 0.0, >= 0.0.10)!
-  yard-relative_markdown_links (~> 0.5.0)
+  yard-relative_markdown_links (~> 0.6)
 
 BUNDLED WITH
    2.7.2

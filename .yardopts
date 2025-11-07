@@ -1,11 +1,12 @@
+--plugin fence
 --plugin junk
 --plugin relative_markdown_links
---readme README.md
+--readme tmp/README.md
 --charset utf-8
 --markup markdown
 --output docs
---load .yard_gfm_support.rb
+-e ./yard_bootstrap.rb
 'lib/**/*.rb'
 -
-'*.md'
-'*.txt'
+'tmp/*.md'
+'tmp/*.txt'

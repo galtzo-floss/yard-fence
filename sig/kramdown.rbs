@@ -1,0 +1,6 @@
+module Kramdown
+  class Document
+    def initialize: (String source, ?::Hash[Symbol, untyped] options) -> void
+  end
+end
+

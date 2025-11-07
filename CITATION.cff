@@ -12,9 +12,9 @@ authors:
     orcid: 'https://orcid.org/0009-0008-8519-441X'
 identifiers:
   - type: url
-    value: 'https://github.com/kettle-rb/yard-fence'
+    value: 'https://github.com/galtzo-floss/yard-fence'
     description: yard-fence
-repository-code: 'https://github.com/kettle-rb/yard-fence'
+repository-code: 'https://github.com/galtzo-floss/yard-fence'
 abstract: >-
   yard-fence
 license: See license file

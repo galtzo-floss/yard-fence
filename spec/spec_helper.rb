@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-require "yard/fence"
+require "kettle/test/rspec"
+
+# Library Configs
+require_relative "config/debug"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -13,3 +16,16 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+
+# NOTE: Gemfiles for older rubies won't have kettle-soup-cover.
+#       The rescue LoadError handles that scenario.
+begin
+  require "kettle-soup-cover"
+  require "simplecov" if Kettle::Soup::Cover::DO_COV # `.simplecov` is run here!
+rescue LoadError => error
+  # check the error message, and re-raise if not what is expected
+  raise error unless error.message.include?("kettle")
+end
+
+require "yard"
+require "yard/fence"

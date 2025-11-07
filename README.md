@@ -33,10 +33,10 @@
 [🖼️galtzo-discord]: https://discord.gg/3qme4XHNKN
 [🖼️ruby-lang-i]: https://logos.galtzo.com/assets/images/ruby-lang/avatar-192px.svg
 [🖼️ruby-lang]: https://www.ruby-lang.org/
-[🖼️yard-fence-i]: https://logos.galtzo.com/assets/images/kettle-rb/yard-fence/avatar-192px.svg
-[🖼️yard-fence]: https://github.com/kettle-rb/yard-fence
+[🖼️yard-fence-i]: https://logos.galtzo.com/assets/images/galtzo-floss/yard-fence/avatar-192px.svg
+[🖼️yard-fence]: https://github.com/galtzo-floss/yard-fence
 
-# 🍕 Yard::Fence
+# 🤺 Yard::Fence
 
 [![Version][👽versioni]][👽version] [![GitHub tag (latest SemVer)][⛳️tag-img]][⛳️tag] [![License: MIT][📄license-img]][📄license-ref] [![Downloads Rank][👽dl-ranki]][👽dl-rank] [![Open Source Helpers][👽oss-helpi]][👽oss-help] [![CodeCov Test Coverage][🏀codecovi]][🏀codecov] [![Coveralls Test Coverage][🏀coveralls-img]][🏀coveralls] [![QLTY Test Coverage][🏀qlty-covi]][🏀qlty-cov] [![QLTY Maintainability][🏀qlty-mnti]][🏀qlty-mnt] [![CI Heads][🚎3-hd-wfi]][🚎3-hd-wf] [![CI Runtime Dependencies @ HEAD][🚎12-crh-wfi]][🚎12-crh-wf] [![CI Current][🚎11-c-wfi]][🚎11-c-wf] [![CI Truffle Ruby][🚎9-t-wfi]][🚎9-t-wf] [![CI JRuby][🚎10-j-wfi]][🚎10-j-wf] [![Deps Locked][🚎13-🔒️-wfi]][🚎13-🔒️-wf] [![Deps Unlocked][🚎14-🔓️-wfi]][🚎14-🔓️-wf] [![CI Supported][🚎6-s-wfi]][🚎6-s-wf] [![CI Legacy][🚎4-lg-wfi]][🚎4-lg-wf] [![CI Unsupported][🚎7-us-wfi]][🚎7-us-wf] [![CI Ancient][🚎1-an-wfi]][🚎1-an-wf] [![CI Test Coverage][🚎2-cov-wfi]][🚎2-cov-wf] [![CI Style][🚎5-st-wfi]][🚎5-st-wf] [![CodeQL][🖐codeQL-img]][🖐codeQL] [![Apache SkyWalking Eyes License Compatibility Check][🚎15-🪪-wfi]][🚎15-🪪-wf]
 
@@ -50,15 +50,21 @@
 
 ## 🌻 Synopsis
 
+A brace converter for the markdown fences in your YARD docs.
 
+Just the important bits:
+- Preprocesses top-level README and other `.md`/`.txt` files into `tmp/` replacing ASCII braces inside fenced code blocks, inline code spans, and simple placeholders like `{issuer}` or `{{TOKEN}}` with visually identical fullwidth braces.
+- This prevents YARD from emitting `InvalidLink` warnings.
+- Prioritizes Kramdown's GFM parser so tables and fenced code blocks render correctly.
+- After YARD finishes generating HTML, restores fullwidth braces back to normal ASCII braces so code examples are copy‑pastable.
 
 ## 💡 Info you can shake a stick at
 
 | Tokens to Remember      | [![Gem name][⛳️name-img]][⛳️gem-name] [![Gem namespace][⛳️namespace-img]][⛳️gem-namespace]                                                                                                                                                                                                                                                                          |
 |-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Works with JRuby        | ![JRuby 9.1 Compat][💎jruby-9.1i] ![JRuby 9.2 Compat][💎jruby-9.2i] ![JRuby 9.3 Compat][💎jruby-9.3i] <br/> [![JRuby 9.4 Compat][💎jruby-9.4i]][🚎10-j-wf] [![JRuby 10.0 Compat][💎jruby-c-i]][🚎11-c-wf] [![JRuby HEAD Compat][💎jruby-headi]][🚎3-hd-wf]                                                                                                          |
-| Works with Truffle Ruby | ![Truffle Ruby 22.3 Compat][💎truby-22.3i] ![Truffle Ruby 23.0 Compat][💎truby-23.0i] <br/> [![Truffle Ruby 23.1 Compat][💎truby-23.1i]][🚎9-t-wf] [![Truffle Ruby 24.1 Compat][💎truby-c-i]][🚎11-c-wf]                                                                                                                                                            |
-| Works with MRI Ruby 3   | [![Ruby 3.2 Compat][💎ruby-3.2i]][🚎6-s-wf] [![Ruby 3.3 Compat][💎ruby-3.3i]][🚎6-s-wf] [![Ruby 3.4 Compat][💎ruby-c-i]][🚎11-c-wf] [![Ruby HEAD Compat][💎ruby-headi]][🚎3-hd-wf]                                                                                         |
+| Works with JRuby        | [![JRuby 10.0 Compat][💎jruby-c-i]][🚎11-c-wf] [![JRuby HEAD Compat][💎jruby-headi]][🚎3-hd-wf]                                                                                                                                                                                                                                                                     |
+| Works with Truffle Ruby | [![Truffle Ruby 23.1 Compat][💎truby-23.1i]][🚎9-t-wf] [![Truffle Ruby 24.1 Compat][💎truby-c-i]][🚎11-c-wf]                                                                                                                                                                                                                                                        |
+| Works with MRI Ruby 3   | [![Ruby 3.2 Compat][💎ruby-3.2i]][🚎6-s-wf] [![Ruby 3.3 Compat][💎ruby-3.3i]][🚎6-s-wf] [![Ruby 3.4 Compat][💎ruby-c-i]][🚎11-c-wf] [![Ruby HEAD Compat][💎ruby-headi]][🚎3-hd-wf]                                                                                                                                                                                  |
 | Support & Community     | [![Join Me on Daily.dev's RubyFriends][✉️ruby-friends-img]][✉️ruby-friends] [![Live Chat on Discord][✉️discord-invite-img-ftb]][✉️discord-invite] [![Get help from me on Upwork][👨🏼‍🏫expsup-upwork-img]][👨🏼‍🏫expsup-upwork] [![Get help from me on Codementor][👨🏼‍🏫expsup-codementor-img]][👨🏼‍🏫expsup-codementor]                                       |
 | Source                  | [![Source on GitLab.com][📜src-gl-img]][📜src-gl] [![Source on CodeBerg.org][📜src-cb-img]][📜src-cb] [![Source on Github.com][📜src-gh-img]][📜src-gh] [![The best SHA: dQw4w9WgXcQ!][🧮kloc-img]][🧮kloc]                                                                                                                                                         |
 | Documentation           | [![Current release on RubyDoc.info][📜docs-cr-rd-img]][🚎yard-current] [![YARD on Galtzo.com][📜docs-head-rd-img]][🚎yard-head] [![Maintainer Blog][🚂maint-blog-img]][🚂maint-blog] [![GitLab Wiki][📜gl-wiki-img]][📜gl-wiki] [![GitHub Wiki][📜gh-wiki-img]][📜gh-wiki]                                                                                          |
@@ -80,16 +86,16 @@ Compatible with MRI Ruby 3.2.0+, and concordant releases of JRuby, and TruffleRu
 <details>
   <summary>Find this repo on federated forges (Coming soon!)</summary>
 
-| Federated [DVCS][💎d-in-dvcs] Repository        | Status                                                                | Issues                    | PRs                      | Wiki                      | CI                       | Discussions                  |
-|-------------------------------------------------|-----------------------------------------------------------------------|---------------------------|--------------------------|---------------------------|--------------------------|------------------------------|
-| 🧪 [kettle-rb/yard-fence on GitLab][📜src-gl]   | The Truth                                                             | [💚][🤝gl-issues]         | [💚][🤝gl-pulls]         | [💚][📜gl-wiki]           | 🐭 Tiny Matrix           | ➖                            |
-| 🧊 [kettle-rb/yard-fence on CodeBerg][📜src-cb] | An Ethical Mirror ([Donate][🤝cb-donate])                             | [💚][🤝cb-issues]         | [💚][🤝cb-pulls]         | ➖                         | ⭕️ No Matrix             | ➖                            |
-| 🐙 [kettle-rb/yard-fence on GitHub][📜src-gh]   | Another Mirror                                                        | [💚][🤝gh-issues]         | [💚][🤝gh-pulls]         | [💚][📜gh-wiki]           | 💯 Full Matrix           | [💚][gh-discussions]         |
-| 🎮️ [Discord Server][✉️discord-invite]          | [![Live Chat on Discord][✉️discord-invite-img-ftb]][✉️discord-invite] | [Let's][✉️discord-invite] | [talk][✉️discord-invite] | [about][✉️discord-invite] | [this][✉️discord-invite] | [library!][✉️discord-invite] |
+| Federated [DVCS][💎d-in-dvcs] Repository           | Status                                                                | Issues                    | PRs                      | Wiki                      | CI                       | Discussions                  |
+|----------------------------------------------------|-----------------------------------------------------------------------|---------------------------|--------------------------|---------------------------|--------------------------|------------------------------|
+| 🧪 [galtzo-floss/yard-fence on GitLab][📜src-gl]   | The Truth                                                             | [💚][🤝gl-issues]         | [💚][🤝gl-pulls]         | [💚][📜gl-wiki]           | 🐭 Tiny Matrix           | ➖                            |
+| 🧊 [galtzo-floss/yard-fence on CodeBerg][📜src-cb] | An Ethical Mirror ([Donate][🤝cb-donate])                             | [💚][🤝cb-issues]         | [💚][🤝cb-pulls]         | ➖                         | ⭕️ No Matrix             | ➖                            |
+| 🐙 [galtzo-floss/yard-fence on GitHub][📜src-gh]   | Another Mirror                                                        | [💚][🤝gh-issues]         | [💚][🤝gh-pulls]         | [💚][📜gh-wiki]           | 💯 Full Matrix           | [💚][gh-discussions]         |
+| 🎮️ [Discord Server][✉️discord-invite]             | [![Live Chat on Discord][✉️discord-invite-img-ftb]][✉️discord-invite] | [Let's][✉️discord-invite] | [talk][✉️discord-invite] | [about][✉️discord-invite] | [this][✉️discord-invite] | [library!][✉️discord-invite] |
 
 </details>
 
-[gh-discussions]: https://github.com/kettle-rb/yard-fence/discussions
+[gh-discussions]: https://github.com/galtzo-floss/yard-fence/discussions
 
 ### Enterprise Support [![Tidelift](https://tidelift.com/badges/package/rubygems/yard-fence)](https://tidelift.com/subscription/pkg/rubygems-yard-fence?utm_source=rubygems-yard-fence&utm_medium=referral&utm_campaign=readme)
 
@@ -165,25 +171,50 @@ NOTE: Be prepared to track down certs for signed gems and add them the same way 
 
 ## ⚙️ Configuration
 
+Yard::Fence writes sanitized copies of top‑level Markdown/TXT into tmp/ at load time. To avoid YARD parsing the unsanitized originals, point YARD at the tmp/ copies.
 
+Recommended .yardopts (noise‑free):
+
+```text
+--plugin fence
+-e 'Yard::Fence.use_kramdown_gfm!'
+--readme tmp/README.md
+--markup markdown
+--output docs
+'lib/**/*.rb'
+-
+'tmp/*.md'
+'tmp/*.txt'
+```
+
+Why tmp/?
+- The plugin converts ASCII `{ }` to fullwidth `｛ ｝` only in `tmp/` so YARD won’t treat brace content as reference tags and emit InvalidLink warnings. After docs are generated, the HTML is restored back to normal ASCII braces for easy copy/paste.
 
 ## 🔧 Basic Usage
 
+CLI example that would be similar to what is accomplished by the `.yardopts` from the section above:
 
+```bash
+yard doc \
+  --plugin fence \
+  -e 'Yard::Fence.use_kramdown_gfm!' \
+  --readme tmp/README.md \
+  lib/**/*.rb - tmp/*.md tmp/*.txt
+```
 
 ## 🦷 FLOSS Funding
 
-While kettle-rb tools are free software and will always be, the project would benefit immensely from some funding.
+While galtzo-floss tools are free software and will always be, the project would benefit immensely from some funding.
 Raising a monthly budget of... "dollars" would make the project more sustainable.
 
 We welcome both individual and corporate sponsors! We also offer a
 wide array of funding channels to account for your preferences
 (although currently [Open Collective][🖇osc] is our preferred funding platform).
 
-**If you're working in a company that's making significant use of kettle-rb tools we'd
-appreciate it if you suggest to your company to become a kettle-rb sponsor.**
+**If you're working in a company that's making significant use of galtzo-floss tools we'd
+appreciate it if you suggest to your company to become a galtzo-floss sponsor.**
 
-You can support the development of kettle-rb tools via
+You can support the development of galtzo-floss tools via
 [GitHub Sponsors][🖇sponsor],
 [Liberapay][⛳liberapay],
 [PayPal][🖇paypal],
@@ -196,7 +227,7 @@ and [Tidelift][🏙️entsup-tidelift].
 
 ### Open Collective for Individuals
 
-Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/kettle-rb#backer)]
+Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/galtzo-floss#backer)]
 
 NOTE: [kettle-readme-backers][kettle-readme-backers] updates this list every day, automatically.
 
@@ -206,7 +237,7 @@ No backers yet. Be the first!
 
 ### Open Collective for Organizations
 
-Become a sponsor and get your logo on our README on GitHub with a link to your site. [[Become a sponsor](https://opencollective.com/kettle-rb#sponsor)]
+Become a sponsor and get your logo on our README on GitHub with a link to your site. [[Become a sponsor](https://opencollective.com/galtzo-floss#sponsor)]
 
 NOTE: [kettle-readme-backers][kettle-readme-backers] updates this list every day, automatically.
 
@@ -214,7 +245,7 @@ NOTE: [kettle-readme-backers][kettle-readme-backers] updates this list every day
 No sponsors yet. Be the first!
 <!-- OPENCOLLECTIVE-ORGANIZATIONS:END -->
 
-[kettle-readme-backers]: https://github.com/kettle-rb/yard-fence/blob/main/exe/kettle-readme-backers
+[kettle-readme-backers]: https://github.com/galtzo-floss/yard-fence/blob/main/exe/kettle-readme-backers
 
 ### Another way to support open-source
 
@@ -265,16 +296,16 @@ chat rooms and mailing lists agrees to follow the [![Contributor Covenant 2.1][�
 
 Made with [contributors-img][🖐contrib-rocks].
 
-Also see GitLab Contributors: [https://gitlab.com/kettle-rb/yard-fence/-/graphs/main][🚎contributors-gl]
+Also see GitLab Contributors: [https://gitlab.com/galtzo-floss/yard-fence/-/graphs/main][🚎contributors-gl]
 
 <details>
     <summary>⭐️ Star History</summary>
 
-<a href="https://star-history.com/#kettle-rb/yard-fence&Date">
+<a href="https://star-history.com/#galtzo-floss/yard-fence&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=kettle-rb/yard-fence&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=kettle-rb/yard-fence&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=kettle-rb/yard-fence&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=galtzo-floss/yard-fence&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=galtzo-floss/yard-fence&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=galtzo-floss/yard-fence&type=Date" />
  </picture>
 </a>
 
@@ -328,7 +359,7 @@ See [LICENSE.txt][📄license] for the official [Copyright Notice][📄copyright
 
 <ul>
     <li>
-        Copyright (c) 2023, 2025 Peter H. Boling, of
+        Copyright (c) 2025 Peter H. Boling, of
         <a href="https://discord.gg/3qme4XHNKN">
             Galtzo.com
             <picture>
@@ -353,7 +384,7 @@ To join the community or get help 👇️ Join the Discord.
 
 To say "thanks!" ☝️ Join the Discord or 👇️ send money.
 
-[![Sponsor kettle-rb/yard-fence on Open Source Collective][🖇osc-all-bottom-img]][🖇osc] 💌 [![Sponsor me on GitHub Sponsors][🖇sponsor-bottom-img]][🖇sponsor] 💌 [![Sponsor me on Liberapay][⛳liberapay-bottom-img]][⛳liberapay] 💌 [![Donate on PayPal][🖇paypal-bottom-img]][🖇paypal]
+[![Sponsor galtzo-floss/yard-fence on Open Source Collective][🖇osc-all-bottom-img]][🖇osc] 💌 [![Sponsor me on GitHub Sponsors][🖇sponsor-bottom-img]][🖇sponsor] 💌 [![Sponsor me on Liberapay][⛳liberapay-bottom-img]][⛳liberapay] 💌 [![Donate on PayPal][🖇paypal-bottom-img]][🖇paypal]
 
 ### Please give the project a star ⭐ ♥.
 
@@ -362,17 +393,17 @@ Thanks for RTFM. ☺️
 [⛳liberapay-img]: https://img.shields.io/liberapay/goal/pboling.svg?logo=liberapay&color=a51611&style=flat
 [⛳liberapay-bottom-img]: https://img.shields.io/liberapay/goal/pboling.svg?style=for-the-badge&logo=liberapay&color=a51611
 [⛳liberapay]: https://liberapay.com/pboling/donate
-[🖇osc-all-img]: https://img.shields.io/opencollective/all/kettle-rb
-[🖇osc-sponsors-img]: https://img.shields.io/opencollective/sponsors/kettle-rb
-[🖇osc-backers-img]: https://img.shields.io/opencollective/backers/kettle-rb
-[🖇osc-backers]: https://opencollective.com/kettle-rb#backer
-[🖇osc-backers-i]: https://opencollective.com/kettle-rb/backers/badge.svg?style=flat
-[🖇osc-sponsors]: https://opencollective.com/kettle-rb#sponsor
-[🖇osc-sponsors-i]: https://opencollective.com/kettle-rb/sponsors/badge.svg?style=flat
-[🖇osc-all-bottom-img]: https://img.shields.io/opencollective/all/kettle-rb?style=for-the-badge
-[🖇osc-sponsors-bottom-img]: https://img.shields.io/opencollective/sponsors/kettle-rb?style=for-the-badge
-[🖇osc-backers-bottom-img]: https://img.shields.io/opencollective/backers/kettle-rb?style=for-the-badge
-[🖇osc]: https://opencollective.com/kettle-rb
+[🖇osc-all-img]: https://img.shields.io/opencollective/all/galtzo-floss
+[🖇osc-sponsors-img]: https://img.shields.io/opencollective/sponsors/galtzo-floss
+[🖇osc-backers-img]: https://img.shields.io/opencollective/backers/galtzo-floss
+[🖇osc-backers]: https://opencollective.com/galtzo-floss#backer
+[🖇osc-backers-i]: https://opencollective.com/galtzo-floss/backers/badge.svg?style=flat
+[🖇osc-sponsors]: https://opencollective.com/galtzo-floss#sponsor
+[🖇osc-sponsors-i]: https://opencollective.com/galtzo-floss/sponsors/badge.svg?style=flat
+[🖇osc-all-bottom-img]: https://img.shields.io/opencollective/all/galtzo-floss?style=for-the-badge
+[🖇osc-sponsors-bottom-img]: https://img.shields.io/opencollective/sponsors/galtzo-floss?style=for-the-badge
+[🖇osc-backers-bottom-img]: https://img.shields.io/opencollective/backers/galtzo-floss?style=for-the-badge
+[🖇osc]: https://opencollective.com/galtzo-floss
 [🖇sponsor-img]: https://img.shields.io/badge/Sponsor_Me!-pboling.svg?style=social&logo=github
 [🖇sponsor-bottom-img]: https://img.shields.io/badge/Sponsor_Me!-pboling-blue?style=for-the-badge&logo=github
 [🖇sponsor]: https://github.com/sponsors/pboling
@@ -396,12 +427,12 @@ Thanks for RTFM. ☺️
 [✉️ruby-friends]: https://app.daily.dev/squads/rubyfriends
 
 [✇bundle-group-pattern]: https://gist.github.com/pboling/4564780
-[⛳️gem-namespace]: https://github.com/kettle-rb/yard-fence
+[⛳️gem-namespace]: https://github.com/galtzo-floss/yard-fence
 [⛳️namespace-img]: https://img.shields.io/badge/namespace-Yard::Fence-3C2D2D.svg?style=square&logo=ruby&logoColor=white
 [⛳️gem-name]: https://bestgems.org/gems/yard-fence
 [⛳️name-img]: https://img.shields.io/badge/name-yard--fence-3C2D2D.svg?style=square&logo=rubygems&logoColor=red
-[⛳️tag-img]: https://img.shields.io/github/tag/kettle-rb/yard-fence.svg
-[⛳️tag]: http://github.com/kettle-rb/yard-fence/releases
+[⛳️tag-img]: https://img.shields.io/github/tag/galtzo-floss/yard-fence.svg
+[⛳️tag]: http://github.com/galtzo-floss/yard-fence/releases
 [🚂maint-blog]: http://www.railsbling.com/tags/yard-fence
 [🚂maint-blog-img]: https://img.shields.io/badge/blog-railsbling-0093D0.svg?style=for-the-badge&logo=rubyonrails&logoColor=orange
 [🚂maint-contact]: http://www.railsbling.com/contact
@@ -436,63 +467,57 @@ Thanks for RTFM. ☺️
 [💁🏼‍♂️peterboling]: http://www.peterboling.com
 [🚂railsbling]: http://www.railsbling.com
 [📜src-gl-img]: https://img.shields.io/badge/GitLab-FBA326?style=for-the-badge&logo=Gitlab&logoColor=orange
-[📜src-gl]: https://gitlab.com/kettle-rb/yard-fence/
+[📜src-gl]: https://gitlab.com/galtzo-floss/yard-fence/
 [📜src-cb-img]: https://img.shields.io/badge/CodeBerg-4893CC?style=for-the-badge&logo=CodeBerg&logoColor=blue
-[📜src-cb]: https://codeberg.org/kettle-rb/yard-fence
+[📜src-cb]: https://codeberg.org/galtzo-floss/yard-fence
 [📜src-gh-img]: https://img.shields.io/badge/GitHub-238636?style=for-the-badge&logo=Github&logoColor=green
-[📜src-gh]: https://github.com/kettle-rb/yard-fence
+[📜src-gh]: https://github.com/galtzo-floss/yard-fence
 [📜docs-cr-rd-img]: https://img.shields.io/badge/RubyDoc-Current_Release-943CD2?style=for-the-badge&logo=readthedocs&logoColor=white
 [📜docs-head-rd-img]: https://img.shields.io/badge/YARD_on_Galtzo.com-HEAD-943CD2?style=for-the-badge&logo=readthedocs&logoColor=white
-[📜gl-wiki]: https://gitlab.com/kettle-rb/yard-fence/-/wikis/home
-[📜gh-wiki]: https://github.com/kettle-rb/yard-fence/wiki
+[📜gl-wiki]: https://gitlab.com/galtzo-floss/yard-fence/-/wikis/home
+[📜gh-wiki]: https://github.com/galtzo-floss/yard-fence/wiki
 [📜gl-wiki-img]: https://img.shields.io/badge/wiki-examples-943CD2.svg?style=for-the-badge&logo=gitlab&logoColor=white
 [📜gh-wiki-img]: https://img.shields.io/badge/wiki-examples-943CD2.svg?style=for-the-badge&logo=github&logoColor=white
 [👽dl-rank]: https://bestgems.org/gems/yard-fence
 [👽dl-ranki]: https://img.shields.io/gem/rd/yard-fence.svg
-[👽oss-help]: https://www.codetriage.com/kettle-rb/yard-fence
-[👽oss-helpi]: https://www.codetriage.com/kettle-rb/yard-fence/badges/users.svg
+[👽oss-help]: https://www.codetriage.com/galtzo-floss/yard-fence
+[👽oss-helpi]: https://www.codetriage.com/galtzo-floss/yard-fence/badges/users.svg
 [👽version]: https://bestgems.org/gems/yard-fence
 [👽versioni]: https://img.shields.io/gem/v/yard-fence.svg
-[🏀qlty-mnt]: https://qlty.sh/gh/kettle-rb/projects/yard-fence
-[🏀qlty-mnti]: https://qlty.sh/gh/kettle-rb/projects/yard-fence/maintainability.svg
-[🏀qlty-cov]: https://qlty.sh/gh/kettle-rb/projects/yard-fence/metrics/code?sort=coverageRating
-[🏀qlty-covi]: https://qlty.sh/gh/kettle-rb/projects/yard-fence/coverage.svg
-[🏀codecov]: https://codecov.io/gh/kettle-rb/yard-fence
-[🏀codecovi]: https://codecov.io/gh/kettle-rb/yard-fence/graph/badge.svg
-[🏀coveralls]: https://coveralls.io/github/kettle-rb/yard-fence?branch=main
-[🏀coveralls-img]: https://coveralls.io/repos/github/kettle-rb/yard-fence/badge.svg?branch=main
-[🖐codeQL]: https://github.com/kettle-rb/yard-fence/security/code-scanning
-[🖐codeQL-img]: https://github.com/kettle-rb/yard-fence/actions/workflows/codeql-analysis.yml/badge.svg
-[🚎1-an-wf]: https://github.com/kettle-rb/yard-fence/actions/workflows/ancient.yml
-[🚎1-an-wfi]: https://github.com/kettle-rb/yard-fence/actions/workflows/ancient.yml/badge.svg
-[🚎2-cov-wf]: https://github.com/kettle-rb/yard-fence/actions/workflows/coverage.yml
-[🚎2-cov-wfi]: https://github.com/kettle-rb/yard-fence/actions/workflows/coverage.yml/badge.svg
-[🚎3-hd-wf]: https://github.com/kettle-rb/yard-fence/actions/workflows/heads.yml
-[🚎3-hd-wfi]: https://github.com/kettle-rb/yard-fence/actions/workflows/heads.yml/badge.svg
-[🚎4-lg-wf]: https://github.com/kettle-rb/yard-fence/actions/workflows/legacy.yml
-[🚎4-lg-wfi]: https://github.com/kettle-rb/yard-fence/actions/workflows/legacy.yml/badge.svg
-[🚎5-st-wf]: https://github.com/kettle-rb/yard-fence/actions/workflows/style.yml
-[🚎5-st-wfi]: https://github.com/kettle-rb/yard-fence/actions/workflows/style.yml/badge.svg
-[🚎6-s-wf]: https://github.com/kettle-rb/yard-fence/actions/workflows/supported.yml
-[🚎6-s-wfi]: https://github.com/kettle-rb/yard-fence/actions/workflows/supported.yml/badge.svg
-[🚎7-us-wf]: https://github.com/kettle-rb/yard-fence/actions/workflows/unsupported.yml
-[🚎7-us-wfi]: https://github.com/kettle-rb/yard-fence/actions/workflows/unsupported.yml/badge.svg
-[🚎8-ho-wf]: https://github.com/kettle-rb/yard-fence/actions/workflows/hoary.yml
-[🚎8-ho-wfi]: https://github.com/kettle-rb/yard-fence/actions/workflows/hoary.yml/badge.svg
-[🚎9-t-wf]: https://github.com/kettle-rb/yard-fence/actions/workflows/truffle.yml
-[🚎9-t-wfi]: https://github.com/kettle-rb/yard-fence/actions/workflows/truffle.yml/badge.svg
-[🚎10-j-wf]: https://github.com/kettle-rb/yard-fence/actions/workflows/jruby.yml
-[🚎10-j-wfi]: https://github.com/kettle-rb/yard-fence/actions/workflows/jruby.yml/badge.svg
-[🚎11-c-wf]: https://github.com/kettle-rb/yard-fence/actions/workflows/current.yml
-[🚎11-c-wfi]: https://github.com/kettle-rb/yard-fence/actions/workflows/current.yml/badge.svg
-[🚎12-crh-wf]: https://github.com/kettle-rb/yard-fence/actions/workflows/dep-heads.yml
-[🚎12-crh-wfi]: https://github.com/kettle-rb/yard-fence/actions/workflows/dep-heads.yml/badge.svg
-[🚎13-🔒️-wf]: https://github.com/kettle-rb/yard-fence/actions/workflows/locked_deps.yml
-[🚎13-🔒️-wfi]: https://github.com/kettle-rb/yard-fence/actions/workflows/locked_deps.yml/badge.svg
-[🚎14-🔓️-wf]: https://github.com/kettle-rb/yard-fence/actions/workflows/unlocked_deps.yml
-[🚎14-🔓️-wfi]: https://github.com/kettle-rb/yard-fence/actions/workflows/unlocked_deps.yml/badge.svg
-[🚎15-🪪-wf]: https://github.com/kettle-rb/yard-fence/actions/workflows/license-eye.yml
-[🚎15-🪪-wfi]: https://github.com/kettle-rb/yard-fence/actions/workflows/license-eye.yml/badge.svg
+[🏀qlty-mnt]: https://qlty.sh/gh/galtzo-floss/projects/yard-fence
+[🏀qlty-mnti]: https://qlty.sh/gh/galtzo-floss/projects/yard-fence/maintainability.svg
+[🏀qlty-cov]: https://qlty.sh/gh/galtzo-floss/projects/yard-fence/metrics/code?sort=coverageRating
+[🏀qlty-covi]: https://qlty.sh/gh/galtzo-floss/projects/yard-fence/coverage.svg
+[🏀codecov]: https://codecov.io/gh/galtzo-floss/yard-fence
+[🏀codecovi]: https://codecov.io/gh/galtzo-floss/yard-fence/graph/badge.svg
+[🏀coveralls]: https://coveralls.io/github/galtzo-floss/yard-fence?branch=main
+[🏀coveralls-img]: https://coveralls.io/repos/github/galtzo-floss/yard-fence/badge.svg?branch=main
+[🖐codeQL]: https://github.com/galtzo-floss/yard-fence/security/code-scanning
+[🖐codeQL-img]: https://github.com/galtzo-floss/yard-fence/actions/workflows/codeql-analysis.yml/badge.svg
+[🚎2-cov-wf]: https://github.com/galtzo-floss/yard-fence/actions/workflows/coverage.yml
+[🚎2-cov-wfi]: https://github.com/galtzo-floss/yard-fence/actions/workflows/coverage.yml/badge.svg
+[🚎3-hd-wf]: https://github.com/galtzo-floss/yard-fence/actions/workflows/heads.yml
+[🚎3-hd-wfi]: https://github.com/galtzo-floss/yard-fence/actions/workflows/heads.yml/badge.svg
+[🚎5-st-wf]: https://github.com/galtzo-floss/yard-fence/actions/workflows/style.yml
+[🚎5-st-wfi]: https://github.com/galtzo-floss/yard-fence/actions/workflows/style.yml/badge.svg
+[🚎6-s-wf]: https://github.com/galtzo-floss/yard-fence/actions/workflows/supported.yml
+[🚎6-s-wfi]: https://github.com/galtzo-floss/yard-fence/actions/workflows/supported.yml/badge.svg
+[🚎8-ho-wf]: https://github.com/galtzo-floss/yard-fence/actions/workflows/hoary.yml
+[🚎8-ho-wfi]: https://github.com/galtzo-floss/yard-fence/actions/workflows/hoary.yml/badge.svg
+[🚎9-t-wf]: https://github.com/galtzo-floss/yard-fence/actions/workflows/truffle.yml
+[🚎9-t-wfi]: https://github.com/galtzo-floss/yard-fence/actions/workflows/truffle.yml/badge.svg
+[🚎10-j-wf]: https://github.com/galtzo-floss/yard-fence/actions/workflows/jruby.yml
+[🚎10-j-wfi]: https://github.com/galtzo-floss/yard-fence/actions/workflows/jruby.yml/badge.svg
+[🚎11-c-wf]: https://github.com/galtzo-floss/yard-fence/actions/workflows/current.yml
+[🚎11-c-wfi]: https://github.com/galtzo-floss/yard-fence/actions/workflows/current.yml/badge.svg
+[🚎12-crh-wf]: https://github.com/galtzo-floss/yard-fence/actions/workflows/dep-heads.yml
+[🚎12-crh-wfi]: https://github.com/galtzo-floss/yard-fence/actions/workflows/dep-heads.yml/badge.svg
+[🚎13-🔒️-wf]: https://github.com/galtzo-floss/yard-fence/actions/workflows/locked_deps.yml
+[🚎13-🔒️-wfi]: https://github.com/galtzo-floss/yard-fence/actions/workflows/locked_deps.yml/badge.svg
+[🚎14-🔓️-wf]: https://github.com/galtzo-floss/yard-fence/actions/workflows/unlocked_deps.yml
+[🚎14-🔓️-wfi]: https://github.com/galtzo-floss/yard-fence/actions/workflows/unlocked_deps.yml/badge.svg
+[🚎15-🪪-wf]: https://github.com/galtzo-floss/yard-fence/actions/workflows/license-eye.yml
+[🚎15-🪪-wfi]: https://github.com/galtzo-floss/yard-fence/actions/workflows/license-eye.yml/badge.svg
 [💎ruby-3.2i]: https://img.shields.io/badge/Ruby-3.2-CC342D?style=for-the-badge&logo=ruby&logoColor=white
 [💎ruby-3.3i]: https://img.shields.io/badge/Ruby-3.3-CC342D?style=for-the-badge&logo=ruby&logoColor=white
 [💎ruby-c-i]: https://img.shields.io/badge/Ruby-current-CC342D?style=for-the-badge&logo=ruby&logoColor=green
@@ -508,19 +533,19 @@ Thanks for RTFM. ☺️
 [💎jruby-9.4i]: https://img.shields.io/badge/JRuby-9.4-FBE742?style=for-the-badge&logo=ruby&logoColor=red
 [💎jruby-c-i]: https://img.shields.io/badge/JRuby-current-FBE742?style=for-the-badge&logo=ruby&logoColor=green
 [💎jruby-headi]: https://img.shields.io/badge/JRuby-HEAD-FBE742?style=for-the-badge&logo=ruby&logoColor=blue
-[🤝gh-issues]: https://github.com/kettle-rb/yard-fence/issues
-[🤝gh-pulls]: https://github.com/kettle-rb/yard-fence/pulls
-[🤝gl-issues]: https://gitlab.com/kettle-rb/yard-fence/-/issues
-[🤝gl-pulls]: https://gitlab.com/kettle-rb/yard-fence/-/merge_requests
-[🤝cb-issues]: https://codeberg.org/kettle-rb/yard-fence/issues
-[🤝cb-pulls]: https://codeberg.org/kettle-rb/yard-fence/pulls
+[🤝gh-issues]: https://github.com/galtzo-floss/yard-fence/issues
+[🤝gh-pulls]: https://github.com/galtzo-floss/yard-fence/pulls
+[🤝gl-issues]: https://gitlab.com/galtzo-floss/yard-fence/-/issues
+[🤝gl-pulls]: https://gitlab.com/galtzo-floss/yard-fence/-/merge_requests
+[🤝cb-issues]: https://codeberg.org/galtzo-floss/yard-fence/issues
+[🤝cb-pulls]: https://codeberg.org/galtzo-floss/yard-fence/pulls
 [🤝cb-donate]: https://donate.codeberg.org/
 [🤝contributing]: CONTRIBUTING.md
-[🏀codecov-g]: https://codecov.io/gh/kettle-rb/yard-fence/graphs/tree.svg
+[🏀codecov-g]: https://codecov.io/gh/galtzo-floss/yard-fence/graphs/tree.svg
 [🖐contrib-rocks]: https://contrib.rocks
-[🖐contributors]: https://github.com/kettle-rb/yard-fence/graphs/contributors
-[🖐contributors-img]: https://contrib.rocks/image?repo=kettle-rb/yard-fence
-[🚎contributors-gl]: https://gitlab.com/kettle-rb/yard-fence/-/graphs/main
+[🖐contributors]: https://github.com/galtzo-floss/yard-fence/graphs/contributors
+[🖐contributors-img]: https://contrib.rocks/image?repo=galtzo-floss/yard-fence
+[🚎contributors-gl]: https://gitlab.com/galtzo-floss/yard-fence/-/graphs/main
 [🪇conduct]: CODE_OF_CONDUCT.md
 [🪇conduct-img]: https://img.shields.io/badge/Contributor_Covenant-2.1-259D6C.svg
 [📌pvc]: http://guides.rubygems.org/patterns/#pessimistic-version-constraint
@@ -548,7 +573,7 @@ Thanks for RTFM. ☺️
 [🚎yard-current]: http://rubydoc.info/gems/yard-fence
 [🚎yard-head]: https://yard-fence.galtzo.com
 [💎stone_checksums]: https://github.com/galtzo-floss/stone_checksums
-[💎SHA_checksums]: https://gitlab.com/kettle-rb/yard-fence/-/tree/main/checksums
+[💎SHA_checksums]: https://gitlab.com/galtzo-floss/yard-fence/-/tree/main/checksums
 [💎rlts]: https://github.com/rubocop-lts/rubocop-lts
 [💎rlts-img]: https://img.shields.io/badge/code_style_&_linting-rubocop--lts-34495e.svg?plastic&logo=ruby&logoColor=white
 [💎appraisal2]: https://github.com/appraisal-rb/appraisal2

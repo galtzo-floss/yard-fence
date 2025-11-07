@@ -1,31 +1,18 @@
 # coding: utf-8
 # frozen_string_literal: true
 
-gem_version =
-  if RUBY_VERSION >= "3.1" # rubocop:disable Gemspec/RubyVersionGlobalsUsage
-    # Loading Version into an anonymous module allows version.rb to get code coverage from SimpleCov!
-    # See: https://github.com/simplecov-ruby/simplecov/issues/557#issuecomment-2630782358
-    # See: https://github.com/panorama-ed/memo_wise/pull/397
-    Module.new.tap { |mod| Kernel.load("#{__dir__}/lib/yard/fence/version.rb", mod) }::Yard::Fence::Version::VERSION
-  else
-    # NOTE: Use __FILE__ or __dir__ until removal of Ruby 1.x support
-    # __dir__ introduced in Ruby 1.9.1
-    # lib = File.expand_path("../lib", __FILE__)
-    lib = File.expand_path("lib", __dir__)
-    $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-    require "yard/fence/version"
-    Yard::Fence::Version::VERSION
-  end
-
 Gem::Specification.new do |spec|
   spec.name = "yard-fence"
-  spec.version = gem_version
+  # Loading Version into an anonymous module allows version.rb to get code coverage from SimpleCov!
+  # See: https://github.com/simplecov-ruby/simplecov/issues/557#issuecomment-2630782358
+  # See: https://github.com/panorama-ed/memo_wise/pull/397
+  spec.version = Module.new.tap { |mod| Kernel.load("#{__dir__}/lib/yard/fence/version.rb", mod) }::Yard::Fence::Version::VERSION
   spec.authors = ["Peter H. Boling"]
-  spec.email = ["peter.boling@gmail.com"]
+  spec.email = ["floss@galtzo.com"]
 
-  spec.summary = "🍕 TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "🍕 TODO: Write a longer description or delete this line."
-  spec.homepage = "https://github.com/kettle-rb/yard-fence"
+  spec.summary = "🤺 A brace converter for the markdown fences in your YARD"
+  spec.description = "🤺 Convert ASCII braces ('{}') to full-width braces ('{}') within code fences (triple-or-single backticks) during YARD processing, and back to ASCII braces afterward"
+  spec.homepage = "https://github.com/galtzo-floss/yard-fence"
   spec.licenses = ["MIT"]
   spec.required_ruby_version = ">= 3.2.0"
 
@@ -97,6 +84,12 @@ Gem::Specification.new do |spec|
   # Listed files are the relative paths from bindir above.
   spec.executables = []
 
+  # Documentation
+  spec.add_dependency("yard", "~> 0.9", ">= 0.9.37") # Ruby >= 0
+
+  # Std Lib extractions
+  spec.add_dependency("rdoc", "~> 6.11")
+
   # Utilities
   spec.add_dependency("version_gem", "~> 1.1", ">= 1.1.9")              # ruby >= 2.2.0
 
@@ -112,6 +105,9 @@ Gem::Specification.new do |spec|
   #
   #       Development dependencies that require strictly newer Ruby versions should be in a "gemfile",
   #       and preferably a modular one (see gemfiles/modular/*.gemfile).
+
+  spec.add_development_dependency("kramdown", "~> 2.5", ">= 2.5.1") # Ruby >= 2.5
+  spec.add_development_dependency("kramdown-parser-gfm", "~> 1.1") # Ruby >= 2.3
 
   # Dev, Test, & Release Tasks
   spec.add_development_dependency("kettle-dev", "~> 1.1")                           # ruby >= 2.3.0

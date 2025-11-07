@@ -1,6 +1,37 @@
 module Yard
   module Fence
+    # Constants
     VERSION: String
-    # See the writing guide of rbs: https://github.com/ruby/rbs#guides
+    ASCII_BRACES: String
+    FULLWIDTH_BRACES: String
+    KRAMDOWN_PROVIDER: Hash[Symbol, untyped]
+    GLOB_PATTERN: String
+    TRIPLE_TICK_FENCE: ::Regexp
+    INLINE_TICK_FENCE: ::Regexp
+    DOUBLE_BRACE_PLACEHOLDER_REGEX: ::Regexp
+    SINGLE_BRACE_PLACEHOLDER_REGEX: ::Regexp
+
+    # Error class
+    class Error < ::StandardError
+    end
+
+    # Module functions
+    def self.fullwidth_braces: (String str) -> String
+    def self.sanitize_inline_code: (String line) -> String
+    def self.sanitize_fenced_blocks: (String text) -> String
+    def self.sanitize_text: (String text) -> String
+                          | (untyped text) -> untyped
+    def self.prepare_tmp_files: () -> void
+    def self.restore_ascii_braces_in_html_file: (String html_filepath) -> void
+    def self.postprocess_html_docs: () -> void
+    def self.use_kramdown_gfm!: () -> bool
+
+    module Version
+      VERSION: String
+    end
+
+    class KramdownGfmDocument < ::Kramdown::Document
+      def initialize: (String source, ?Hash[Symbol, untyped] options) -> void
+    end
   end
 end
