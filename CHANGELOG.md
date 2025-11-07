@@ -30,6 +30,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Use namespaced directory in `tmp/` (`tmp/yard-fence`)
+  - avoids polluting, and pollution from, other garbage in `tmp/`
+
 ### Security
 
 ## [0.3.0] - 2025-11-07

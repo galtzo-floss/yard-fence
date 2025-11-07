@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Prepare sanitized copies of Markdown/TXT files in tmp/ for YARD consumption.
+# Prepare sanitized copies of Markdown/TXT files in tmp/yard-fence/ for YARD consumption.
 #
 # Why this exists
 # - YARD treats any `{…}` sequence in extra files (like README.md) as a potential link
@@ -14,8 +14,8 @@
 #   no backslash escapes sprinkled throughout examples).
 # - We need YARD to stop interpreting code-fenced braces as links.
 #
-# Strategy (tmp/ preprocessor)
-# - At doc build time, copy top-level *.md/*.txt into tmp/ and transform only the risky
+# Strategy (tmp/yard-fence/ preprocessor)
+# - At doc build time, copy top-level *.md/*.txt into tmp/yard-fence/ and transform only the risky
 #   brace pairs in contexts YARD misinterprets:
 #   * inside triple‑backtick fenced code blocks
 #   * inside single‑backtick inline code spans
@@ -28,7 +28,7 @@
 #
 # Key lines to see:
 # - Transform to fullwidth:   str.tr('{}', '｛｝')
-#   This replaces ASCII { and } with their fullwidth Unicode counterparts in sanitized tmp files.
+#   This replaces ASCII { and } with their fullwidth Unicode counterparts in sanitized tmp/yard-fence files.
 # - Restore to ASCII (HTML):  out = src.tr('｛｝', '{}')
 #   This runs after docs are generated and rewrites the HTML contents back to normal { and }.
 #
@@ -84,6 +84,7 @@ module Yard
 
     # Escape braces inside inline `code` spans only.
     def sanitize_inline_code(line)
+      # Use $1 because the block parameter (_) is the matched substring, not a MatchData object.
       line.gsub(INLINE_TICK_FENCE) { |_| "`#{fullwidth_braces($1)}`" }
     end
 
@@ -114,10 +115,10 @@ module Yard
       sanitize_fenced_blocks(text)
     end
 
-    # Copy top-level *.md/*.txt into tmp/ with the above sanitization applied.
+    # Copy top-level *.md/*.txt into tmp/yard-fence/ with the above sanitization applied.
     def prepare_tmp_files
       root = Dir.pwd
-      outdir = File.join(root, "tmp")
+      outdir = File.join(root, "tmp", "yard-fence")
       FileUtils.mkdir_p(outdir)
 
       candidates = Dir.glob(File.join(root, GLOB_PATTERN))
@@ -170,11 +171,11 @@ module Yard
     end
   end
 
-  # Execute at load-time so files exist before YARD scans tmp/*.md
+  # Execute at load-time so files exist before YARD scans tmp/yard-fence/*.md
   begin
     Yard::Fence.prepare_tmp_files
   rescue => e
-    warn("Yard::Fence: failed to prepare tmp files: #{e.class}: #{e.message}")
+    warn("Yard::Fence: failed to prepare tmp/yard-fence files: #{e.class}: #{e.message}")
   end
 end
 

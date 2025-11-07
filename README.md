@@ -51,7 +51,7 @@
 A brace converter for the markdown fences in your YARD docs to prevent the `InvalidLink` warning.
 
 Just the important bits:
-- Preprocesses top-level README and other `.md`/`.txt` files into `tmp/` replacing ASCII braces inside fenced code blocks, inline code spans, and simple placeholders like `{issuer}` or `{{TOKEN}}` with visually identical fullwidth braces.
+- Preprocesses top-level README and other `.md`/`.txt` files into `tmp/yard-fence/` replacing ASCII braces inside fenced code blocks, inline code spans, and simple placeholders like `{issuer}` or `{{TOKEN}}` with visually identical fullwidth braces.
 - This prevents YARD from emitting `InvalidLink` warnings.
 - Prioritizes Kramdown's GFM parser so tables and fenced code blocks render correctly.
 - After YARD finishes generating HTML, restores fullwidth braces back to normal ASCII braces so code examples are copy‑pastable.
@@ -61,13 +61,13 @@ Create a `.yardopts` file like this:
 ```text
 --plugin fence
 -e yard/fence/hoist.rb
---readme tmp/README.md
+--readme tmp/yard-fence/README.md
 --markup markdown
 --output docs
 'lib/**/*.rb'
 -
-'tmp/*.md'
-'tmp/*.txt'
+'tmp/yard-fence/*.md'
+'tmp/yard-fence/*.txt'
 ```
 
 See the configuration and usage sections for more details.
@@ -196,24 +196,24 @@ NOTE: Be prepared to track down certs for signed gems and add them the same way 
 
 ## ⚙️ Configuration
 
-Yard::Fence writes sanitized copies of top‑level Markdown/TXT into tmp/ at load time. To avoid YARD parsing the unsanitized originals, point YARD at the tmp/ copies.
+Yard::Fence writes sanitized copies of top‑level Markdown/TXT into tmp/yard-fence/ at load time. To avoid YARD parsing the unsanitized originals, point YARD at the tmp/yard-fence/ copies.
 
 Recommended .yardopts (noise‑free):
 
 ```text
 --plugin fence
 -e yard/fence/hoist.rb
---readme tmp/README.md
+--readme tmp/yard-fence/README.md
 --markup markdown
 --output docs
 'lib/**/*.rb'
 -
-'tmp/*.md'
-'tmp/*.txt'
+'tmp/yard-fence/*.md'
+'tmp/yard-fence/*.txt'
 ```
 
-Why tmp/?
-- The plugin converts ASCII `{ }` to fullwidth `｛ ｝` only in `tmp/` so YARD won’t treat brace content as reference tags and emit InvalidLink warnings. After docs are generated, the HTML is restored back to normal ASCII braces for easy copy/paste.
+Why tmp/yard-fence/?
+- The plugin converts ASCII `{ }` to fullwidth `｛ ｝` only in `tmp/yard-fence/` so YARD won’t treat brace content as reference tags and emit InvalidLink warnings. After docs are generated, the HTML is restored back to normal ASCII braces for easy copy/paste.
 
 ## 🔧 Basic Usage
 
@@ -223,8 +223,8 @@ CLI example that would be similar to what is accomplished by the `.yardopts` fro
 yard doc \
   --plugin fence \
   -e yard/fence/hoist.rb \
-  --readme tmp/README.md \
-  lib/**/*.rb - tmp/*.md tmp/*.txt
+  --readme tmp/yard-fence/README.md \
+  lib/**/*.rb - tmp/yard-fence/*.md tmp/yard-fence/*.txt
 ```
 
 ## 🦷 FLOSS Funding

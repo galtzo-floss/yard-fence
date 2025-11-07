@@ -76,8 +76,8 @@ RSpec.describe Yard::Fence do
           expect(Dir.exist?("tmp")).to be(false)
           described_class.prepare_tmp_files
 
-          expect(File.exist?(File.join("tmp", "examples.md"))).to be(false)
-          out = File.read(File.join("tmp", "README.md"))
+          expect(File.exist?(File.join("tmp", "yard-fence", "examples.md"))).to be(false)
+          out = File.read(File.join("tmp", "yard-fence", "README.md"))
           expect(out).to eq(described_class.sanitize_text(original))
         end
       end
