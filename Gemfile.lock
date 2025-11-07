@@ -1,0 +1,20 @@
+PATH
+  remote: .
+  specs:
+    yard-fence (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    kettle-dev (1.1.48)
+
+PLATFORMS
+  ruby
+  x86_64-linux
+
+DEPENDENCIES
+  kettle-dev (~> 1.1)
+  yard-fence!
+
+BUNDLED WITH
+   2.7.2
