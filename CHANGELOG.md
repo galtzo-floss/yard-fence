@@ -20,6 +20,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+- Document importance of `require: false` in `Gemfile` for this gem
+
 ### Changed
 
 ### Deprecated

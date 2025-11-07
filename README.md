@@ -139,7 +139,18 @@ Alternatively:
 Install the gem and add to the application's Gemfile by executing:
 
 ```console
-bundle add yard-fence
+bundle add yard-fence --require false
+```
+
+NOTE: if you add it directly to your Gemfile,
+be sure to include `require: false` so bundler doesn't load it when bootstrapping.
+This is important because this gem has a global `at_exit` callback that only makes sense to run after yard runs.
+As such this gem should only be loaded by YARD itself via the `--plugin fence` option.
+
+Example:
+
+```ruby
+gem "yard-fence", "~> 0.3", require: false
 ```
 
 If bundler is not being used to manage dependencies, install the gem by executing:

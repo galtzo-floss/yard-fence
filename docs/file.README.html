@@ -275,7 +275,18 @@ Alternatively:
 <p>Install the gem and add to the application’s Gemfile by executing:</p>
 
 <p><code>console
-bundle add yard-fence
+bundle add yard-fence --require false
+</code></p>
+
+<p>NOTE: if you add it directly to your Gemfile,
+be sure to include <code>require: false</code> so bundler doesn’t load it when bootstrapping.
+This is important because this gem has a global <code>at_exit</code> callback that only makes sense to run after yard runs.
+As such this gem should only be loaded by YARD itself via the <code>--plugin fence</code> option.</p>
+
+<p>Example:</p>
+
+<p><code>ruby
+gem "yard-fence", "~&gt; 0.3", require: false
 </code></p>
 
 <p>If bundler is not being used to manage dependencies, install the gem by executing:</p>
@@ -552,7 +563,7 @@ Please consider sponsoring me or the project.</p>
 </div></div>
 
       <div id="footer">
-  Generated on Fri Nov  7 14:19:59 2025 by
+  Generated on Fri Nov  7 15:08:58 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.4.7).
 </div>
