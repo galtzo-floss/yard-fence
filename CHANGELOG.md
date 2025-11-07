@@ -20,8 +20,6 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
-- yard/fence/hoist.rb: Hoisting the customized GFM kramdown parser
-
 ### Changed
 
 ### Deprecated
@@ -31,6 +29,17 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Fixed
 
 ### Security
+
+## [0.3.0] - 2025-11-07
+
+- TAG: [v0.3.0][0.3.0t]
+- COVERAGE: 96.43% -- 81/84 lines in 4 files
+- BRANCH COVERAGE: 93.75% -- 15/16 branches in 4 files
+- 29.17% documented
+
+### Added
+
+- yard/fence/hoist.rb: Hoisting the customized GFM kramdown parser
 
 ## [0.2.0] - 2025-11-07
 
@@ -53,6 +62,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/galtzo-floss/yard-fence/compare/v0.2.0...v0.3.0
+[0.3.0t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.3.0
 [0.2.0]: https://github.com/galtzo-floss/yard-fence/compare/v0.1.0...v0.2.0
 [0.2.0t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.2.0
