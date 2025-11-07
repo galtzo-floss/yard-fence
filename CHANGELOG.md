@@ -20,9 +20,11 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
-- Document importance of `require: false` in `Gemfile` for this gem
+- Docs: Document importance of `require: false` in `Gemfile` for this gem
 
 ### Changed
+
+- Docs: Improved markdown syntax in README.md for Kramdown => HTML
 
 ### Deprecated
 

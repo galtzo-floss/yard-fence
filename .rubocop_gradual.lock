@@ -1,5 +1,5 @@
 {
-  "spec/yard/fence_spec.rb:3183006417": [
+  "spec/yard/fence_spec.rb:1919282897": [
     [71, 9, 14, "ThreadSafety/DirChdir: Avoid using `Dir.chdir` due to its process-wide effect.", 2866645406],
     [118, 9, 14, "ThreadSafety/DirChdir: Avoid using `Dir.chdir` due to its process-wide effect.", 2866645406],
     [127, 9, 14, "ThreadSafety/DirChdir: Avoid using `Dir.chdir` due to its process-wide effect.", 2866645406]

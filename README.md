@@ -51,6 +51,7 @@
 A brace converter for the markdown fences in your YARD docs to prevent the `InvalidLink` warning.
 
 Just the important bits:
+
 - Preprocesses top-level README and other `.md`/`.txt` files into `tmp/yard-fence/` replacing ASCII braces inside fenced code blocks, inline code spans, and simple placeholders like `{issuer}` or `{{TOKEN}}` with visually identical fullwidth braces.
 - This prevents YARD from emitting `InvalidLink` warnings.
 - Prioritizes Kramdown's GFM parser so tables and fenced code blocks render correctly.
@@ -97,7 +98,7 @@ Compatible with MRI Ruby 3.2.0+, and concordant releases of JRuby, and TruffleRu
 
 ### Federated DVCS
 
-<details>
+<details markdown="1">
   <summary>Find this repo on federated forges (Coming soon!)</summary>
 
 | Federated [DVCS][💎d-in-dvcs] Repository           | Status                                                                | Issues                    | PRs                      | Wiki                      | CI                       | Discussions                  |
@@ -115,7 +116,7 @@ Compatible with MRI Ruby 3.2.0+, and concordant releases of JRuby, and TruffleRu
 
 Available as part of the Tidelift Subscription.
 
-<details>
+<details markdown="1">
   <summary>Need enterprise-level guarantees?</summary>
 
 The maintainers of this and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source packages you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages you use.
@@ -161,7 +162,7 @@ gem install yard-fence
 
 ### 🔒 Secure Installation
 
-<details>
+<details markdown="1">
   <summary>For Medium or High Security Installations</summary>
 
 This gem is cryptographically signed, and has verifiable [SHA-256 and SHA-512][💎SHA_checksums] checksums by
@@ -196,7 +197,7 @@ NOTE: Be prepared to track down certs for signed gems and add them the same way 
 
 ## ⚙️ Configuration
 
-Yard::Fence writes sanitized copies of top‑level Markdown/TXT into tmp/yard-fence/ at load time. To avoid YARD parsing the unsanitized originals, point YARD at the tmp/yard-fence/ copies.
+NOTE: `Yard::Fence` writes sanitized copies of top‑level Markdown/TXT into `tmp/yard-fence/` at load time. To avoid YARD parsing the unsanitized originals, point YARD at the `tmp/yard-fence/` copies.
 
 Recommended .yardopts (noise‑free):
 
@@ -213,7 +214,8 @@ Recommended .yardopts (noise‑free):
 ```
 
 Why tmp/yard-fence/?
-- The plugin converts ASCII `{ }` to fullwidth `｛ ｝` only in `tmp/yard-fence/` so YARD won’t treat brace content as reference tags and emit InvalidLink warnings. After docs are generated, the HTML is restored back to normal ASCII braces for easy copy/paste.
+
+- The plugin converts ASCII `{ }` to fullwidth `｛ ｝` only in `tmp/yard-fence/` so YARD won’t treat brace content as reference tags and emit `InvalidLink` warnings. After docs are generated, the HTML is restored back to normal ASCII braces for easy copy/paste.
 
 ## 🔧 Basic Usage
 
@@ -355,10 +357,10 @@ the [Pessimistic Version Constraint][📌pvc] with two digits of precision.
 For example:
 
 ```ruby
-spec.add_dependency("yard-fence", "~> 1.0")
+spec.add_dependency("yard-fence", "~> 0.4")
 ```
 
-<details>
+<details markdown="1">
 <summary>📌 Is "Platform Support" part of the public API? More details inside.</summary>
 
 SemVer should, IMO, but doesn't explicitly, say that dropping support for specific Platforms
