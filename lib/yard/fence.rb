@@ -183,8 +183,10 @@ Yard::Fence::Version.class_eval do
   extend VersionGem::Basic
 end
 
-# After YARD completes, restore ASCII braces in generated HTML docs.
-# This guarantees the published docs (docs/*.html) show and copy normal { }.
-at_exit do
-  Yard::Fence.postprocess_html_docs
+unless ENV["YARD_FENCE_SKIP_AT_EXIT"] == "1"
+  # After YARD completes, restore ASCII braces in generated HTML docs.
+  # This guarantees the published docs (docs/*.html) show and copy normal { }.
+  at_exit do
+    Yard::Fence.postprocess_html_docs
+  end
 end

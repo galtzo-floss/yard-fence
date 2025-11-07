@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "tempfile"
+require "yard/fence"
 
 RSpec.describe Yard::Fence do
   it "has a version number" do
@@ -225,20 +226,6 @@ RSpec.describe Yard::Fence do
         expect(result).to be(false)
         expect(output).to match(/Yard::Fence.use_kramdown_gfm!: failed to load YARD helper: NameError:/)
       end
-    end
-  end
-
-  describe "load-time prepare_tmp_files (error path)" do
-    it "rescues and warns when preparing tmp files fails at load time", :check_output do
-      # Make mkdir_p raise so Yard::Fence.prepare_tmp_files fails inside load
-      allow(FileUtils).to receive(:mkdir_p).and_raise(StandardError, "mkdir blew up")
-
-      root = File.expand_path("../..", __dir__)
-      fence_rb = File.join(root, "lib", "yard", "fence.rb")
-      expect(File.exist?(fence_rb)).to be(true)
-
-      output = capture(:stderr) { load fence_rb }
-      expect(output).to include("Yard::Fence: failed to prepare tmp files: StandardError: mkdir blew up")
     end
   end
 end

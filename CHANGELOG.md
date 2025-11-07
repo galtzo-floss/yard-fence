@@ -20,8 +20,6 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
-- 100% test coverage, lines and branches
-
 ### Changed
 
 ### Deprecated
@@ -30,12 +28,29 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+### Security
+
+## [0.2.0] - 2025-11-07
+
+- TAG: [v0.2.0][0.2.0t]
+- COVERAGE: 100.00% -- 83/83 lines in 4 files
+- BRANCH COVERAGE: 100.00% -- 14/14 branches in 4 files
+- 29.17% documented
+
+### Added
+
+- 100% test coverage, lines and branches
+
+### Fixed
+
 - handling of optional dependencies
   - kramdown
   - kramdown-parser-gfm
 
-### Security
-
 ## [0.1.0] - 2025-11-06
 
 - Initial release
+
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/galtzo-floss/yard-fence/compare/v0.1.0...v0.2.0
+[0.2.0t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.2.0
