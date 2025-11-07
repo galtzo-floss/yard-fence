@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  File: LICENSE
+  File: fence
   
     &mdash; Documentation by YARD 0.9.37
   
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="css/common.css" type="text/css" />
 
 <script type="text/javascript">
-  pathId = "LICENSE";
+  pathId = "fence";
   relpath = '';
 </script>
 
@@ -37,7 +37,7 @@
         <div id="menu">
   
     <a href="_index.html">Index</a> &raquo; 
-    <span class="title">File: LICENSE</span>
+    <span class="title">File: fence</span>
   
 </div>
 
@@ -57,7 +57,43 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><div id='filecontents'>The MIT License (MIT)<br><br>Copyright (c) 2025 Peter H. Boling<br><br>Permission is hereby granted, free of charge, to any person obtaining a copy<br>of this software and associated documentation files (the "Software"), to deal<br>in the Software without restriction, including without limitation the rights<br>to use, copy, modify, merge, publish, distribute, sublicense, and/or sell<br>copies of the Software, and to permit persons to whom the Software is<br>furnished to do so, subject to the following conditions:<br><br>The above copyright notice and this permission notice shall be included in<br>all copies or substantial portions of the Software.<br><br>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR<br>IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,<br>FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE<br>AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER<br>LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,<br>OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN<br>THE SOFTWARE.</div></div>
+      <div id="content"><div id='filecontents'><p>module Yard
+  module Fence
+    # Constants
+    VERSION: String
+    ASCII_BRACES: String
+    FULLWIDTH_BRACES: String
+    KRAMDOWN_PROVIDER: Hash[Symbol, untyped]
+    GLOB_PATTERN: String
+    TRIPLE_TICK_FENCE: ::Regexp
+    INLINE_TICK_FENCE: ::Regexp
+    DOUBLE_BRACE_PLACEHOLDER_REGEX: ::Regexp
+    SINGLE_BRACE_PLACEHOLDER_REGEX: ::Regexp</p>
+
+<pre class="code ruby"><code class="ruby"># Error class
+class Error &lt; ::StandardError
+end
+
+# Module functions
+def self.fullwidth_braces: (String str) -&gt; String
+def self.sanitize_inline_code: (String line) -&gt; String
+def self.sanitize_fenced_blocks: (String text) -&gt; String
+def self.sanitize_text: (String text) -&gt; String
+                      | (untyped text) -&gt; untyped
+def self.prepare_tmp_files: () -&gt; void
+def self.restore_ascii_braces_in_html_file: (String html_filepath) -&gt; void
+def self.postprocess_html_docs: () -&gt; void
+def self.use_kramdown_gfm!: () -&gt; bool
+
+module Version
+  VERSION: String
+end
+
+class KramdownGfmDocument &lt; ::Kramdown::Document
+  def initialize: (String source, ?Hash[Symbol, untyped] options) -&gt; void
+end   end end
+</code></pre>
+</div></div>
 
       <div id="footer">
   Generated on Fri Nov  7 03:12:06 2025 by
