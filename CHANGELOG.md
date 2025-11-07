@@ -33,19 +33,19 @@ Please file a bug if you notice a violation of semantic versioning.
 ## [0.2.0] - 2025-11-07
 
 - TAG: [v0.2.0][0.2.0t]
-- COVERAGE: 100.00% -- 83/83 lines in 4 files
-- BRANCH COVERAGE: 100.00% -- 14/14 branches in 4 files
+- COVERAGE: 96.43% -- 81/84 lines in 4 files
+- BRANCH COVERAGE: 93.75% -- 15/16 branches in 4 files
 - 29.17% documented
 
 ### Added
 
-- 100% test coverage, lines and branches
+- Up to 96% lines / 93% branches test coverage
 
 ### Fixed
 
 - handling of optional dependencies
-  - kramdown
-  - kramdown-parser-gfm
+    - kramdown
+    - kramdown-parser-gfm
 
 ## [0.1.0] - 2025-11-06
 

@@ -33,13 +33,13 @@ RSpec.configure do |config|
   end
 
   # Stabilize YARD Markup providers between examples to avoid order-dependent variability.
-  config.around(:each) do |example|
+  config.around do |example|
     snapshot = nil
     begin
-      if defined?(::YARD::Templates::Helpers::MarkupHelper) &&
-         ::YARD::Templates::Helpers::MarkupHelper::MARKUP_PROVIDERS.is_a?(Hash) &&
-         ::YARD::Templates::Helpers::MarkupHelper::MARKUP_PROVIDERS.key?(:markdown)
-        providers = ::YARD::Templates::Helpers::MarkupHelper::MARKUP_PROVIDERS[:markdown]
+      if defined?(YARD::Templates::Helpers::MarkupHelper) &&
+          YARD::Templates::Helpers::MarkupHelper::MARKUP_PROVIDERS.is_a?(Hash) &&
+          YARD::Templates::Helpers::MarkupHelper::MARKUP_PROVIDERS.key?(:markdown)
+        providers = YARD::Templates::Helpers::MarkupHelper::MARKUP_PROVIDERS[:markdown]
         snapshot = providers.map { |h| h.dup }
       end
     rescue NameError
@@ -50,7 +50,7 @@ RSpec.configure do |config|
   ensure
     if snapshot
       begin
-        ::YARD::Templates::Helpers::MarkupHelper::MARKUP_PROVIDERS[:markdown].replace(snapshot)
+        YARD::Templates::Helpers::MarkupHelper::MARKUP_PROVIDERS[:markdown].replace(snapshot)
       rescue NameError
         # Constant may have been hidden in the example; it will restore after.
       end
