@@ -48,7 +48,7 @@
 
 ## 🌻 Synopsis
 
-A brace converter for the markdown fences in your YARD docs.
+A brace converter for the markdown fences in your YARD docs to prevent the `InvalidLink` warning.
 
 Just the important bits:
 - Preprocesses top-level README and other `.md`/`.txt` files into `tmp/` replacing ASCII braces inside fenced code blocks, inline code spans, and simple placeholders like `{issuer}` or `{{TOKEN}}` with visually identical fullwidth braces.
