@@ -168,7 +168,9 @@ module Yard
 
     def postprocess_html_docs
       if ENV.fetch("YARD_FENCE_DISABLE", "false").casecmp?("true")
+        # :nocov:
         warn("[yard/fence] postprocess_html_docs disabled via YARD_FENCE_DISABLE")
+        # :nocov:
       else
         docs = File.join(Dir.pwd, "docs")
         return unless Dir.exist?(docs)
@@ -208,7 +210,9 @@ module Yard
 
     def at_load_hook
       if ENV.fetch("YARD_FENCE_DISABLE", "false").casecmp?("true")
+        # :nocov:
         warn("[yard/fence] at_load_hook disabled via YARD_FENCE_DISABLE")
+        # :nocov:
       else
         Yard::Fence.prepare_tmp_files
       end

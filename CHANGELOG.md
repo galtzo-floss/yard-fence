@@ -20,7 +20,7 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
-- Allow disabling of yard-fence via YARD_FENCE_DISABLED=true (default false)
+- Allow disabling of yard-fence via YARD_FENCE_DISABLE=true (default false)
 
 ### Changed
 
