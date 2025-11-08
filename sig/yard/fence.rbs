@@ -48,7 +48,22 @@ module Yard
     end
 
     class KramdownGfmDocument < ::Kramdown::Document
+      # From implementation: stores original source and forces GFM input by default
+      UNRENDERED_FENCE_PARAGRAPH: ::Regexp
+      DETAILS_MARKDOWN_1: ::Regexp
+
       def initialize: (String source, ?Hash[Symbol, untyped] options) -> void
+
+      # Public API
+      def to_html: () -> String
+
+      private
+
+      def needs_fallback?: (String html) -> bool
+      def fallback_improved?: (String fb_html) -> bool
     end
   end
 end
+
+# Top-level alias used by YARD's constant resolution (see ruby implementation)
+KramdownGfmDocument: Yard::Fence::KramdownGfmDocument

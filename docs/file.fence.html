@@ -107,13 +107,28 @@ module Version
 end
 
 class KramdownGfmDocument &lt; ::Kramdown::Document
+  # From implementation: stores original source and forces GFM input by default
+  UNRENDERED_FENCE_PARAGRAPH: ::Regexp
+  DETAILS_MARKDOWN_1: ::Regexp
+
   def initialize: (String source, ?Hash[Symbol, untyped] options) -&gt; void
+
+  # Public API
+  def to_html: () -&gt; String
+
+  private
+
+  def needs_fallback?: (String html) -&gt; bool
+  def fallback_improved?: (String fb_html) -&gt; bool
 end   end end
 </code></pre>
+
+<h1 id="top-level-alias-used-by-yards-constant-resolution-see-ruby-implementation">Top-level alias used by YARD’s constant resolution (see ruby implementation)</h1>
+<p>KramdownGfmDocument: Yard::Fence::KramdownGfmDocument</p>
 </div></div>
 
       <div id="footer">
-  Generated on Sat Nov  8 00:15:13 2025 by
+  Generated on Sat Nov  8 01:27:42 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.4.7).
 </div>

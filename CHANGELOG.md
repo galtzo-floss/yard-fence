@@ -20,6 +20,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+- Allow disabling of yard-fence via YARD_FENCE_DISABLE=true (default false)
+
 ### Changed
 
 ### Deprecated
@@ -27,6 +29,9 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Removed
 
 ### Fixed
+
+- Usage instructions in README.md
+  - Include `--markup-provider kramdown`
 
 ### Security
 
