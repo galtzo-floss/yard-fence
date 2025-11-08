@@ -63,7 +63,9 @@ Create a `.yardopts` file like this:
 --plugin fence
 -e yard/fence/hoist.rb
 --readme tmp/yard-fence/README.md
+--charset utf-8
 --markup markdown
+--markup-provider kramdown
 --output docs
 'lib/**/*.rb'
 -
@@ -205,7 +207,9 @@ Recommended .yardopts (noise‑free):
 --plugin fence
 -e yard/fence/hoist.rb
 --readme tmp/yard-fence/README.md
+--charset utf-8
 --markup markdown
+--markup-provider kramdown
 --output docs
 'lib/**/*.rb'
 -
@@ -226,6 +230,10 @@ yard doc \
   --plugin fence \
   -e yard/fence/hoist.rb \
   --readme tmp/yard-fence/README.md \
+  --charset utf-8 \
+  --markup markdown \
+  --markup-provider kramdown \
+  --output docs \
   lib/**/*.rb - tmp/yard-fence/*.md tmp/yard-fence/*.txt
 ```
 

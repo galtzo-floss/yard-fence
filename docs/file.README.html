@@ -129,7 +129,9 @@
 <pre class="code language-text"><code class="language-text">--plugin fence
 -e yard/fence/hoist.rb
 --readme tmp/yard-fence/README.md
+--charset utf-8
 --markup markdown
+--markup-provider kramdown
 --output docs
 &#39;lib/**/*.rb&#39;
 -
@@ -389,7 +391,9 @@ by following the instructions below.</p>
 <pre class="code language-text"><code class="language-text">--plugin fence
 -e yard/fence/hoist.rb
 --readme tmp/yard-fence/README.md
+--charset utf-8
 --markup markdown
+--markup-provider kramdown
 --output docs
 &#39;lib/**/*.rb&#39;
 -
@@ -411,6 +415,10 @@ by following the instructions below.</p>
   --plugin fence \
   -e yard/fence/hoist.rb \
   --readme tmp/yard-fence/README.md \
+  --charset utf-8 \
+  --markup markdown \
+  --markup-provider kramdown \
+  --output docs \
   lib/**/*.rb - tmp/yard-fence/*.md tmp/yard-fence/*.txt
 </code></pre>
 
@@ -615,7 +623,7 @@ Please consider sponsoring me or the project.</p>
 </div></div>
 
       <div id="footer">
-  Generated on Sat Nov  8 00:15:13 2025 by
+  Generated on Sat Nov  8 01:27:42 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.4.7).
 </div>

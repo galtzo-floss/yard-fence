@@ -58,6 +58,7 @@ module Yard
       def to_html: () -> String
 
       private
+
       def needs_fallback?: (String html) -> bool
       def fallback_improved?: (String fb_html) -> bool
     end
