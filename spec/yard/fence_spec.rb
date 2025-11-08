@@ -136,6 +136,22 @@ RSpec.describe Yard::Fence do
       expect(sanitized).not_to include("{{DOUBLE}}")
       expect(sanitized).not_to include("{placeholder}")
     end
+
+    it "converts consecutive indented code lines (coverage for continuation else branch)" do
+      sample = <<~MD
+            first = {x: 1}
+            second = {y: {z: true}}
+            third = {arr: [ {a: 1}, {b: 2} ]}
+        After indented block {placeholder}.
+      MD
+
+      sanitized = described_class.sanitize_text(sample)
+      expect(sanitized).to include("first = ｛x: 1｝")
+      expect(sanitized).to include("second = ｛y: ｛z: true｝｝")
+      expect(sanitized).to include("third = ｛arr: [ ｛a: 1｝, ｛b: 2｝ ]｝")
+      # Ensure prose line sanitized
+      expect(sanitized).to include("After indented block ｛placeholder｝.")
+    end
   end
 
   describe "::at_load_hook" do

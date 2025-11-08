@@ -111,9 +111,7 @@ module Yard
           in_fence = !in_fence
           in_indented_block = false if in_fence
           line
-        elsif !in_fence && line.match?(INDENTED_CODE_LINE)
-          # Enter indented code block on first qualifying line
-          in_indented_block = true
+        elsif in_fence
           fullwidth_braces(line)
         elsif in_indented_block
           # Continue indented block until a blank line or non-indented line breaks it
@@ -126,7 +124,9 @@ module Yard
           else
             fullwidth_braces(line)
           end
-        elsif in_fence
+        elsif line.match?(INDENTED_CODE_LINE)
+          # Enter indented code block on first qualifying line
+          in_indented_block = true
           fullwidth_braces(line)
         else
           ln = sanitize_inline_code(line)
