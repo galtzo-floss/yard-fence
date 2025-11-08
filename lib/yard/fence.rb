@@ -203,11 +203,9 @@ module Yard
     end
 
     def at_load_hook
-      begin
-        Yard::Fence.prepare_tmp_files
-      rescue => e
-        warn("Yard::Fence: failed to prepare tmp/yard-fence files: #{e.class}: #{e.message}")
-      end
+      Yard::Fence.prepare_tmp_files
+    rescue => e
+      warn("Yard::Fence: failed to prepare tmp/yard-fence files: #{e.class}: #{e.message}")
     end
   end
 

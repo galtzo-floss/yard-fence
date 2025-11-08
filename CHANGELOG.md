@@ -21,6 +21,7 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Added
 
 - Support multi-line braces
+- 100% lines / 100% branches test coverage
 
 ### Changed
 

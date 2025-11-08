@@ -200,6 +200,29 @@ Do NOT change this to a Symbol.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#at_load_hook-class_method" title="at_load_hook (class method)">.<strong>at_load_hook</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#fullwidth_braces-class_method" title="fullwidth_braces (class method)">.<strong>fullwidth_braces</strong>(str)  &#x21d2; Object </a>
     
 
@@ -391,7 +414,41 @@ Do NOT change this to a Symbol.</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="fullwidth_braces-class_method">
+  <h3 class="signature first" id="at_load_hook-class_method">
+  
+    .<strong>at_load_hook</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+205
+206
+207
+208
+209</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 205</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_at_load_hook'>at_load_hook</span>
+  <span class='const'><span class='object_link'><a href="../Yard.html" title="Yard (module)">Yard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Yard::Fence (module)">Fence</a></span></span><span class='period'>.</span><span class='id identifier rubyid_prepare_tmp_files'><span class='object_link'><a href="#prepare_tmp_files-class_method" title="Yard::Fence.prepare_tmp_files (method)">prepare_tmp_files</a></span></span>
+<span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
+  <span class='id identifier rubyid_warn'>warn</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Yard::Fence: failed to prepare tmp/yard-fence files: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="fullwidth_braces-class_method">
   
     .<strong>fullwidth_braces</strong>(str)  &#x21d2; <tt>Object</tt> 
   
@@ -648,9 +705,7 @@ and disarm simple prose placeholders like {issuer} or {{something}}.</p>
 </span>      <span class='id identifier rubyid_in_fence'>in_fence</span> <span class='op'>=</span> <span class='op'>!</span><span class='id identifier rubyid_in_fence'>in_fence</span>
       <span class='id identifier rubyid_in_indented_block'>in_indented_block</span> <span class='op'>=</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_in_fence'>in_fence</span>
       <span class='id identifier rubyid_line'>line</span>
-    <span class='kw'>elsif</span> <span class='op'>!</span><span class='id identifier rubyid_in_fence'>in_fence</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_line'>line</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#INDENTED_CODE_LINE-constant" title="Yard::Fence::INDENTED_CODE_LINE (constant)">INDENTED_CODE_LINE</a></span></span><span class='rparen'>)</span>
-      <span class='comment'># Enter indented code block on first qualifying line
-</span>      <span class='id identifier rubyid_in_indented_block'>in_indented_block</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='kw'>elsif</span> <span class='id identifier rubyid_in_fence'>in_fence</span>
       <span class='id identifier rubyid_fullwidth_braces'>fullwidth_braces</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
     <span class='kw'>elsif</span> <span class='id identifier rubyid_in_indented_block'>in_indented_block</span>
       <span class='comment'># Continue indented block until a blank line or non-indented line breaks it
@@ -663,7 +718,9 @@ and disarm simple prose placeholders like {issuer} or {{something}}.</p>
       <span class='kw'>else</span>
         <span class='id identifier rubyid_fullwidth_braces'>fullwidth_braces</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
       <span class='kw'>end</span>
-    <span class='kw'>elsif</span> <span class='id identifier rubyid_in_fence'>in_fence</span>
+    <span class='kw'>elsif</span> <span class='id identifier rubyid_line'>line</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#INDENTED_CODE_LINE-constant" title="Yard::Fence::INDENTED_CODE_LINE (constant)">INDENTED_CODE_LINE</a></span></span><span class='rparen'>)</span>
+      <span class='comment'># Enter indented code block on first qualifying line
+</span>      <span class='id identifier rubyid_in_indented_block'>in_indented_block</span> <span class='op'>=</span> <span class='kw'>true</span>
       <span class='id identifier rubyid_fullwidth_braces'>fullwidth_braces</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
     <span class='kw'>else</span>
       <span class='id identifier rubyid_ln'>ln</span> <span class='op'>=</span> <span class='id identifier rubyid_sanitize_inline_code'>sanitize_inline_code</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
@@ -841,7 +898,7 @@ from a file loaded via .yardopts (e.g. <code>-e 'require "yard/fence/kramdown_gf
 </div>
 
       <div id="footer">
-  Generated on Fri Nov  7 19:59:23 2025 by
+  Generated on Fri Nov  7 20:18:44 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.4.7).
 </div>
