@@ -61,12 +61,19 @@ module Yard
   module Fence
     ASCII_BRACES = "{}"
     FULLWIDTH_BRACES = "｛｝"
+    # IMPORTANT: YARD expects :const to be a String.
+    # YARD concatenates with a String prefix (e.g., "::" + const),
+    # so a Symbol here will break provider resolution. Some static analyzers
+    # suggest making this a Symbol to match types, but that is incorrect for YARD.
+    # Do NOT change this to a Symbol.
     KRAMDOWN_PROVIDER = {lib: :kramdown, const: "KramdownGfmDocument"}
     GLOB_PATTERN = "*.{md,MD,txt,TXT}"
     TRIPLE_TICK_FENCE = /^\s*```/
     INLINE_TICK_FENCE = /`([^`]+)`/
     DOUBLE_BRACE_PLACEHOLDER_REGEX = /{{([^{}]+)}}/
     SINGLE_BRACE_PLACEHOLDER_REGEX = /{([A-Za-z0-9_:\-]+)}/
+    # Lines that are part of a classic indented code block (CommonMark: 4 spaces)
+    INDENTED_CODE_LINE = /^ {4,}\S/
 
     class Error < StandardError; end
     # :nocov:
@@ -84,8 +91,11 @@ module Yard
 
     # Escape braces inside inline `code` spans only.
     def sanitize_inline_code(line)
-      # Use $1 because the block parameter (_) is the matched substring, not a MatchData object.
-      line.gsub(INLINE_TICK_FENCE) { |_| "`#{fullwidth_braces($1)}`" }
+      # Use Regexp.last_match to safely access capture; to_s guards against nil
+      line.gsub(INLINE_TICK_FENCE) do |_|
+        inner = Regexp.last_match(1).to_s
+        "`#{fullwidth_braces(inner)}`"
+      end
     end
 
     # Walk the text, toggling a simple in_fence state on ``` lines.
@@ -93,11 +103,29 @@ module Yard
     # and disarm simple prose placeholders like ｛issuer｝ or ｛｛something｝｝.
     def sanitize_fenced_blocks(text)
       in_fence = false
+      in_indented_block = false
 
       text.each_line.map do |line|
         if line.match?(TRIPLE_TICK_FENCE)
+          # Toggle fenced block state; leaving indented block if switching into explicit fence
           in_fence = !in_fence
+          in_indented_block = false if in_fence
           line
+        elsif !in_fence && line.match?(INDENTED_CODE_LINE)
+          # Enter indented code block on first qualifying line
+          in_indented_block = true
+          fullwidth_braces(line)
+        elsif in_indented_block
+          # Continue indented block until a blank line or non-indented line breaks it
+          if line.strip.empty? || !line.match?(INDENTED_CODE_LINE)
+            in_indented_block = false
+            # Process this line as normal prose outside block
+            ln = sanitize_inline_code(line)
+            ln = ln.gsub(DOUBLE_BRACE_PLACEHOLDER_REGEX) { |m| fullwidth_braces(m) }
+            ln.gsub(SINGLE_BRACE_PLACEHOLDER_REGEX) { |m| fullwidth_braces(m) }
+          else
+            fullwidth_braces(line)
+          end
         elsif in_fence
           fullwidth_braces(line)
         else
@@ -162,6 +190,10 @@ module Yard
       end
       # :nocov:
       providers = ::YARD::Templates::Helpers::MarkupHelper::MARKUP_PROVIDERS[:markdown]
+      # NOTE: Intentionally using String for :const in KRAMDOWN_PROVIDER.
+      # YARD performs string concatenation with this value (e.g., "::" + const).
+      # Changing it to a Symbol to satisfy static type hints breaks runtime behavior.
+      # Suppress type fuzz complaints: expected Hash{Symbol->Symbol}, actual includes String by design.
       providers.unshift(KRAMDOWN_PROVIDER)
       providers.uniq! { |p| [p[:lib].to_s, p[:const].to_s] }
       true
@@ -169,14 +201,18 @@ module Yard
       warn("Yard::Fence.use_kramdown_gfm!: failed to load YARD helper: #{e.class}: #{e.message}")
       false
     end
+
+    def at_load_hook
+      begin
+        Yard::Fence.prepare_tmp_files
+      rescue => e
+        warn("Yard::Fence: failed to prepare tmp/yard-fence files: #{e.class}: #{e.message}")
+      end
+    end
   end
 
   # Execute at load-time so files exist before YARD scans tmp/yard-fence/*.md
-  begin
-    Yard::Fence.prepare_tmp_files
-  rescue => e
-    warn("Yard::Fence: failed to prepare tmp/yard-fence files: #{e.class}: #{e.message}")
-  end
+  Yard::Fence.at_load_hook
 end
 
 # Extend the Version with VersionGem::Basic to provide semantic version helpers.
@@ -184,6 +220,8 @@ Yard::Fence::Version.class_eval do
   extend VersionGem::Basic
 end
 
+# :nocov:
+# Not checking coverage of the at_exit hook, because it would require a forked process.
 unless ENV["YARD_FENCE_SKIP_AT_EXIT"] == "1"
   # After YARD completes, restore ASCII braces in generated HTML docs.
   # This guarantees the published docs (docs/*.html) show and copy normal { }.
@@ -191,3 +229,4 @@ unless ENV["YARD_FENCE_SKIP_AT_EXIT"] == "1"
     Yard::Fence.postprocess_html_docs
   end
 end
+# :nocov:

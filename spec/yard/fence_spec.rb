@@ -63,6 +63,91 @@ RSpec.describe Yard::Fence do
       expect(described_class.sanitize_text(obj)).to equal(obj)
       expect(described_class.sanitize_text(nil)).to be_nil
     end
+
+    it "handles multi-line braces in a fenced code example (Faraday OAuth2 client)" do
+      sample = <<~MD
+        ```ruby
+        require "faraday"
+
+        client = OAuth2::Client.new(
+          id,
+          secret,
+          site: "https://api.example.com",
+          # Pass Faraday connection options to make FlatParamsEncoder the default
+          connection_opts: {
+            request: {params_encoder: Faraday::FlatParamsEncoder},
+          },
+        ) do |faraday|
+          faraday.request(:url_encoded)
+          faraday.adapter(:net_http)
+        end
+        ```
+      MD
+
+      sanitized = described_class.sanitize_text(sample)
+      # Extract the content inside the code fence
+      inner = sanitized[/```[^\n]*\n(.*?)\n```/m, 1]
+      expect(inner).to be_a(String)
+      # Inside the fence, all ASCII braces should be replaced with fullwidth braces
+      expect(inner).to include("｛").and include("｝")
+      expect(inner).not_to include("{")
+      expect(inner).not_to include("}")
+      # Fence markers preserved
+      expect(sanitized).to include("```ruby")
+    end
+
+    it "converts braces in 4-space indented code blocks (CommonMark style)" do
+      sample = <<~MD
+        Here is some indented code:
+
+            hash = {a: {b: 1}}
+            more = {c: 2}
+
+        Back to prose with {placeholder}.
+      MD
+
+      sanitized = described_class.sanitize_text(sample)
+      # The indented lines should have fullwidth braces
+      expect(sanitized).to include("hash = ｛a: ｛b: 1｝｝")
+      expect(sanitized).to include("more = ｛c: 2｝")
+      # The prose placeholder should also be fullwidth-protected
+      expect(sanitized).to include("｛placeholder｝")
+    end
+
+    it "exits indented block on a non-indented line and sanitizes that line as prose" do
+      sample = <<~MD
+            code = {a: 1}
+            more = {b: 2}
+        Outside with {placeholder} and {{DOUBLE}} and inline `{:sym => :val}`.
+      MD
+
+      sanitized = described_class.sanitize_text(sample)
+      # Indented lines should have fullwidth braces (treated as code)
+      expect(sanitized).to include("code = ｛a: 1｝")
+      expect(sanitized).to include("more = ｛b: 2｝")
+
+      # The first non-indented line should be treated as prose and sanitized accordingly:
+      # - placeholders converted to fullwidth
+      # - inline code braces converted inside backticks
+      expect(sanitized).to include("Outside with ｛placeholder｝ and ｛｛DOUBLE｝｝ and inline `｛:sym => :val｝`.")
+
+      # Ensure that outside-of-code generic braces (if any) are not blindly converted except placeholders/inline code
+      expect(sanitized).not_to include("{:sym => :val}")
+      expect(sanitized).not_to include("{{DOUBLE}}")
+      expect(sanitized).not_to include("{placeholder}")
+    end
+  end
+
+  describe "::at_load_hook" do
+    describe "error path" do
+      it "rescues and warns if an exception occurs during processing", :check_output do
+        # Force the method past the early return and then raise inside the loop
+        allow(described_class).to receive(:prepare_tmp_files).and_raise(StandardError, "boom from prepare_tmp_files")
+
+        output = capture(:stderr) { described_class.at_load_hook }
+        expect(output).to include("Yard::Fence: failed to prepare tmp/yard-fence files: StandardError: boom from prepare_tmp_files")
+      end
+    end
   end
 
   describe "::prepare_tmp_files" do

@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Yard::Fence
+  
+    &mdash; Documentation by YARD 0.9.37
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Yard::Fence";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (F)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Yard.html" title="Yard (module)">Yard</a></span></span>
+     &raquo; 
+    <span class="title">Fence</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Yard::Fence
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/yard/fence.rb<span class="defines">,<br />
+  lib/yard/fence/version.rb,<br /> lib/yard/fence/kramdown_gfm_document.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Fence/Version.html" title="Yard::Fence::Version (module)">Version</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Fence/Error.html" title="Yard::Fence::Error (class)">Error</a></span>, <span class='object_link'><a href="Fence/KramdownGfmDocument.html" title="Yard::Fence::KramdownGfmDocument (class)">KramdownGfmDocument</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="ASCII_BRACES-constant" class="">ASCII_BRACES =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>{}</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="FULLWIDTH_BRACES-constant" class="">FULLWIDTH_BRACES =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>{}</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="KRAMDOWN_PROVIDER-constant" class="">KRAMDOWN_PROVIDER =
+          <div class="docstring">
+  <div class="discussion">
+    <p>IMPORTANT: YARD expects :const to be a String.
+YARD concatenates with a String prefix (e.g., “::” + const),
+so a Symbol here will break provider resolution. Some static analyzers
+suggest making this a Symbol to match types, but that is incorrect for YARD.
+Do NOT change this to a Symbol.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span><span class='label'>lib:</span> <span class='symbol'>:kramdown</span><span class='comma'>,</span> <span class='label'>const:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>KramdownGfmDocument</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span></pre></dd>
+      
+        <dt id="GLOB_PATTERN-constant" class="">GLOB_PATTERN =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>*.{md,MD,txt,TXT}</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="TRIPLE_TICK_FENCE-constant" class="">TRIPLE_TICK_FENCE =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^\s*```</span><span class='regexp_end'>/</span></span></pre></dd>
+      
+        <dt id="INLINE_TICK_FENCE-constant" class="">INLINE_TICK_FENCE =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>`([^`]+)`</span><span class='regexp_end'>/</span></span></pre></dd>
+      
+        <dt id="DOUBLE_BRACE_PLACEHOLDER_REGEX-constant" class="">DOUBLE_BRACE_PLACEHOLDER_REGEX =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>{{([^{}]+)}}</span><span class='regexp_end'>/</span></span></pre></dd>
+      
+        <dt id="SINGLE_BRACE_PLACEHOLDER_REGEX-constant" class="">SINGLE_BRACE_PLACEHOLDER_REGEX =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>{([A-Za-z0-9_:\-]+)}</span><span class='regexp_end'>/</span></span></pre></dd>
+      
+        <dt id="INDENTED_CODE_LINE-constant" class="">INDENTED_CODE_LINE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Lines that are part of a classic indented code block (CommonMark: 4 spaces)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^ {4,}\S</span><span class='regexp_end'>/</span></span></pre></dd>
+      
+        <dt id="VERSION-constant" class="">VERSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'><span class='object_link'><a href="Fence/Version.html" title="Yard::Fence::Version (module)">Version</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Fence/Version.html#VERSION-constant" title="Yard::Fence::Version::VERSION (constant)">VERSION</a></span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fullwidth_braces-class_method" title="fullwidth_braces (class method)">.<strong>fullwidth_braces</strong>(str)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Replace ASCII { } with Unicode fullwidth { }.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#postprocess_html_docs-class_method" title="postprocess_html_docs (class method)">.<strong>postprocess_html_docs</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#prepare_tmp_files-class_method" title="prepare_tmp_files (class method)">.<strong>prepare_tmp_files</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Copy top-level <em>.md/</em>.txt into tmp/yard-fence/ with the above sanitization applied.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#restore_ascii_braces_in_html_file-class_method" title="restore_ascii_braces_in_html_file (class method)">.<strong>restore_ascii_braces_in_html_file</strong>(html_filepath)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sanitize_fenced_blocks-class_method" title="sanitize_fenced_blocks (class method)">.<strong>sanitize_fenced_blocks</strong>(text)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Walk the text, toggling a simple in_fence state on ``` lines.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sanitize_inline_code-class_method" title="sanitize_inline_code (class method)">.<strong>sanitize_inline_code</strong>(line)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Escape braces inside inline <code>code</code> spans only.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sanitize_text-class_method" title="sanitize_text (class method)">.<strong>sanitize_text</strong>(text)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_kramdown_gfm!-class_method" title="use_kramdown_gfm! (class method)">.<strong>use_kramdown_gfm!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Register Kramdown GFM as the highest priority Markdown provider in YARD.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="fullwidth_braces-class_method">
+  
+    .<strong>fullwidth_braces</strong>(str)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Replace ASCII { } with Unicode fullwidth { }.
+Visual effect in browsers is the same, but YARD’s link matcher won’t recognize them.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+88
+89
+90</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 88</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_fullwidth_braces'>fullwidth_braces</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_tr'>tr</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#ASCII_BRACES-constant" title="Yard::Fence::ASCII_BRACES (constant)">ASCII_BRACES</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="#FULLWIDTH_BRACES-constant" title="Yard::Fence::FULLWIDTH_BRACES (constant)">FULLWIDTH_BRACES</a></span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="postprocess_html_docs-class_method">
+  
+    .<strong>postprocess_html_docs</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+169
+170
+171
+172
+173
+174
+175
+176
+177</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 169</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_postprocess_html_docs'>postprocess_html_docs</span>
+  <span class='id identifier rubyid_docs'>docs</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_pwd'>pwd</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>docs</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='id identifier rubyid_docs'>docs</span><span class='rparen'>)</span>
+  <span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_glob'>glob</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid_docs'>docs</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>**</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>*.html</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_html'>html</span><span class='op'>|</span>
+    <span class='id identifier rubyid_restore_ascii_braces_in_html_file'>restore_ascii_braces_in_html_file</span><span class='lparen'>(</span><span class='id identifier rubyid_html'>html</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
+  <span class='id identifier rubyid_warn'>warn</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Yard::Fence.postprocess_html_docs failed: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="prepare_tmp_files-class_method">
+  
+    .<strong>prepare_tmp_files</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Copy top-level <em>.md/</em>.txt into tmp/yard-fence/ with the above sanitization applied.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 147</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_prepare_tmp_files'>prepare_tmp_files</span>
+  <span class='id identifier rubyid_root'><span class='object_link'><a href="../top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span> <span class='op'>=</span> <span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_pwd'>pwd</span>
+  <span class='id identifier rubyid_outdir'>outdir</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid_root'><span class='object_link'><a href="../top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>tmp</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>yard-fence</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='const'>FileUtils</span><span class='period'>.</span><span class='id identifier rubyid_mkdir_p'>mkdir_p</span><span class='lparen'>(</span><span class='id identifier rubyid_outdir'>outdir</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_candidates'>candidates</span> <span class='op'>=</span> <span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_glob'>glob</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid_root'><span class='object_link'><a href="../top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="#GLOB_PATTERN-constant" title="Yard::Fence::GLOB_PATTERN (constant)">GLOB_PATTERN</a></span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_candidates'>candidates</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_src'>src</span><span class='op'>|</span>
+    <span class='kw'>next</span> <span class='kw'>unless</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_file?'>file?</span><span class='lparen'>(</span><span class='id identifier rubyid_src'>src</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_content'>content</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_src'>src</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_sanitized'>sanitized</span> <span class='op'>=</span> <span class='id identifier rubyid_sanitize_text'>sanitize_text</span><span class='lparen'>(</span><span class='id identifier rubyid_content'>content</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_dst'>dst</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid_outdir'>outdir</span><span class='comma'>,</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_basename'>basename</span><span class='lparen'>(</span><span class='id identifier rubyid_src'>src</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='id identifier rubyid_dst'>dst</span><span class='comma'>,</span> <span class='id identifier rubyid_sanitized'>sanitized</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="restore_ascii_braces_in_html_file-class_method">
+  
+    .<strong>restore_ascii_braces_in_html_file</strong>(html_filepath)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+162
+163
+164
+165
+166
+167</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 162</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_restore_ascii_braces_in_html_file'>restore_ascii_braces_in_html_file</span><span class='lparen'>(</span><span class='id identifier rubyid_html_filepath'>html_filepath</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>unless</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_file?'>file?</span><span class='lparen'>(</span><span class='id identifier rubyid_html_filepath'>html_filepath</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_content'>content</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_html_filepath'>html_filepath</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_restored'>restored</span> <span class='op'>=</span> <span class='id identifier rubyid_content'>content</span><span class='period'>.</span><span class='id identifier rubyid_tr'>tr</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#FULLWIDTH_BRACES-constant" title="Yard::Fence::FULLWIDTH_BRACES (constant)">FULLWIDTH_BRACES</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="#ASCII_BRACES-constant" title="Yard::Fence::ASCII_BRACES (constant)">ASCII_BRACES</a></span></span><span class='rparen'>)</span>
+  <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='id identifier rubyid_html_filepath'>html_filepath</span><span class='comma'>,</span> <span class='id identifier rubyid_restored'>restored</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sanitize_fenced_blocks-class_method">
+  
+    .<strong>sanitize_fenced_blocks</strong>(text)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Walk the text, toggling a simple in_fence state on ``` lines.
+While inside a fence, convert braces to fullwidth; outside, also sanitize inline code
+and disarm simple prose placeholders like {issuer} or {{something}}.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 104</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sanitize_fenced_blocks'>sanitize_fenced_blocks</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_in_fence'>in_fence</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='id identifier rubyid_in_indented_block'>in_indented_block</span> <span class='op'>=</span> <span class='kw'>false</span>
+
+  <span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_each_line'>each_line</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_line'>line</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_line'>line</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#TRIPLE_TICK_FENCE-constant" title="Yard::Fence::TRIPLE_TICK_FENCE (constant)">TRIPLE_TICK_FENCE</a></span></span><span class='rparen'>)</span>
+      <span class='comment'># Toggle fenced block state; leaving indented block if switching into explicit fence
+</span>      <span class='id identifier rubyid_in_fence'>in_fence</span> <span class='op'>=</span> <span class='op'>!</span><span class='id identifier rubyid_in_fence'>in_fence</span>
+      <span class='id identifier rubyid_in_indented_block'>in_indented_block</span> <span class='op'>=</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_in_fence'>in_fence</span>
+      <span class='id identifier rubyid_line'>line</span>
+    <span class='kw'>elsif</span> <span class='op'>!</span><span class='id identifier rubyid_in_fence'>in_fence</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_line'>line</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#INDENTED_CODE_LINE-constant" title="Yard::Fence::INDENTED_CODE_LINE (constant)">INDENTED_CODE_LINE</a></span></span><span class='rparen'>)</span>
+      <span class='comment'># Enter indented code block on first qualifying line
+</span>      <span class='id identifier rubyid_in_indented_block'>in_indented_block</span> <span class='op'>=</span> <span class='kw'>true</span>
+      <span class='id identifier rubyid_fullwidth_braces'>fullwidth_braces</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+    <span class='kw'>elsif</span> <span class='id identifier rubyid_in_indented_block'>in_indented_block</span>
+      <span class='comment'># Continue indented block until a blank line or non-indented line breaks it
+</span>      <span class='kw'>if</span> <span class='id identifier rubyid_line'>line</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='op'>||</span> <span class='op'>!</span><span class='id identifier rubyid_line'>line</span><span class='period'>.</span><span class='id identifier rubyid_match?'>match?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#INDENTED_CODE_LINE-constant" title="Yard::Fence::INDENTED_CODE_LINE (constant)">INDENTED_CODE_LINE</a></span></span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_in_indented_block'>in_indented_block</span> <span class='op'>=</span> <span class='kw'>false</span>
+        <span class='comment'># Process this line as normal prose outside block
+</span>        <span class='id identifier rubyid_ln'>ln</span> <span class='op'>=</span> <span class='id identifier rubyid_sanitize_inline_code'>sanitize_inline_code</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_ln'>ln</span> <span class='op'>=</span> <span class='id identifier rubyid_ln'>ln</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#DOUBLE_BRACE_PLACEHOLDER_REGEX-constant" title="Yard::Fence::DOUBLE_BRACE_PLACEHOLDER_REGEX (constant)">DOUBLE_BRACE_PLACEHOLDER_REGEX</a></span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span> <span class='id identifier rubyid_fullwidth_braces'>fullwidth_braces</span><span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+        <span class='id identifier rubyid_ln'>ln</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#SINGLE_BRACE_PLACEHOLDER_REGEX-constant" title="Yard::Fence::SINGLE_BRACE_PLACEHOLDER_REGEX (constant)">SINGLE_BRACE_PLACEHOLDER_REGEX</a></span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span> <span class='id identifier rubyid_fullwidth_braces'>fullwidth_braces</span><span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+      <span class='kw'>else</span>
+        <span class='id identifier rubyid_fullwidth_braces'>fullwidth_braces</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+    <span class='kw'>elsif</span> <span class='id identifier rubyid_in_fence'>in_fence</span>
+      <span class='id identifier rubyid_fullwidth_braces'>fullwidth_braces</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_ln'>ln</span> <span class='op'>=</span> <span class='id identifier rubyid_sanitize_inline_code'>sanitize_inline_code</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+      <span class='comment'># IMPORTANT: handle double-brace placeholders first so we don&#39;t partially
+</span>      <span class='comment'># convert the inner {TOKEN} and leave outer ASCII braces from `{{TOKEN}}`.
+</span>      <span class='id identifier rubyid_ln'>ln</span> <span class='op'>=</span> <span class='id identifier rubyid_ln'>ln</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#DOUBLE_BRACE_PLACEHOLDER_REGEX-constant" title="Yard::Fence::DOUBLE_BRACE_PLACEHOLDER_REGEX (constant)">DOUBLE_BRACE_PLACEHOLDER_REGEX</a></span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span> <span class='id identifier rubyid_fullwidth_braces'>fullwidth_braces</span><span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+      <span class='id identifier rubyid_ln'>ln</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#SINGLE_BRACE_PLACEHOLDER_REGEX-constant" title="Yard::Fence::SINGLE_BRACE_PLACEHOLDER_REGEX (constant)">SINGLE_BRACE_PLACEHOLDER_REGEX</a></span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span> <span class='id identifier rubyid_fullwidth_braces'>fullwidth_braces</span><span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sanitize_inline_code-class_method">
+  
+    .<strong>sanitize_inline_code</strong>(line)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Escape braces inside inline <code>code</code> spans only.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+93
+94
+95
+96
+97
+98
+99</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 93</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sanitize_inline_code'>sanitize_inline_code</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
+  <span class='comment'># Use Regexp.last_match to safely access capture; to_s guards against nil
+</span>  <span class='id identifier rubyid_line'>line</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#INLINE_TICK_FENCE-constant" title="Yard::Fence::INLINE_TICK_FENCE (constant)">INLINE_TICK_FENCE</a></span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid__'>_</span><span class='op'>|</span>
+    <span class='id identifier rubyid_inner'>inner</span> <span class='op'>=</span> <span class='const'>Regexp</span><span class='period'>.</span><span class='id identifier rubyid_last_match'>last_match</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>`</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_fullwidth_braces'>fullwidth_braces</span><span class='lparen'>(</span><span class='id identifier rubyid_inner'>inner</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>`</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sanitize_text-class_method">
+  
+    .<strong>sanitize_text</strong>(text)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+141
+142
+143
+144</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 141</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sanitize_text'>sanitize_text</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_text'>text</span> <span class='kw'>unless</span> <span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_sanitize_fenced_blocks'>sanitize_fenced_blocks</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="use_kramdown_gfm!-class_method">
+  
+    .<strong>use_kramdown_gfm!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Register Kramdown GFM as the highest priority Markdown provider in YARD.
+Returns true if registration succeeded, false otherwise.</p>
+
+<p>This method is intentionally not executed at file load to avoid circular
+require warnings when YARD is in the middle of loading itself. Call this
+from a file loaded via .yardopts (e.g. <code>-e 'require "yard/fence/kramdown_gfm"; Yard::Fence.use_kramdown_gfm!'</code>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 185</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_use_kramdown_gfm!'>use_kramdown_gfm!</span>
+  <span class='comment'># :nocov:
+</span>  <span class='comment'># Not covering, because kramdown support is tested, so this rescue is not hit in test runs.
+</span>  <span class='kw'>unless</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Yard.html" title="Yard (module)">Yard</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="" title="Yard::Fence (module)">Fence</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Fence/KramdownGfmDocument.html" title="Yard::Fence::KramdownGfmDocument (class)">KramdownGfmDocument</a></span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="Fence/Error.html" title="Yard::Fence::Error (class)">Error</a></span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Yard::Fence: Kramdown GFM provider not loaded. Add kramdown and kramdown-parser-gfm to your Gemfile.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='comment'># :nocov:
+</span>  <span class='id identifier rubyid_providers'>providers</span> <span class='op'>=</span> <span class='op'>::</span><span class='const'>YARD</span><span class='op'>::</span><span class='const'>Templates</span><span class='op'>::</span><span class='const'>Helpers</span><span class='op'>::</span><span class='const'>MarkupHelper</span><span class='op'>::</span><span class='const'>MARKUP_PROVIDERS</span><span class='lbracket'>[</span><span class='symbol'>:markdown</span><span class='rbracket'>]</span>
+  <span class='comment'># NOTE: Intentionally using String for :const in KRAMDOWN_PROVIDER.
+</span>  <span class='comment'># YARD performs string concatenation with this value (e.g., &quot;::&quot; + const).
+</span>  <span class='comment'># Changing it to a Symbol to satisfy static type hints breaks runtime behavior.
+</span>  <span class='comment'># Suppress type fuzz complaints: expected Hash{Symbol-&gt;Symbol}, actual includes String by design.
+</span>  <span class='id identifier rubyid_providers'>providers</span><span class='period'>.</span><span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#KRAMDOWN_PROVIDER-constant" title="Yard::Fence::KRAMDOWN_PROVIDER (constant)">KRAMDOWN_PROVIDER</a></span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_providers'>providers</span><span class='period'>.</span><span class='id identifier rubyid_uniq!'>uniq!</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_p'>p</span><span class='op'>|</span> <span class='lbracket'>[</span><span class='id identifier rubyid_p'>p</span><span class='lbracket'>[</span><span class='symbol'>:lib</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='id identifier rubyid_p'>p</span><span class='lbracket'>[</span><span class='symbol'>:const</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
+  <span class='kw'>true</span>
+<span class='kw'>rescue</span> <span class='const'>NameError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
+  <span class='id identifier rubyid_warn'>warn</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Yard::Fence.use_kramdown_gfm!: failed to load YARD helper: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'>: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Fri Nov  7 19:59:23 2025 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.37 (ruby-3.4.7).
+</div>
+
+    </div>
+  </body>
+</html>
