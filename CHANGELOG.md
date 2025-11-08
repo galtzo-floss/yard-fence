@@ -20,9 +20,6 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
-- Support multi-line braces
-- 100% lines / 100% branches test coverage
-
 ### Changed
 
 ### Deprecated
@@ -32,6 +29,18 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Fixed
 
 ### Security
+
+## [0.5.0] - 2025-11-07
+
+- TAG: [v0.5.0][0.5.0t]
+- COVERAGE: 100.00% -- 98/98 lines in 4 files
+- BRANCH COVERAGE: 100.00% -- 22/22 branches in 4 files
+- 34.62% documented
+
+### Added
+
+- Support multi-line braces
+- 100% lines / 100% branches test coverage
 
 ## [0.4.0] - 2025-11-07
 
@@ -85,7 +94,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/galtzo-floss/yard-fence/compare/v0.4.0...v0.5.0
+[0.5.0t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.5.0
 [0.4.0]: https://github.com/galtzo-floss/yard-fence/compare/v0.3.0...v0.4.0
 [0.4.0t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.4.0
 [0.3.0]: https://github.com/galtzo-floss/yard-fence/compare/v0.2.0...v0.3.0
