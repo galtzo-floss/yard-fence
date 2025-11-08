@@ -30,6 +30,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Usage instructions in README.md
+  - Include `--markup-provider kramdown`
+
 ### Security
 
 ## [0.7.0] - 2025-11-08
