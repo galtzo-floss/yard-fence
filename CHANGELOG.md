@@ -20,8 +20,6 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
-- Allow disabling of yard-fence via YARD_FENCE_DISABLE=true (default false)
-
 ### Changed
 
 ### Deprecated
@@ -30,10 +28,23 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+### Security
+
+## [0.8.0] - 2025-11-08
+
+- TAG: [v0.8.0][0.8.0t]
+- COVERAGE: 100.00% -- 121/121 lines in 4 files
+- BRANCH COVERAGE: 100.00% -- 36/36 branches in 4 files
+- 37.93% documented
+
+### Added
+
+- Allow disabling of yard-fence via YARD_FENCE_DISABLE=true (default false)
+
+### Fixed
+
 - Usage instructions in README.md
   - Include `--markup-provider kramdown`
-
-### Security
 
 ## [0.7.0] - 2025-11-08
 
@@ -121,7 +132,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.8.0...HEAD
+[0.8.0]: https://github.com/galtzo-floss/yard-fence/compare/v0.7.0...v0.8.0
+[0.8.0t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.8.0
 [0.7.0]: https://github.com/galtzo-floss/yard-fence/compare/v0.6.0...v0.7.0
 [0.7.0t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.7.0
 [0.6.0]: https://github.com/galtzo-floss/yard-fence/compare/v0.5.0...v0.6.0
