@@ -66,13 +66,3 @@ module Yard
     end
   end
 end
-
-# Ensure YARD can resolve the provider constant at the top-level
-# YARD does something akin to Object.const_get("::" + const), so it expects
-# a top-level ::KramdownGfmDocument when const == "KramdownGfmDocument".
-# Provide an alias to our namespaced implementation.
-# :nocov:
-unless defined?(KramdownGfmDocument)
-  KramdownGfmDocument = Yard::Fence::KramdownGfmDocument
-end
-# :nocov:

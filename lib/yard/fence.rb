@@ -167,10 +167,14 @@ module Yard
     end
 
     def postprocess_html_docs
-      docs = File.join(Dir.pwd, "docs")
-      return unless Dir.exist?(docs)
-      Dir.glob(File.join(docs, "**", "*.html")).each do |html|
-        restore_ascii_braces_in_html_file(html)
+      if ENV.fetch("YARD_FENCE_DISABLE", "false").casecmp?("true")
+        warn("[yard/fence] postprocess_html_docs disabled via YARD_FENCE_DISABLE")
+      else
+        docs = File.join(Dir.pwd, "docs")
+        return unless Dir.exist?(docs)
+        Dir.glob(File.join(docs, "**", "*.html")).each do |html|
+          restore_ascii_braces_in_html_file(html)
+        end
       end
     rescue => e
       warn("Yard::Fence.postprocess_html_docs failed: #{e.class}: #{e.message}")
@@ -203,7 +207,11 @@ module Yard
     end
 
     def at_load_hook
-      Yard::Fence.prepare_tmp_files
+      if ENV.fetch("YARD_FENCE_DISABLE", "false").casecmp?("true")
+        warn("[yard/fence] at_load_hook disabled via YARD_FENCE_DISABLE")
+      else
+        Yard::Fence.prepare_tmp_files
+      end
     rescue => e
       warn("Yard::Fence: failed to prepare tmp/yard-fence files: #{e.class}: #{e.message}")
     end

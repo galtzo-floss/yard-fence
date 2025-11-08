@@ -20,6 +20,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+- Allow disabling of yard-fence via YARD_FENCE_DISABLED=true (default false)
+
 ### Changed
 
 ### Deprecated
