@@ -20,8 +20,8 @@ module Yard
       #   most sections; however, we've observed edge cases where fenced code blocks inside a
       #   <details markdown="1"> are left as literal backticks (rendered as <p>``` …</p>).
       #   This fallback detects that situation and re-renders with the classic parser.
-      UNRENDERED_FENCE_PARAGRAPH = /<p>```/.freeze
-      DETAILS_MARKDOWN_1 = /<details[^>]*markdown=["']1["'][^>]*>/i.freeze
+      UNRENDERED_FENCE_PARAGRAPH = /<p>```/
+      DETAILS_MARKDOWN_1 = /<details[^>]*markdown=["']1["'][^>]*>/i
 
       def initialize(source, options = {})
         options[:input] = "GFM" unless options.key?(:input)

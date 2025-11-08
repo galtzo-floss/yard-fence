@@ -67,12 +67,8 @@ RSpec.describe Yard::Fence::KramdownGfmDocument do
 
       it "auto-selects GFM while plain Kramdown without input may differ" do
         gfm_html = described_class.new(fence_only).to_html
-        # Plain Kramdown default 'kramdown' input might still handle fences in newer versions;
-        # this assertion focuses on our class guaranteeing language annotation.
         plain_html = Kramdown::Document.new(fence_only).to_html
         expect(gfm_html).to include('class="language-ruby"')
-        # Allow plain_html to possibly lack the language class (older versions) but don't fail if present.
-        # Ensure our implementation doesn't degrade compared to plain.
         expect(gfm_html.length).to be >= plain_html.length
       end
     end
@@ -95,29 +91,22 @@ RSpec.describe Yard::Fence::KramdownGfmDocument do
 
       it "renders the fence as a real code block (no literal ``` in <p>)" do
         html = described_class.new(details_md).to_html
-        # Should not leave the raw fence inside a paragraph
         expect(html).not_to include("<p>```")
-        # Should contain a code block
         expect(html).to include("<pre")
         expect(html).to include("<code")
-        # And preserve the language where possible
         expect(html).to match(/<code[^>]*ruby|<code[^>]*language-ruby/)
       end
 
       it "does not use fallback when disabled via env var" do
-        begin
-          ENV["YARD_FENCE_DISABLE_FALLBACK"] = "1"
-          html = described_class.new(details_md).to_html
-          # Depending on kramdown-parser-gfm behavior, this may include raw fences; we only assert that
-          # our fallback is bypassed, so presence of <p>``` indicates the bypass worked.
-          expect(html).to be_a(String)
-        ensure
-          ENV.delete("YARD_FENCE_DISABLE_FALLBACK")
-        end
+        ENV["YARD_FENCE_DISABLE_FALLBACK"] = "1"
+        html = described_class.new(details_md).to_html
+        expect(html).to be_a(String)
+      ensure
+        ENV.delete("YARD_FENCE_DISABLE_FALLBACK")
       end
     end
 
-    context "fallback behavior" do
+    context "when fallback behavior" do
       let(:details_with_fence) do
         <<~MD
           <details markdown="1">
@@ -133,12 +122,10 @@ RSpec.describe Yard::Fence::KramdownGfmDocument do
       it "applies fallback when needs_fallback? true and fallback_improved? true" do
         doc = described_class.new(details_with_fence)
         original_html = doc.to_html
-        allow(doc).to receive(:needs_fallback?).and_return(true)
-        allow(doc).to receive(:fallback_improved?).and_return(true)
+        allow(doc).to receive_messages(needs_fallback?: true, fallback_improved?: true)
         fallback_html = "<details><pre><code class=\"language-ruby\">puts :hi\n</code></pre></details>"
         fake_fallback = double("FallbackDoc", to_html: fallback_html)
         allow(Kramdown::Document).to receive(:new).and_return(fake_fallback)
-
         final = doc.to_html
         expect(final).to eq(fallback_html)
         expect(final).not_to eq(original_html) unless original_html == fallback_html
@@ -147,12 +134,10 @@ RSpec.describe Yard::Fence::KramdownGfmDocument do
       it "retains original html when needs_fallback? true but fallback_improved? false" do
         doc = described_class.new(details_with_fence)
         original_html = doc.to_html
-        allow(doc).to receive(:needs_fallback?).and_return(true)
-        allow(doc).to receive(:fallback_improved?).and_return(false)
+        allow(doc).to receive_messages(needs_fallback?: true, fallback_improved?: false)
         bad_fallback_html = "<details><p>```ruby\nputs :hi\n```</p></details>"
         fake_fallback = double("BadFallbackDoc", to_html: bad_fallback_html)
         allow(Kramdown::Document).to receive(:new).and_return(fake_fallback)
-
         final = doc.to_html
         expect(final).to eq(original_html)
         expect(final).not_to eq(bad_fallback_html)
@@ -168,7 +153,7 @@ RSpec.describe Yard::Fence::KramdownGfmDocument do
       end
     end
 
-    context "helper decision logic" do
+    context "when helper decision logic" do
       it "needs_fallback? returns true when html contains <p>```" do
         doc = described_class.new("```\ncode\n```")
         expect(doc.send(:needs_fallback?, "<p>```ruby</p>")).to be(true)
@@ -189,9 +174,9 @@ RSpec.describe Yard::Fence::KramdownGfmDocument do
 
       it "fallback_improved? returns true only when no <p>``` and has <pre><code>" do
         doc = described_class.new("irrelevant")
-        good = '<pre><code>ok</code></pre>'
-        bad1 = '<p>```</p>'
-        bad2 = '<pre>no code</pre>'
+        good = "<pre><code>ok</code></pre>"
+        bad1 = "<p>```</p>"
+        bad2 = "<pre>no code</pre>"
         expect(doc.send(:fallback_improved?, good)).to be(true)
         expect(doc.send(:fallback_improved?, bad1)).to be(false)
         expect(doc.send(:fallback_improved?, bad2)).to be(false)
