@@ -20,14 +20,7 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
-- `YARD_FENCE_CLEAN_DOCS` environment variable to optionally clear the `docs/` directory before regeneration
-  - Set to `true` to enable; prevents stale HTML files from persisting when markdown source files are deleted
-
 ### Changed
-
-- `prepare_tmp_files` now clears the `tmp/yard-fence/` staging directory before regenerating files
-  - This prevents stale preprocessed files from persisting when source markdown files are deleted
-  - Previously, files added manually or by other processes to `tmp/yard-fence/` would remain and get included in documentation
 
 ### Deprecated
 
@@ -36,6 +29,24 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Fixed
 
 ### Security
+
+## [0.8.1] - 2025-12-29
+
+- TAG: [v0.8.1][0.8.1t]
+- COVERAGE: 100.00% -- 129/129 lines in 4 files
+- BRANCH COVERAGE: 100.00% -- 40/40 branches in 4 files
+- 40.00% documented
+
+### Added
+
+- `YARD_FENCE_CLEAN_DOCS` environment variable to optionally clear the `docs/` directory before regeneration
+  - Set to `true` to enable; prevents stale HTML files from persisting when markdown source files are deleted
+
+### Changed
+
+- `prepare_tmp_files` now clears the `tmp/yard-fence/` staging directory before regenerating files
+  - This prevents stale preprocessed files from persisting when source markdown files are deleted
+  - Previously, files added manually or by other processes to `tmp/yard-fence/` would remain and get included in documentation
 
 ## [0.8.0] - 2025-11-08
 
@@ -139,7 +150,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.8.0...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.8.1...HEAD
+[0.8.1]: https://github.com/galtzo-floss/yard-fence/compare/v0.8.0...v0.8.1
+[0.8.1t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.8.1
 [0.8.0]: https://github.com/galtzo-floss/yard-fence/compare/v0.7.0...v0.8.0
 [0.8.0t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.8.0
 [0.7.0]: https://github.com/galtzo-floss/yard-fence/compare/v0.6.0...v0.7.0
