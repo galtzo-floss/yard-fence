@@ -144,9 +144,15 @@ module Yard
     end
 
     # Copy top-level *.md/*.txt into tmp/yard-fence/ with the above sanitization applied.
+    # Clears the staging directory first to prevent stale files from persisting.
     def prepare_tmp_files
       root = Dir.pwd
       outdir = File.join(root, "tmp", "yard-fence")
+
+      # Clear existing staging directory to prevent stale files from persisting.
+      # This ensures that if a markdown file is deleted from the project root,
+      # it won't remain in tmp/yard-fence/ and get included in documentation.
+      FileUtils.rm_rf(outdir)
       FileUtils.mkdir_p(outdir)
 
       candidates = Dir.glob(File.join(root, GLOB_PATTERN))
@@ -208,12 +214,27 @@ module Yard
       false
     end
 
+    # Clear the docs output directory to remove stale generated files.
+    # Only runs when YARD_FENCE_CLEAN_DOCS=true is set.
+    # This ensures that if a markdown file is deleted from the project,
+    # its corresponding HTML file won't remain in docs/.
+    def clean_docs_directory
+      return unless ENV.fetch("YARD_FENCE_CLEAN_DOCS", "false").casecmp?("true")
+
+      docs = File.join(Dir.pwd, "docs")
+      return unless Dir.exist?(docs)
+
+      FileUtils.rm_rf(docs)
+      puts "[yard/fence] Cleared docs/ directory (YARD_FENCE_CLEAN_DOCS=true)"
+    end
+
     def at_load_hook
       if ENV.fetch("YARD_FENCE_DISABLE", "false").casecmp?("true")
         # :nocov:
         warn("[yard/fence] at_load_hook disabled via YARD_FENCE_DISABLE")
         # :nocov:
       else
+        Yard::Fence.clean_docs_directory
         Yard::Fence.prepare_tmp_files
       end
     rescue => e

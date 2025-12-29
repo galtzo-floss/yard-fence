@@ -20,7 +20,14 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+- `YARD_FENCE_CLEAN_DOCS` environment variable to optionally clear the `docs/` directory before regeneration
+  - Set to `true` to enable; prevents stale HTML files from persisting when markdown source files are deleted
+
 ### Changed
+
+- `prepare_tmp_files` now clears the `tmp/yard-fence/` staging directory before regenerating files
+  - This prevents stale preprocessed files from persisting when source markdown files are deleted
+  - Previously, files added manually or by other processes to `tmp/yard-fence/` would remain and get included in documentation
 
 ### Deprecated
 

@@ -72,7 +72,26 @@ Please file a bug if you notice a violation of semantic versioning.</p>
 
 <h3 id="added">Added</h3>
 
+<ul>
+  <li>
+<code>YARD_FENCE_CLEAN_DOCS</code> environment variable to optionally clear the <code>docs/</code> directory before regeneration
+    <ul>
+      <li>Set to <code>true</code> to enable; prevents stale HTML files from persisting when markdown source files are deleted</li>
+    </ul>
+  </li>
+</ul>
+
 <h3 id="changed">Changed</h3>
+
+<ul>
+  <li>
+<code>prepare_tmp_files</code> now clears the <code>tmp/yard-fence/</code> staging directory before regenerating files
+    <ul>
+      <li>This prevents stale preprocessed files from persisting when source markdown files are deleted</li>
+      <li>Previously, files added manually or by other processes to <code>tmp/yard-fence/</code> would remain and get included in documentation</li>
+    </ul>
+  </li>
+</ul>
 
 <h3 id="deprecated">Deprecated</h3>
 
@@ -250,9 +269,9 @@ Please file a bug if you notice a violation of semantic versioning.</p>
 </div></div>
 
       <div id="footer">
-  Generated on Sat Nov  8 02:19:18 2025 by
+  Generated on Sun Dec 28 23:54:59 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.4.7).
+  0.9.37 (ruby-4.0.0).
 </div>
 
     </div>

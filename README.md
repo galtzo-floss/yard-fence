@@ -27,12 +27,14 @@
 [gem-server]: https://github.com/galtzo-floss/gem-server
 [reinteractive-podcast]: https://youtu.be/_H4qbtC5qzU?si=BvuBU90R2wAqD2E6
 
-[![Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0][🖼️galtzo-i]][🖼️galtzo-discord] [![ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5][🖼️ruby-lang-i]][🖼️ruby-lang]
+[![Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0][🖼️galtzo-i]][🖼️galtzo-discord] [![ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5][🖼️ruby-lang-i]][🖼️ruby-lang]  [![yard-fence Logo by Aboling0, CC BY-SA 4.0][🖼️yard-fence-i]][🖼️yard-fence]
 
 [🖼️galtzo-i]: https://logos.galtzo.com/assets/images/galtzo-floss/avatar-192px.svg
 [🖼️galtzo-discord]: https://discord.gg/3qme4XHNKN
 [🖼️ruby-lang-i]: https://logos.galtzo.com/assets/images/ruby-lang/avatar-192px.svg
 [🖼️ruby-lang]: https://www.ruby-lang.org/
+[🖼️yard-fence-i]: https://logos.galtzo.com/assets/images/galtzo-floss/yard-fence/avatar-192px.svg
+[🖼️yard-fence]: https://github.com/galtzo-floss/yard-fence
 
 # 🤺 Yard::Fence
 
@@ -219,7 +221,30 @@ Recommended .yardopts (noise‑free):
 
 Why tmp/yard-fence/?
 
-- The plugin converts ASCII `{ }` to fullwidth `｛ ｝` only in `tmp/yard-fence/` so YARD won’t treat brace content as reference tags and emit `InvalidLink` warnings. After docs are generated, the HTML is restored back to normal ASCII braces for easy copy/paste.
+- The plugin converts ASCII `{ }` to fullwidth `｛ ｝` only in `tmp/yard-fence/` so YARD won't treat brace content as reference tags and emit `InvalidLink` warnings. After docs are generated, the HTML is restored back to normal ASCII braces for easy copy/paste.
+
+### Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `YARD_FENCE_DISABLE` | `false` | Set to `true` to disable all yard-fence processing |
+| `YARD_FENCE_CLEAN_DOCS` | `false` | Set to `true` to clear `docs/` directory before regeneration (prevents stale files) |
+| `YARD_FENCE_SKIP_AT_EXIT` | `0` | Set to `1` to skip the at_exit hook that restores ASCII braces in HTML |
+| `YARD_DEBUG` | `false` | Set to `true` to enable debug output |
+
+#### Preventing Stale Files
+
+When markdown files are removed from your project, their corresponding HTML files may remain in `docs/`. To ensure a clean build:
+
+```bash
+# Option 1: Use the YARD_FENCE_CLEAN_DOCS environment variable
+YARD_FENCE_CLEAN_DOCS=true bundle exec yard
+
+# Option 2: Manually clear the docs directory before running yard
+rm -rf docs/ && bundle exec yard
+```
+
+The `tmp/yard-fence/` staging directory is always cleared automatically before regeneration to prevent stale preprocessed files.
 
 ## 🔧 Basic Usage
 
