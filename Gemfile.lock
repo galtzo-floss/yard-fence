@@ -11,21 +11,6 @@ GIT
       yard
 
 PATH
-  remote: ../kettle-test
-  specs:
-    kettle-test (1.0.7)
-      appraisal2 (~> 3.0)
-      backports (~> 3.0)
-      rspec (~> 3.0)
-      rspec-block_is_expected (~> 1.0, >= 1.0.6)
-      rspec-pending_for (~> 0.1, >= 0.1.19)
-      rspec-stubbed_env (~> 1.0, >= 1.0.4)
-      rspec_junit_formatter (~> 0.6)
-      silent_stream (~> 1.0, >= 1.0.12)
-      timecop-rspec (~> 1.0, >= 1.0.3)
-      version_gem (~> 1.1, >= 1.1.9)
-
-PATH
   remote: .
   specs:
     yard-fence (0.8.0)
@@ -109,6 +94,17 @@ GEM
       simplecov-lcov (~> 0.8)
       simplecov-rcov (~> 0.3, >= 0.3.7)
       simplecov_json_formatter (~> 0.1, >= 0.1.4)
+      version_gem (~> 1.1, >= 1.1.9)
+    kettle-test (1.0.7)
+      appraisal2 (~> 3.0)
+      backports (~> 3.0)
+      rspec (~> 3.0)
+      rspec-block_is_expected (~> 1.0, >= 1.0.6)
+      rspec-pending_for (~> 0.1, >= 0.1.19)
+      rspec-stubbed_env (~> 1.0, >= 1.0.4)
+      rspec_junit_formatter (~> 0.6)
+      silent_stream (~> 1.0, >= 1.0.12)
+      timecop-rspec (~> 1.0, >= 1.0.3)
       version_gem (~> 1.1, >= 1.1.9)
     kramdown (2.5.1)
       rexml (>= 3.3.9)
@@ -332,7 +328,7 @@ DEPENDENCIES
   irb (~> 1.15, >= 1.15.2)
   kettle-dev (~> 1.1)
   kettle-soup-cover (~> 1.1, ~> 1.0, >= 1.1.1, >= 1.0.10)
-  kettle-test (~> 1.0, >= 1.0.7, >= 0)!
+  kettle-test (~> 1.0, >= 1.0.7)
   kramdown (~> 2.5, >= 2.5.1)
   kramdown-parser-gfm (~> 1.1)
   mutex_m (~> 0.2)
@@ -385,7 +381,7 @@ CHECKSUMS
   json (2.18.0) sha256=b10506aee4183f5cf49e0efc48073d7b75843ce3782c68dbeb763351c08fd505
   kettle-dev (1.2.4) sha256=71373c67fe7eb0a9656e70dfd10cf226a15083b6d1be18dafcb5360f21ee98b6
   kettle-soup-cover (1.1.1) sha256=2303885a9d8485d8d43cb250bcf73570f6b6fb997526beeaef3ef54e3501d445
-  kettle-test (1.0.7)
+  kettle-test (1.0.7) sha256=16fcb8b1bc12366f443d0ec9d125c1865249865c7afff7ef856e602436d4cdc7
   kramdown (2.5.1) sha256=87bbb6abd9d3cebe4fc1f33e367c392b4500e6f8fa19dd61c0972cf4afe7368c
   kramdown-parser-gfm (1.1.0) sha256=fb39745516427d2988543bf01fc4cf0ab1149476382393e0e9c48592f6581729
   language_server-protocol (3.17.0.5) sha256=fd1e39a51a28bf3eec959379985a72e296e9f9acfce46f6a79d31ca8760803cc
