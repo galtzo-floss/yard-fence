@@ -20,14 +20,31 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.8.2] - 2025-12-30
+
+- TAG: [v0.8.2][0.8.2t]
+- COVERAGE: 100.00% -- 130/130 lines in 4 files
+- BRANCH COVERAGE: 100.00% -- 40/40 branches in 4 files
+- 50.00% documented
+
+### Added
+
 - `Yard::Fence::RakeTask` - New rake task class that provides `yard:fence:prepare` and `yard:fence:clean` tasks
   - Automatically enhances the `:yard` task when defined
   - Auto-registers when Rake is available at gem load time
 - `Yard::Fence.prepare_for_yard` - New method to prepare for YARD documentation generation
   - Combines `clean_docs_directory` and `prepare_tmp_files` into a single call
   - Intended to be called from rake tasks, not at load time
-
-### Changed
 
 ### Deprecated
 
@@ -44,8 +61,6 @@ Please file a bug if you notice a violation of semantic versioning.
 - Fixed `docs/` directory being cleared during `rake build` and `rake release` commands
   - The root cause was `at_load_hook` running at gem load time instead of only when generating documentation
   - Now docs cleanup and tmp file preparation only occur when the `yard` task actually runs
-
-### Security
 
 ## [0.8.1] - 2025-12-29
 
@@ -167,7 +182,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.8.1...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.8.2...HEAD
+[0.8.2]: https://github.com/galtzo-floss/yard-fence/compare/v0.8.1...v0.8.2
+[0.8.2t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.8.2
 [0.8.1]: https://github.com/galtzo-floss/yard-fence/compare/v0.8.0...v0.8.1
 [0.8.1t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.8.1
 [0.8.0]: https://github.com/galtzo-floss/yard-fence/compare/v0.7.0...v0.8.0
