@@ -155,14 +155,38 @@ RSpec.describe Yard::Fence do
   end
 
   describe "::at_load_hook" do
+    it "returns nil and does nothing (deprecated)" do
+      # at_load_hook is now intentionally empty - all preparation happens via rake task
+      expect(described_class.at_load_hook).to be_nil
+    end
+  end
+
+  describe "::prepare_for_yard" do
     describe "error path" do
       it "rescues and warns if an exception occurs during processing", :check_output do
         # Force the method past the early return and then raise inside the loop
         allow(described_class).to receive(:prepare_tmp_files).and_raise(StandardError, "boom from prepare_tmp_files")
 
-        output = capture(:stderr) { described_class.at_load_hook }
-        expect(output).to include("Yard::Fence: failed to prepare tmp/yard-fence files: StandardError: boom from prepare_tmp_files")
+        output = capture(:stderr) { described_class.prepare_for_yard }
+        expect(output).to include("Yard::Fence: failed to prepare for YARD: StandardError: boom from prepare_tmp_files")
       end
+    end
+
+    it "calls clean_docs_directory and prepare_tmp_files" do
+      expect(described_class).to receive(:clean_docs_directory).ordered
+      expect(described_class).to receive(:prepare_tmp_files).ordered
+
+      described_class.prepare_for_yard
+    end
+
+    it "can be disabled via YARD_FENCE_DISABLE", :check_output do
+      stub_env("YARD_FENCE_DISABLE" => "true")
+
+      expect(described_class).not_to receive(:clean_docs_directory)
+      expect(described_class).not_to receive(:prepare_tmp_files)
+
+      output = capture(:stderr) { described_class.prepare_for_yard }
+      expect(output).to include("[yard/fence] prepare_for_yard disabled via YARD_FENCE_DISABLE")
     end
   end
 

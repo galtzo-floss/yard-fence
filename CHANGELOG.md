@@ -20,13 +20,30 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+- `Yard::Fence::RakeTask` - New rake task class that provides `yard:fence:prepare` and `yard:fence:clean` tasks
+  - Automatically enhances the `:yard` task when defined
+  - Auto-registers when Rake is available at gem load time
+- `Yard::Fence.prepare_for_yard` - New method to prepare for YARD documentation generation
+  - Combines `clean_docs_directory` and `prepare_tmp_files` into a single call
+  - Intended to be called from rake tasks, not at load time
+
 ### Changed
 
 ### Deprecated
 
+- `Yard::Fence.at_load_hook` - Now does nothing; use `prepare_for_yard` via rake task instead
+
 ### Removed
 
+- **BREAKING**: Removed load-time execution of `clean_docs_directory` and `prepare_tmp_files`
+  - Previously, these ran when yard-fence was loaded, causing `docs/` to be cleared during unrelated rake tasks like `build` and `release`
+  - Now all preparation happens via the `yard:fence:prepare` rake task, which runs as a prerequisite to the `:yard` task
+
 ### Fixed
+
+- Fixed `docs/` directory being cleared during `rake build` and `rake release` commands
+  - The root cause was `at_load_hook` running at gem load time instead of only when generating documentation
+  - Now docs cleanup and tmp file preparation only occur when the `yard` task actually runs
 
 ### Security
 

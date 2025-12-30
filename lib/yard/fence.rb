@@ -228,28 +228,56 @@ module Yard
       puts "[yard/fence] Cleared docs/ directory (YARD_FENCE_CLEAN_DOCS=true)"
     end
 
-    def at_load_hook
+    # Prepare for YARD documentation generation.
+    # This method should be called from a rake task BEFORE yard runs, not at load time.
+    # It cleans the docs directory (if YARD_FENCE_CLEAN_DOCS=true) and prepares tmp files.
+    def prepare_for_yard
       if ENV.fetch("YARD_FENCE_DISABLE", "false").casecmp?("true")
         # :nocov:
-        warn("[yard/fence] at_load_hook disabled via YARD_FENCE_DISABLE")
+        warn("[yard/fence] prepare_for_yard disabled via YARD_FENCE_DISABLE")
         # :nocov:
       else
         Yard::Fence.clean_docs_directory
         Yard::Fence.prepare_tmp_files
       end
     rescue => e
-      warn("Yard::Fence: failed to prepare tmp/yard-fence files: #{e.class}: #{e.message}")
+      warn("Yard::Fence: failed to prepare for YARD: #{e.class}: #{e.message}")
+    end
+
+    # @deprecated Use prepare_for_yard instead. This method is kept for backward compatibility
+    #   but does nothing at load time. Call prepare_for_yard from a rake task.
+    def at_load_hook
+      # INTENTIONALLY EMPTY
+      # Previously this ran at load time, but that caused docs/ to be cleared
+      # during unrelated rake tasks like `build` and `release`.
+      # All preparation now happens via the yard:fence:prepare rake task.
+      nil
     end
   end
 
-  # Execute at load-time so files exist before YARD scans tmp/yard-fence/*.md
-  Yard::Fence.at_load_hook
+  # NOTE: at_load_hook is intentionally NOT called at load time.
+  # Use the yard:fence:prepare rake task instead.
+  # Yard::Fence.at_load_hook  # REMOVED - was causing docs/ to be cleared during `rake build`
 end
 
 # Extend the Version with VersionGem::Basic to provide semantic version helpers.
 Yard::Fence::Version.class_eval do
   extend VersionGem::Basic
 end
+
+# Auto-register rake tasks when Rake is available.
+# This allows upgrading yard-fence to get the fix without also upgrading kettle-dev.
+# The rake task defines yard:fence:prepare which enhances the :yard task if it exists.
+# :nocov:
+if defined?(Rake::Task)
+  begin
+    require_relative "fence/rake_task"
+    Yard::Fence::RakeTask.new unless Rake::Task.task_defined?("yard:fence:prepare")
+  rescue LoadError
+    # Rake::TaskLib may not be available in all contexts
+  end
+end
+# :nocov:
 
 # :nocov:
 # Not checking coverage of the at_exit hook, because it would require a forked process.
