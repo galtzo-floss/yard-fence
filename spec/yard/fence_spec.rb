@@ -193,7 +193,7 @@ RSpec.describe Yard::Fence do
   describe "::prepare_tmp_files" do
     it "skips non-file candidates matched by the glob (branch 110[then])" do
       Dir.mktmpdir do |dir|
-        Dir.chdir(dir) do
+        FileUtils.cd(dir) do
           Dir.mkdir("examples.md")
           original = "Code: {a: 1}"
           File.write("README.md", original)
@@ -210,7 +210,7 @@ RSpec.describe Yard::Fence do
 
     it "clears existing staging directory before regenerating files" do
       Dir.mktmpdir do |dir|
-        Dir.chdir(dir) do
+        FileUtils.cd(dir) do
           # Create a markdown file
           File.write("README.md", "Hello {world}")
 
@@ -233,7 +233,7 @@ RSpec.describe Yard::Fence do
 
     it "removes files from staging when source files are deleted" do
       Dir.mktmpdir do |dir|
-        Dir.chdir(dir) do
+        FileUtils.cd(dir) do
           # Create two markdown files
           File.write("README.md", "Hello {world}")
           File.write("CHANGELOG.md", "Changes {here}")
@@ -258,7 +258,7 @@ RSpec.describe Yard::Fence do
   describe "::clean_docs_directory" do
     it "does nothing when YARD_FENCE_CLEAN_DOCS is not set" do
       Dir.mktmpdir do |dir|
-        Dir.chdir(dir) do
+        FileUtils.cd(dir) do
           FileUtils.mkdir_p("docs")
           File.write(File.join("docs", "index.html"), "<html></html>")
 
@@ -272,7 +272,7 @@ RSpec.describe Yard::Fence do
 
     it "does nothing when YARD_FENCE_CLEAN_DOCS is false" do
       Dir.mktmpdir do |dir|
-        Dir.chdir(dir) do
+        FileUtils.cd(dir) do
           FileUtils.mkdir_p("docs")
           File.write(File.join("docs", "index.html"), "<html></html>")
 
@@ -286,7 +286,7 @@ RSpec.describe Yard::Fence do
 
     it "clears docs directory when YARD_FENCE_CLEAN_DOCS is true" do
       Dir.mktmpdir do |dir|
-        Dir.chdir(dir) do
+        FileUtils.cd(dir) do
           FileUtils.mkdir_p(File.join("docs", "nested"))
           File.write(File.join("docs", "index.html"), "<html></html>")
           File.write(File.join("docs", "nested", "page.html"), "<html></html>")
@@ -302,7 +302,7 @@ RSpec.describe Yard::Fence do
 
     it "does nothing when docs directory does not exist" do
       Dir.mktmpdir do |dir|
-        Dir.chdir(dir) do
+        FileUtils.cd(dir) do
           stub_env("YARD_FENCE_CLEAN_DOCS" => "true")
           expect { described_class.clean_docs_directory }.not_to raise_error
           expect(Dir.exist?("docs")).to be(false)
@@ -342,7 +342,7 @@ RSpec.describe Yard::Fence do
   describe "::postprocess_html_docs" do
     it "returns early when docs directory is absent (branch 127[then])" do
       Dir.mktmpdir do |dir|
-        Dir.chdir(dir) do
+        FileUtils.cd(dir) do
           expect(Dir.exist?("docs")).to be(false)
           expect { described_class.postprocess_html_docs }.not_to raise_error
         end
@@ -351,7 +351,7 @@ RSpec.describe Yard::Fence do
 
     it "processes html files when docs directory exists" do
       Dir.mktmpdir do |dir|
-        Dir.chdir(dir) do
+        FileUtils.cd(dir) do
           FileUtils.mkdir_p(File.join("docs", "nested"))
           html = File.join("docs", "nested", "page.html")
           File.write(html, "<code>｛x: 1｝</code>")
