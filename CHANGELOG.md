@@ -20,13 +20,19 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+- `Yard::Fence.install_rake_tasks!` for explicit integration with a chosen documentation rake task
+
 ### Changed
+
+- Workspace documentation development can now source `yard-fence` through the sibling `documentation_local.gemfile` pattern instead of only released gems
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+
+- `yard-fence` no longer relies on global `at_exit` hooks, so loading YARD during unrelated rake tasks no longer clears or rewrites `docs/`
 
 ### Security
 
