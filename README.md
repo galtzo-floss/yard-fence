@@ -58,6 +58,7 @@ Just the important bits:
 - This prevents YARD from emitting `InvalidLink` warnings.
 - Prioritizes Kramdown's GFM parser so tables and fenced code blocks render correctly.
 - After YARD finishes generating HTML, restores fullwidth braces back to normal ASCII braces so code examples are copy‑pastable.
+- The supported workflow is `rake yard`; raw `yard` / `bin/yard` does not run the explicit prepare + postprocess hooks.
 
 Create a `.yardopts` file like this:
 
@@ -201,9 +202,11 @@ NOTE: Be prepared to track down certs for signed gems and add them the same way 
 
 ## ⚙️ Configuration
 
-NOTE: `Yard::Fence` writes sanitized copies of top‑level Markdown/TXT into `tmp/yard-fence/` at load time. To avoid YARD parsing the unsanitized originals, point YARD at the `tmp/yard-fence/` copies.
+`Yard::Fence` writes sanitized copies of top-level Markdown/TXT into
+`tmp/yard-fence/` during the rake-based YARD workflow. To avoid YARD parsing
+the unsanitized originals, point YARD at the `tmp/yard-fence/` copies.
 
-Recommended .yardopts (noise‑free):
+Recommended `.yardopts` (noise-free) for the rake-based workflow:
 
 ```text
 --plugin fence
@@ -229,7 +232,6 @@ Why tmp/yard-fence/?
 |----------|---------|-------------|
 | `YARD_FENCE_DISABLE` | `false` | Set to `true` to disable all yard-fence processing |
 | `YARD_FENCE_CLEAN_DOCS` | `false` | Set to `true` to clear `docs/` directory before regeneration (prevents stale files) |
-| `YARD_FENCE_SKIP_AT_EXIT` | `0` | Set to `1` to skip the at_exit hook that restores ASCII braces in HTML |
 | `YARD_DEBUG` | `false` | Set to `true` to enable debug output |
 
 #### Preventing Stale Files
@@ -238,29 +240,37 @@ When markdown files are removed from your project, their corresponding HTML file
 
 ```bash
 # Option 1: Use the YARD_FENCE_CLEAN_DOCS environment variable
-YARD_FENCE_CLEAN_DOCS=true bundle exec yard
+YARD_FENCE_CLEAN_DOCS=true bundle exec rake yard
 
 # Option 2: Manually clear the docs directory before running yard
-rm -rf docs/ && bundle exec yard
+rm -rf docs/ && bundle exec rake yard
 ```
 
 The `tmp/yard-fence/` staging directory is always cleared automatically before regeneration to prevent stale preprocessed files.
 
 ## 🔧 Basic Usage
 
-CLI example that would be similar to what is accomplished by the `.yardopts` from the section above:
+Use the rake integration, not raw `yard`, so the prepare + postprocess steps
+run around the YARD build:
+
+```ruby
+require "yard"
+require "yard/fence"
+
+YARD::Rake::YardocTask.new(:yard) { |t| t.files = [] }
+Yard::Fence.install_rake_tasks!(:yard)
+```
+
+Then build docs with:
 
 ```bash
-yard doc \
-  --plugin fence \
-  -e yard/fence/hoist.rb \
-  --readme tmp/yard-fence/README.md \
-  --charset utf-8 \
-  --markup markdown \
-  --markup-provider kramdown \
-  --output docs \
-  lib/**/*.rb - tmp/yard-fence/*.md tmp/yard-fence/*.txt
+bundle exec rake yard
 ```
+
+If your project exposes `bin/yard`, treat it the same as raw `yard`: it runs
+YARD itself, but it does not run `Yard::Fence.install_rake_tasks!(:yard)`.
+Use `bundle exec rake yard` whenever `tmp/yard-fence/` staging is part of the
+setup.
 
 ## 🦷 FLOSS Funding
 

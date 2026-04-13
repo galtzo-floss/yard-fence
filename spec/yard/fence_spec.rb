@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "rake"
 require "tempfile"
 require "yard/fence"
 
@@ -372,6 +373,30 @@ RSpec.describe Yard::Fence do
         output = capture(:stderr) { described_class.postprocess_html_docs }
         expect(output).to include("Yard::Fence.postprocess_html_docs failed: StandardError: boom from glob")
       end
+    end
+  end
+
+  describe "::install_rake_tasks!" do
+    before do
+      Rake::Task.clear
+      described_class.__reset_rake_integrations__
+      Rake::Task.define_task(:yard)
+    end
+
+    it "adds the prepare prerequisite and postprocess hook to the yard task" do
+      expect(described_class.install_rake_tasks!(:yard)).to be(true)
+      expect(Rake::Task.task_defined?("yard:fence:prepare")).to be(true)
+      expect(Rake::Task[:yard].prerequisites).to include("yard:fence:prepare")
+    end
+
+    it "is idempotent for the same yard task" do
+      allow(described_class).to receive(:postprocess_html_docs)
+
+      described_class.install_rake_tasks!(:yard)
+      described_class.install_rake_tasks!(:yard)
+      Rake::Task[:yard].invoke
+
+      expect(described_class).to have_received(:postprocess_html_docs).once
     end
   end
 

@@ -61,6 +61,8 @@ module Yard
   module Fence
     ASCII_BRACES = "{}"
     FULLWIDTH_BRACES = "｛｝"
+    RAKE_INTEGRATIONS = {}
+    RAKE_INTEGRATIONS_MUTEX = Mutex.new
     # IMPORTANT: YARD expects :const to be a String.
     # YARD concatenates with a String prefix (e.g., "::" + const),
     # so a Symbol here will break provider resolution. Some static analyzers
@@ -82,6 +84,37 @@ module Yard
     # :nocov:
 
     module_function
+
+    def install_rake_tasks!(yard_task_name = :yard)
+      return false unless defined?(::Rake::Task)
+
+      require_relative "fence/rake_task"
+
+      ::Yard::Fence::RakeTask.new unless ::Rake::Task.task_defined?("yard:fence:prepare")
+      return true unless ::Rake::Task.task_defined?(yard_task_name)
+
+      yard_task = ::Rake::Task[yard_task_name]
+      prereqs = yard_task.prerequisites.map(&:to_s)
+      yard_task.enhance(["yard:fence:prepare"]) unless prereqs.include?("yard:fence:prepare")
+
+      RAKE_INTEGRATIONS_MUTEX.synchronize do
+        key = yard_task_name.to_s
+        unless RAKE_INTEGRATIONS[key]
+          yard_task.enhance { ::Yard::Fence.postprocess_html_docs }
+          RAKE_INTEGRATIONS[key] = true
+        end
+      end
+
+      true
+    rescue LoadError => e
+      warn("Yard::Fence.install_rake_tasks!: failed to load rake integration: #{e.class}: #{e.message}")
+      false
+    end
+
+    def __reset_rake_integrations__
+      RAKE_INTEGRATIONS_MUTEX.synchronize { RAKE_INTEGRATIONS.clear }
+      nil
+    end
 
     # Replace ASCII { } with Unicode fullwidth ｛ ｝.
     # Visual effect in browsers is the same, but YARD's link matcher won't recognize them.
@@ -265,27 +298,6 @@ Yard::Fence::Version.class_eval do
   extend VersionGem::Basic
 end
 
-# Auto-register rake tasks when Rake is available.
-# This allows upgrading yard-fence to get the fix without also upgrading kettle-dev.
-# The rake task defines yard:fence:prepare which enhances the :yard task if it exists.
-# :nocov:
-if defined?(Rake::Task)
-  begin
-    require_relative "fence/rake_task"
-    Yard::Fence::RakeTask.new unless Rake::Task.task_defined?("yard:fence:prepare")
-  rescue LoadError
-    # Rake::TaskLib may not be available in all contexts
-  end
-end
-# :nocov:
-
-# :nocov:
-# Not checking coverage of the at_exit hook, because it would require a forked process.
-unless ENV["YARD_FENCE_SKIP_AT_EXIT"] == "1"
-  # After YARD completes, restore ASCII braces in generated HTML docs.
-  # This guarantees the published docs (docs/*.html) show and copy normal { }.
-  at_exit do
-    Yard::Fence.postprocess_html_docs
-  end
-end
-# :nocov:
+# Rake integration is explicit. Call Yard::Fence.install_rake_tasks! from your
+# Rakefile after defining the :yard task so prepare + postprocess only run for
+# documentation builds, never for unrelated processes that happen to load YARD.
