@@ -5,6 +5,6 @@ module Yard
     module Version
       VERSION = "0.8.2"
     end
-    VERSION = Version::VERSION
+    VERSION = Version::VERSION # Traditional Constant Location
   end
 end
