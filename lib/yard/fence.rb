@@ -57,16 +57,6 @@ rescue LoadError => error
   end
 end
 # :nocov:
-# Not covering, because kramdown support is tested, so this rescue is not hit in test runs.
-rescue LoadError => error
-  # check the error message, and re-raise if not what is expected
-  if error.message.include?("kramdown")
-    warn("Yard::Fence: Kramdown GFM provider not loaded: #{error.class}: #{error.message}") if ENV.fetch("YARD_DEBUG", "false").casecmp?("true")
-  else
-    raise error
-  end
-end
-# :nocov:
 
 module Yard
   module Fence
