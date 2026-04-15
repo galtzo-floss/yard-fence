@@ -111,7 +111,7 @@ Gem::Specification.new do |spec|
   #       Development dependencies that require strictly newer Ruby versions should be in a "gemfile",
   #       and preferably a modular one (see gemfiles/modular/*.gemfile).
 
-spec.add_development_dependency("kettle-drift")
+  spec.add_development_dependency("kettle-drift")
   spec.add_development_dependency("kramdown", "~> 2.5", ">= 2.5.1") # Ruby >= 2.5
   spec.add_development_dependency("kramdown-parser-gfm", "~> 1.1") # Ruby >= 2.3
 

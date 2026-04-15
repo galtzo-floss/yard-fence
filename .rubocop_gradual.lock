@@ -1,13 +1,16 @@
 {
-  "spec/yard/fence_spec.rb:4073026116": [
-    [196, 9, 14, "ThreadSafety/DirChdir: Avoid using `Dir.chdir` due to its process-wide effect.", 2866645406],
-    [213, 9, 14, "ThreadSafety/DirChdir: Avoid using `Dir.chdir` due to its process-wide effect.", 2866645406],
-    [236, 9, 14, "ThreadSafety/DirChdir: Avoid using `Dir.chdir` due to its process-wide effect.", 2866645406],
-    [261, 9, 14, "ThreadSafety/DirChdir: Avoid using `Dir.chdir` due to its process-wide effect.", 2866645406],
-    [275, 9, 14, "ThreadSafety/DirChdir: Avoid using `Dir.chdir` due to its process-wide effect.", 2866645406],
-    [289, 9, 14, "ThreadSafety/DirChdir: Avoid using `Dir.chdir` due to its process-wide effect.", 2866645406],
-    [305, 9, 14, "ThreadSafety/DirChdir: Avoid using `Dir.chdir` due to its process-wide effect.", 2866645406],
-    [345, 9, 14, "ThreadSafety/DirChdir: Avoid using `Dir.chdir` due to its process-wide effect.", 2866645406],
-    [354, 9, 14, "ThreadSafety/DirChdir: Avoid using `Dir.chdir` due to its process-wide effect.", 2866645406]
+  "spec/yard/fence_spec.rb:671645524": [
+    [197, 9, 17, "ThreadSafety/DirChdir: Avoid using `FileUtils.cd` due to its process-wide effect.", 180595587],
+    [214, 9, 17, "ThreadSafety/DirChdir: Avoid using `FileUtils.cd` due to its process-wide effect.", 180595587],
+    [237, 9, 17, "ThreadSafety/DirChdir: Avoid using `FileUtils.cd` due to its process-wide effect.", 180595587],
+    [262, 9, 17, "ThreadSafety/DirChdir: Avoid using `FileUtils.cd` due to its process-wide effect.", 180595587],
+    [276, 9, 17, "ThreadSafety/DirChdir: Avoid using `FileUtils.cd` due to its process-wide effect.", 180595587],
+    [290, 9, 17, "ThreadSafety/DirChdir: Avoid using `FileUtils.cd` due to its process-wide effect.", 180595587],
+    [306, 9, 17, "ThreadSafety/DirChdir: Avoid using `FileUtils.cd` due to its process-wide effect.", 180595587],
+    [346, 9, 17, "ThreadSafety/DirChdir: Avoid using `FileUtils.cd` due to its process-wide effect.", 180595587],
+    [355, 9, 17, "ThreadSafety/DirChdir: Avoid using `FileUtils.cd` due to its process-wide effect.", 180595587]
+  ],
+  "yard-fence.gemspec:3497770182": [
+    [114, 3, 47, "Gemspec/DependencyVersion: Dependency version specification is required.", 607089141]
   ]
 }
