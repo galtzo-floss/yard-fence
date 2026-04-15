@@ -44,9 +44,9 @@ require "version_gem"
 # includes gem files
 require_relative "fence/version"
 
+# :nocov:
 begin
   require_relative "fence/kramdown_gfm_document"
-# :nocov:
 # Not covering, because kramdown support is tested, so this rescue is not hit in test runs.
 rescue LoadError => error
   # check the error message, and re-raise if not what is expected
