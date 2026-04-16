@@ -304,7 +304,7 @@ GEM
     yard-relative_markdown_links (0.6.0)
       nokogiri (>= 1.14.3, < 2)
     zeitwerk (2.7.4)
-    zlib (3.2.2)
+    zlib (3.2.3)
 
 PLATFORMS
   aarch64-linux-gnu
@@ -466,7 +466,7 @@ CHECKSUMS
   yard-junk (0.0.10)
   yard-relative_markdown_links (0.6.0) sha256=3e5ffa85cbad9bac70bee5421774b190fb25d3bdf489323a5b3534f647d1a70e
   zeitwerk (2.7.4) sha256=2bef90f356bdafe9a6c2bd32bcd804f83a4f9b8bc27f3600fff051eb3edcec8b
-  zlib (3.2.2) sha256=908e61263f99c1371b5422581e2d6663bd37c6b04ae13b5f8cb10b0d09379f40
+  zlib (3.2.3)
 
 BUNDLED WITH
   4.0.3
