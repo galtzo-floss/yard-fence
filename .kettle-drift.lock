@@ -31,6 +31,24 @@
       ]
     }
   ],
+  "Run tests via `kettle-test` (provided by `kettle-test`). It runs RSpec, writes the full log to\n`tmp/kettle-test/rspec-TIMESTAMP.log`, and prints a compact highlight block with timing, seed,": [
+    {
+      "file": "CONTRIBUTING.md",
+      "lines": [
+        126,
+        140
+      ]
+    }
+  ],
+  "`tmp/kettle-test/rspec-TIMESTAMP.log`, and prints a compact highlight block with timing, seed,\npass/fail count, failing example list, and SimpleCov coverage percentages.": [
+    {
+      "file": "CONTRIBUTING.md",
+      "lines": [
+        127,
+        141
+      ]
+    }
+  ],
   "appraisal: \"current\"\nexec_cmd: \"rake test\"": [
     {
       "file": ".github/workflows/current.yml",

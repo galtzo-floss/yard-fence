@@ -57,7 +57,6 @@ rescue LoadError => error
   end
 end
 # :nocov:
-
 module Yard
   module Fence
     ASCII_BRACES = "{}"
