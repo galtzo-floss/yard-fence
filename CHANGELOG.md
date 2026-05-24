@@ -22,18 +22,29 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
-- Expanded the `rdoc` runtime dependency to allow `rdoc` 7.x while retaining
-  support for `rdoc` 6.11.x.
-
 ### Deprecated
 
 ### Removed
 
 ### Fixed
 
-- Fixed CI workflow setup for appraisal-based style and coverage jobs, locked-deps, and TruffleRuby 23.1.
-
 ### Security
+
+## [0.9.1] - 2026-05-24
+
+- TAG: [v0.9.1][0.9.1t]
+- COVERAGE: 97.71% -- 171/175 lines in 5 files
+- BRANCH COVERAGE: 90.74% -- 49/54 branches in 5 files
+- 47.37% documented
+
+### Changed
+
+- Expanded the `rdoc` runtime dependency to allow `rdoc` 7.x while retaining
+  support for `rdoc` 6.11.x.
+
+### Fixed
+
+- Fixed CI workflow setup for appraisal-based style and coverage jobs, locked-deps, and TruffleRuby 23.1.
 
 ## [0.9.0] - 2026-05-23
 
@@ -212,7 +223,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.0...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.1...HEAD
+[0.9.1]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.0...v0.9.1
+[0.9.1t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.1
 [0.9.0]: https://github.com/galtzo-floss/yard-fence/compare/v0.8.2...v0.9.0
 [0.9.0t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.0
 [0.8.2]: https://github.com/galtzo-floss/yard-fence/compare/v0.8.1...v0.8.2

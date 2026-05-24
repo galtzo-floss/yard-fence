@@ -4,6 +4,10 @@ source "https://gem.coop"
 
 gem "irb", "~> 1.17"
 
+platforms :truffleruby do
+  gem "psych", "< 5.3"
+end
+
 gemspec :path => "../"
 
 eval_gemfile("modular/coverage.gemfile")
