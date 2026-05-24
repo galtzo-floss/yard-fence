@@ -21,18 +21,22 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Added
 
 - `Yard::Fence.install_rake_tasks!` for explicit integration with a chosen documentation rake task
+- Rake task integration now wires `yard:fence:prepare` before the selected YARD task and runs HTML post-processing after that task completes
 
 ### Changed
 
-- Workspace documentation development can now source `yard-fence` through the sibling `documentation_local.gemfile` pattern instead of only released gems
+- Documentation processing is now Rake-driven. Projects should call `Yard::Fence.install_rake_tasks!` after defining their `:yard` task so prepare and post-processing hooks run only for documentation builds.
+- Project maintenance files, workflows, modular Gemfiles, and local development wiring were refreshed with the current kettle-jem template.
 
 ### Deprecated
 
 ### Removed
 
+- Removed global `at_exit` post-processing. Raw `yard` / `bin/yard` no longer runs `yard-fence` post-processing unless the caller invokes the Rake-integrated documentation task.
+
 ### Fixed
 
-- `yard-fence` no longer relies on global `at_exit` hooks, so loading YARD during unrelated rake tasks no longer clears or rewrites `docs/`
+- Loading YARD during unrelated rake tasks no longer clears or rewrites `docs/`.
 
 ### Security
 

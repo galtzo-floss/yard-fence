@@ -4,6 +4,8 @@ module Yard
     VERSION: String
     ASCII_BRACES: "{}"
     FULLWIDTH_BRACES: "｛｝"
+    RAKE_INTEGRATIONS: ::Hash[String, bool]
+    RAKE_INTEGRATIONS_MUTEX: ::Mutex
     KRAMDOWN_PROVIDER: { lib: Symbol, const: String }
     GLOB_PATTERN: String
     TRIPLE_TICK_FENCE: ::Regexp
@@ -42,6 +44,14 @@ module Yard
 
     def self.use_kramdown_gfm!: () -> bool
     def use_kramdown_gfm!: () -> bool
+
+    def self.install_rake_tasks!: (?Symbol yard_task_name) -> bool
+                                | (?String yard_task_name) -> bool
+    def install_rake_tasks!: (?Symbol yard_task_name) -> bool
+                           | (?String yard_task_name) -> bool
+
+    def self.__reset_rake_integrations__: () -> nil
+    def __reset_rake_integrations__: () -> nil
 
     module Version
       VERSION: String

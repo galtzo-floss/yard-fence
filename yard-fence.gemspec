@@ -9,15 +9,12 @@
 
 Gem::Specification.new do |spec|
   spec.name = "yard-fence"
-  # Loading Version into an anonymous module allows version.rb to get code coverage from SimpleCov!
-  # See: https://github.com/simplecov-ruby/simplecov/issues/557#issuecomment-2630782358
-  # See: https://github.com/panorama-ed/memo_wise/pull/397
   spec.version = Module.new.tap { |mod| Kernel.load("#{__dir__}/lib/yard/fence/version.rb", mod) }::Yard::Fence::Version::VERSION
   spec.authors = ["Peter H. Boling"]
   spec.email = ["floss@galtzo.com"]
 
   spec.summary = "🍲 A brace converter for the markdown fences in your YARD"
-  spec.description = "🤺 Convert ASCII braces ('{}') to full-width braces ('{}') within code fences (triple-or-single backticks) during YARD processing, and back to ASCII braces afterward"
+  spec.description = "🍲 Convert ASCII braces ('{}') to full-width braces ('{}') within code fences (triple-or-single backticks) during YARD processing, and back to ASCII braces afterward"
   spec.homepage = "https://github.com/galtzo-floss/yard-fence"
   spec.licenses = ["MIT"]
   spec.required_ruby_version = ">= 3.2.0"
@@ -40,7 +37,7 @@ Gem::Specification.new do |spec|
     end
   end
 
-  spec.metadata["homepage_uri"] = "https://yard-fence.galtzo.com/"
+  spec.metadata["homepage_uri"] = "https://structuredmerge.org"
   spec.metadata["source_code_uri"] = "#{spec.homepage}/tree/v#{spec.version}"
   spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/v#{spec.version}/CHANGELOG.md"
   spec.metadata["bug_tracker_uri"] = "#{spec.homepage}/issues"
@@ -51,13 +48,22 @@ Gem::Specification.new do |spec|
   spec.metadata["discord_uri"] = "https://discord.gg/3qme4XHNKN"
   spec.metadata["rubygems_mfa_required"] = "true"
 
+  enumerate_package_files = lambda do |root|
+    Dir.glob(File.join(root, "**", "*"), File::FNM_DOTMATCH).select do |path|
+      File.file?(path) && ![".", ".."].include?(File.basename(path))
+    end
+  end
+
   # Specify which files are part of the released package.
-  spec.files = Dir[
+  spec.files = [
     # Code / tasks / data (NOTE: exe/ is specified via spec.bindir and spec.executables below)
-    "lib/**/*.rb",
-    "lib/**/*.rake",
+    *enumerate_package_files.call("lib"),
+    # Executables and executable support scripts
+    *enumerate_package_files.call("exe"),
+    # Public certs for gem signing
+    *enumerate_package_files.call("certs"),
     # Signatures
-    "sig/**/*.rbs",
+    *enumerate_package_files.call("sig"),
   ]
 
   # Automatically included with gem package, no need to list again in files.
@@ -68,7 +74,7 @@ Gem::Specification.new do |spec|
     "CODE_OF_CONDUCT.md",
     "CONTRIBUTING.md",
     "FUNDING.md",
-    "LICENSE.txt",
+    "LICENSE.md",
     "README.md",
     "RUBOCOP.md",
     "SECURITY.md",
@@ -84,19 +90,15 @@ Gem::Specification.new do |spec|
     "--inline-source",
     "--quiet",
   ]
-  spec.require_paths = ["lib"]
   spec.bindir = "exe"
   # Listed files are the relative paths from bindir above.
   spec.executables = []
-
-  # Documentation
-  spec.add_dependency("yard", "~> 0.9", ">= 0.9.37") # Ruby >= 0
-
-  # Std Lib extractions
-  spec.add_dependency("rdoc", "~> 6.11")
+  spec.require_paths = ["lib"]
 
   # Utilities
+  spec.add_dependency("rdoc", "~> 6.11")
   spec.add_dependency("version_gem", "~> 1.1", ">= 1.1.9")              # ruby >= 2.2.0
+  spec.add_dependency("yard", "~> 0.9", ">= 0.9.37") # Ruby >= 0
 
   # NOTE: It is preferable to list development dependencies in the gemspec due to increased
   #       visibility and discoverability.
@@ -110,10 +112,6 @@ Gem::Specification.new do |spec|
   #
   #       Development dependencies that require strictly newer Ruby versions should be in a "gemfile",
   #       and preferably a modular one (see gemfiles/modular/*.gemfile).
-
-  spec.add_development_dependency("kettle-drift")
-  spec.add_development_dependency("kramdown", "~> 2.5", ">= 2.5.1") # Ruby >= 2.5
-  spec.add_development_dependency("kramdown-parser-gfm", "~> 1.1") # Ruby >= 2.3
 
   # Dev, Test, & Release Tasks
   spec.add_development_dependency("kettle-dev", "~> 2.0")                           # ruby >= 2.3.0
@@ -129,7 +127,6 @@ Gem::Specification.new do |spec|
 
   # Testing
   spec.add_development_dependency("appraisal2", "~> 3.0", ">= 3.0.6")               # ruby >= 1.8.7, for testing against multiple versions of dependencies
-  spec.add_development_dependency("kettle-soup-cover", "~> 1.1", ">= 1.1.1")        # ruby >= 2.3
   spec.add_development_dependency("kettle-test", "~> 2.0", ">= 2.0.0")              # ruby >= 2.3
 
   # Releasing
@@ -154,4 +151,7 @@ Gem::Specification.new do |spec|
   # See: https://github.com/vcr/vcr/issues/1057
   # spec.add_development_dependency("vcr", ">= 4")                        # 6.0 claims to support ruby >= 2.3, but fails on ruby 2.4
   # spec.add_development_dependency("webmock", ">= 3")                    # Last version to support ruby >= 2.3
+  spec.add_development_dependency("kettle-soup-cover", "~> 1.1", ">= 1.1.1")        # ruby >= 2.3
+  spec.add_development_dependency("kramdown", "~> 2.5", ">= 2.5.1") # Ruby >= 2.5
+  spec.add_development_dependency("kramdown-parser-gfm", "~> 1.1") # Ruby >= 2.3
 end
