@@ -22,7 +22,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
-- Expanded the `rdoc` runtime dependency to support both `~> 6.11` and `>= 7.0`.
+- Expanded the `rdoc` runtime dependency to allow `rdoc` 7.x while retaining
+  support for `rdoc` 6.11.x.
 
 ### Deprecated
 
