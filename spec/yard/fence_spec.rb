@@ -5,6 +5,13 @@ require "tempfile"
 require "yard/fence"
 
 RSpec.describe Yard::Fence do
+  def with_tmp_project
+    Dir.mktmpdir do |dir|
+      allow(Dir).to receive(:pwd).and_return(dir)
+      yield(dir)
+    end
+  end
+
   it "has a version number" do
     expect(described_class::VERSION).not_to be_nil
   end
@@ -193,121 +200,113 @@ RSpec.describe Yard::Fence do
 
   describe "::prepare_tmp_files" do
     it "skips non-file candidates matched by the glob (branch 110[then])" do
-      Dir.mktmpdir do |dir|
-        FileUtils.cd(dir) do
-          Dir.mkdir("examples.md")
-          original = "Code: {a: 1}"
-          File.write("README.md", original)
+      with_tmp_project do |dir|
+        Dir.mkdir(File.join(dir, "examples.md"))
+        original = "Code: {a: 1}"
+        File.write(File.join(dir, "README.md"), original)
 
-          expect(Dir.exist?("tmp")).to be(false)
-          described_class.prepare_tmp_files
+        expect(Dir.exist?(File.join(dir, "tmp"))).to be(false)
+        described_class.prepare_tmp_files
 
-          expect(File.exist?(File.join("tmp", "yard-fence", "examples.md"))).to be(false)
-          out = File.read(File.join("tmp", "yard-fence", "README.md"))
-          expect(out).to eq(described_class.sanitize_text(original))
-        end
+        expect(File.exist?(File.join(dir, "tmp", "yard-fence", "examples.md"))).to be(false)
+        out = File.read(File.join(dir, "tmp", "yard-fence", "README.md"))
+        expect(out).to eq(described_class.sanitize_text(original))
       end
     end
 
     it "clears existing staging directory before regenerating files" do
-      Dir.mktmpdir do |dir|
-        FileUtils.cd(dir) do
-          # Create a markdown file
-          File.write("README.md", "Hello {world}")
+      with_tmp_project do |dir|
+        # Create a markdown file
+        File.write(File.join(dir, "README.md"), "Hello {world}")
 
-          # First run creates the staging directory
-          described_class.prepare_tmp_files
-          expect(File.exist?(File.join("tmp", "yard-fence", "README.md"))).to be(true)
+        # First run creates the staging directory
+        described_class.prepare_tmp_files
+        expect(File.exist?(File.join(dir, "tmp", "yard-fence", "README.md"))).to be(true)
 
-          # Manually add a stale file that shouldn't exist
-          stale_file = File.join("tmp", "yard-fence", "STALE.md")
-          File.write(stale_file, "This should be removed")
-          expect(File.exist?(stale_file)).to be(true)
+        # Manually add a stale file that shouldn't exist
+        stale_file = File.join(dir, "tmp", "yard-fence", "STALE.md")
+        File.write(stale_file, "This should be removed")
+        expect(File.exist?(stale_file)).to be(true)
 
-          # Second run should clear the directory, removing the stale file
-          described_class.prepare_tmp_files
-          expect(File.exist?(stale_file)).to be(false)
-          expect(File.exist?(File.join("tmp", "yard-fence", "README.md"))).to be(true)
-        end
+        # Second run should clear the directory, removing the stale file
+        described_class.prepare_tmp_files
+        expect(File.exist?(stale_file)).to be(false)
+        expect(File.exist?(File.join(dir, "tmp", "yard-fence", "README.md"))).to be(true)
       end
     end
 
     it "removes files from staging when source files are deleted" do
-      Dir.mktmpdir do |dir|
-        FileUtils.cd(dir) do
-          # Create two markdown files
-          File.write("README.md", "Hello {world}")
-          File.write("CHANGELOG.md", "Changes {here}")
+      with_tmp_project do |dir|
+        readme = File.join(dir, "README.md")
+        changelog = File.join(dir, "CHANGELOG.md")
 
-          # First run creates both files in staging
-          described_class.prepare_tmp_files
-          expect(File.exist?(File.join("tmp", "yard-fence", "README.md"))).to be(true)
-          expect(File.exist?(File.join("tmp", "yard-fence", "CHANGELOG.md"))).to be(true)
+        # Create two markdown files
+        File.write(readme, "Hello {world}")
+        File.write(changelog, "Changes {here}")
 
-          # Delete one source file
-          File.delete("CHANGELOG.md")
+        # First run creates both files in staging
+        described_class.prepare_tmp_files
+        expect(File.exist?(File.join(dir, "tmp", "yard-fence", "README.md"))).to be(true)
+        expect(File.exist?(File.join(dir, "tmp", "yard-fence", "CHANGELOG.md"))).to be(true)
 
-          # Second run should only have README.md
-          described_class.prepare_tmp_files
-          expect(File.exist?(File.join("tmp", "yard-fence", "README.md"))).to be(true)
-          expect(File.exist?(File.join("tmp", "yard-fence", "CHANGELOG.md"))).to be(false)
-        end
+        # Delete one source file
+        File.delete(changelog)
+
+        # Second run should only have README.md
+        described_class.prepare_tmp_files
+        expect(File.exist?(File.join(dir, "tmp", "yard-fence", "README.md"))).to be(true)
+        expect(File.exist?(File.join(dir, "tmp", "yard-fence", "CHANGELOG.md"))).to be(false)
       end
     end
   end
 
   describe "::clean_docs_directory" do
     it "does nothing when YARD_FENCE_CLEAN_DOCS is not set" do
-      Dir.mktmpdir do |dir|
-        FileUtils.cd(dir) do
-          FileUtils.mkdir_p("docs")
-          File.write(File.join("docs", "index.html"), "<html></html>")
+      with_tmp_project do |dir|
+        docs_index = File.join(dir, "docs", "index.html")
+        FileUtils.mkdir_p(File.dirname(docs_index))
+        File.write(docs_index, "<html></html>")
 
-          hide_env("YARD_FENCE_CLEAN_DOCS")
-          described_class.clean_docs_directory
+        hide_env("YARD_FENCE_CLEAN_DOCS")
+        described_class.clean_docs_directory
 
-          expect(File.exist?(File.join("docs", "index.html"))).to be(true)
-        end
+        expect(File.exist?(docs_index)).to be(true)
       end
     end
 
     it "does nothing when YARD_FENCE_CLEAN_DOCS is false" do
-      Dir.mktmpdir do |dir|
-        FileUtils.cd(dir) do
-          FileUtils.mkdir_p("docs")
-          File.write(File.join("docs", "index.html"), "<html></html>")
+      with_tmp_project do |dir|
+        docs_index = File.join(dir, "docs", "index.html")
+        FileUtils.mkdir_p(File.dirname(docs_index))
+        File.write(docs_index, "<html></html>")
 
-          stub_env("YARD_FENCE_CLEAN_DOCS" => "false")
-          described_class.clean_docs_directory
+        stub_env("YARD_FENCE_CLEAN_DOCS" => "false")
+        described_class.clean_docs_directory
 
-          expect(File.exist?(File.join("docs", "index.html"))).to be(true)
-        end
+        expect(File.exist?(docs_index)).to be(true)
       end
     end
 
     it "clears docs directory when YARD_FENCE_CLEAN_DOCS is true" do
-      Dir.mktmpdir do |dir|
-        FileUtils.cd(dir) do
-          FileUtils.mkdir_p(File.join("docs", "nested"))
-          File.write(File.join("docs", "index.html"), "<html></html>")
-          File.write(File.join("docs", "nested", "page.html"), "<html></html>")
+      with_tmp_project do |dir|
+        docs = File.join(dir, "docs")
+        FileUtils.mkdir_p(File.join(docs, "nested"))
+        File.write(File.join(docs, "index.html"), "<html></html>")
+        File.write(File.join(docs, "nested", "page.html"), "<html></html>")
 
-          stub_env("YARD_FENCE_CLEAN_DOCS" => "true")
-          output = capture(:stdout) { described_class.clean_docs_directory }
+        stub_env("YARD_FENCE_CLEAN_DOCS" => "true")
+        output = capture(:stdout) { described_class.clean_docs_directory }
 
-          expect(Dir.exist?("docs")).to be(false)
-          expect(output).to include("Cleared docs/ directory")
-        end
+        expect(Dir.exist?(docs)).to be(false)
+        expect(output).to include("Cleared docs/ directory")
       end
     end
 
     it "does nothing when docs directory does not exist" do
-      Dir.mktmpdir do |dir|
-        FileUtils.cd(dir) do
-          stub_env("YARD_FENCE_CLEAN_DOCS" => "true")
-          expect { described_class.clean_docs_directory }.not_to raise_error
-          expect(Dir.exist?("docs")).to be(false)
-        end
+      with_tmp_project do |dir|
+        stub_env("YARD_FENCE_CLEAN_DOCS" => "true")
+        expect { described_class.clean_docs_directory }.not_to raise_error
+        expect(Dir.exist?(File.join(dir, "docs"))).to be(false)
       end
     end
   end
@@ -342,25 +341,21 @@ RSpec.describe Yard::Fence do
 
   describe "::postprocess_html_docs" do
     it "returns early when docs directory is absent (branch 127[then])" do
-      Dir.mktmpdir do |dir|
-        FileUtils.cd(dir) do
-          expect(Dir.exist?("docs")).to be(false)
-          expect { described_class.postprocess_html_docs }.not_to raise_error
-        end
+      with_tmp_project do |dir|
+        expect(Dir.exist?(File.join(dir, "docs"))).to be(false)
+        expect { described_class.postprocess_html_docs }.not_to raise_error
       end
     end
 
     it "processes html files when docs directory exists" do
-      Dir.mktmpdir do |dir|
-        FileUtils.cd(dir) do
-          FileUtils.mkdir_p(File.join("docs", "nested"))
-          html = File.join("docs", "nested", "page.html")
-          File.write(html, "<code>｛x: 1｝</code>")
+      with_tmp_project do |dir|
+        FileUtils.mkdir_p(File.join(dir, "docs", "nested"))
+        html = File.join(dir, "docs", "nested", "page.html")
+        File.write(html, "<code>｛x: 1｝</code>")
 
-          described_class.postprocess_html_docs
+        described_class.postprocess_html_docs
 
-          expect(File.read(html)).to include("{x: 1}")
-        end
+        expect(File.read(html)).to include("{x: 1}")
       end
     end
 
