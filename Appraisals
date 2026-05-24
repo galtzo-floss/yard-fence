@@ -81,6 +81,7 @@ end
 
 appraise "coverage" do
   eval_gemfile "modular/coverage.gemfile"
+  eval_gemfile "modular/documentation.gemfile"
   eval_gemfile "modular/optional.gemfile"
   eval_gemfile "modular/x_std_libs.gemfile"
 end
