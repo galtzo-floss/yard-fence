@@ -96,7 +96,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Utilities
-  spec.add_dependency("rdoc", "~> 6.11")
+  spec.add_dependency("rdoc", ">= 6.11", "< 8")
   spec.add_dependency("version_gem", "~> 1.1", ">= 1.1.9")              # ruby >= 2.2.0
   spec.add_dependency("yard", "~> 0.9", ">= 0.9.37") # Ruby >= 0
 

@@ -3,22 +3,22 @@
     {
       "file": ".github/workflows/current.yml",
       "lines": [
-        89,
-        103
-      ]
-    },
-    {
-      "file": ".github/workflows/dep-heads.yml",
-      "lines": [
         91,
         105
       ]
     },
     {
+      "file": ".github/workflows/dep-heads.yml",
+      "lines": [
+        93,
+        107
+      ]
+    },
+    {
       "file": ".github/workflows/heads.yml",
       "lines": [
-        90,
-        104
+        92,
+        106
       ]
     }
   ],
@@ -31,7 +31,7 @@
       ]
     }
   ],
-  "appraisal: \"current\"\nexec_cmd: \"rake test\"": [
+  "appraisal: \"current\"\nexec_cmd: \"kettle-test\"": [
     {
       "file": ".github/workflows/current.yml",
       "lines": [
@@ -41,9 +41,45 @@
       ]
     }
   ],
-  "appraisal: \"dep-heads\"\nexec_cmd: \"rake test\"": [
+  "appraisal: \"dep-heads\"\nexec_cmd: \"kettle-test\"": [
     {
       "file": ".github/workflows/dep-heads.yml",
+      "lines": [
+        44,
+        52,
+        60
+      ]
+    }
+  ],
+  "appraisal: \"head\"\nexec_cmd: \"kettle-test\"": [
+    {
+      "file": ".github/workflows/heads.yml",
+      "lines": [
+        43,
+        51,
+        59
+      ]
+    }
+  ],
+  "exec_cmd: \"kettle-test\"\ngemfile: \"Appraisal.root\"": [
+    {
+      "file": ".github/workflows/current.yml",
+      "lines": [
+        43,
+        51,
+        59
+      ]
+    },
+    {
+      "file": ".github/workflows/dep-heads.yml",
+      "lines": [
+        45,
+        53,
+        61
+      ]
+    },
+    {
+      "file": ".github/workflows/heads.yml",
       "lines": [
         44,
         52,
@@ -55,22 +91,22 @@
     {
       "file": ".github/workflows/current.yml",
       "lines": [
-        82,
-        87
-      ]
-    },
-    {
-      "file": ".github/workflows/dep-heads.yml",
-      "lines": [
         84,
         89
       ]
     },
     {
+      "file": ".github/workflows/dep-heads.yml",
+      "lines": [
+        86,
+        91
+      ]
+    },
+    {
       "file": ".github/workflows/heads.yml",
       "lines": [
-        83,
-        88
+        85,
+        90
       ]
     }
   ]
