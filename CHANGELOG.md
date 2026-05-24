@@ -20,6 +20,25 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.9.0] - 2026-05-23
+
+- TAG: [v0.9.0][0.9.0t]
+- COVERAGE: 97.71% -- 171/175 lines in 5 files
+- BRANCH COVERAGE: 90.74% -- 49/54 branches in 5 files
+- 47.37% documented
+
+### Added
+
 - `Yard::Fence.install_rake_tasks!` for explicit integration with a chosen documentation rake task
 - Rake task integration now wires `yard:fence:prepare` before the selected YARD task and runs HTML post-processing after that task completes
 
@@ -28,8 +47,6 @@ Please file a bug if you notice a violation of semantic versioning.
 - Documentation processing is now Rake-driven. Projects should call `Yard::Fence.install_rake_tasks!` after defining their `:yard` task so prepare and post-processing hooks run only for documentation builds.
 - Project maintenance files, workflows, modular Gemfiles, and local development wiring were refreshed with the current kettle-jem template.
 
-### Deprecated
-
 ### Removed
 
 - Removed global `at_exit` post-processing. Raw `yard` / `bin/yard` no longer runs `yard-fence` post-processing unless the caller invokes the Rake-integrated documentation task.
@@ -37,8 +54,6 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Fixed
 
 - Loading YARD during unrelated rake tasks no longer clears or rewrites `docs/`.
-
-### Security
 
 ## [0.8.2] - 2025-12-30
 
@@ -192,7 +207,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.8.2...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.0...HEAD
+[0.9.0]: https://github.com/galtzo-floss/yard-fence/compare/v0.8.2...v0.9.0
+[0.9.0t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.0
 [0.8.2]: https://github.com/galtzo-floss/yard-fence/compare/v0.8.1...v0.8.2
 [0.8.2t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.8.2
 [0.8.1]: https://github.com/galtzo-floss/yard-fence/compare/v0.8.0...v0.8.1

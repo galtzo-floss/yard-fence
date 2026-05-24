@@ -6,13 +6,13 @@
 <title>
   File: CHANGELOG
   
-    &mdash; Documentation by YARD 0.9.38
+    &mdash; Documentation by YARD 0.9.43
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "CHANGELOG";
@@ -27,6 +27,8 @@
 
   </head>
   <body>
+    <div id="main_progress" aria-hidden="true"></div>
+
     <div class="nav_wrap">
       <iframe id="nav" src="file_list.html?1"></iframe>
       <div id="resizer"></div>
@@ -68,7 +70,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 and <a href="https://tom.preston-werner.com/2022/05/23/major-version-numbers-are-not-sacred.html">yes</a>, platform and engine support are part of the <a href="https://github.com/semver/semver/issues/716#issuecomment-869336139">public API</a>.<br>
 Please file a bug if you notice a violation of semantic versioning.</p>
 
-<h2 id="unreleased"><a href="https://github.com/galtzo-floss/yard-fence/compare/v0.8.2...HEAD">Unreleased</a></h2>
+<h2 id="unreleased"><a href="https://github.com/galtzo-floss/yard-fence/compare/v0.9.0...HEAD">Unreleased</a></h2>
 
 <h3 id="added">Added</h3>
 
@@ -82,6 +84,44 @@ Please file a bug if you notice a violation of semantic versioning.</p>
 
 <h3 id="security">Security</h3>
 
+<h2 id="090---2026-05-23">
+<a href="https://github.com/galtzo-floss/yard-fence/compare/v0.8.2...v0.9.0">0.9.0</a> - 2026-05-23</h2>
+
+<ul>
+  <li>TAG: <a href="https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.0">v0.9.0</a>
+</li>
+  <li>COVERAGE: 97.71% – 171/175 lines in 5 files</li>
+  <li>BRANCH COVERAGE: 90.74% – 49/54 branches in 5 files</li>
+  <li>47.37% documented</li>
+</ul>
+
+<h3 id="added-1">Added</h3>
+
+<ul>
+  <li>
+<code>Yard::Fence.install_rake_tasks!</code> for explicit integration with a chosen documentation rake task</li>
+  <li>Rake task integration now wires <code>yard:fence:prepare</code> before the selected YARD task and runs HTML post-processing after that task completes</li>
+</ul>
+
+<h3 id="changed-1">Changed</h3>
+
+<ul>
+  <li>Documentation processing is now Rake-driven. Projects should call <code>Yard::Fence.install_rake_tasks!</code> after defining their <code>:yard</code> task so prepare and post-processing hooks run only for documentation builds.</li>
+  <li>Project maintenance files, workflows, modular Gemfiles, and local development wiring were refreshed with the current kettle-jem template.</li>
+</ul>
+
+<h3 id="removed-1">Removed</h3>
+
+<ul>
+  <li>Removed global <code>at_exit</code> post-processing. Raw <code>yard</code> / <code>bin/yard</code> no longer runs <code>yard-fence</code> post-processing unless the caller invokes the Rake-integrated documentation task.</li>
+</ul>
+
+<h3 id="fixed-1">Fixed</h3>
+
+<ul>
+  <li>Loading YARD during unrelated rake tasks no longer clears or rewrites <code>docs/</code>.</li>
+</ul>
+
 <h2 id="082---2025-12-30">
 <a href="https://github.com/galtzo-floss/yard-fence/compare/v0.8.1...v0.8.2">0.8.2</a> - 2025-12-30</h2>
 
@@ -93,7 +133,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>50.00% documented</li>
 </ul>
 
-<h3 id="added-1">Added</h3>
+<h3 id="added-2">Added</h3>
 
 <ul>
   <li>
@@ -119,7 +159,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
 <code>Yard::Fence.at_load_hook</code> - Now does nothing; use <code>prepare_for_yard</code> via rake task instead</li>
 </ul>
 
-<h3 id="removed-1">Removed</h3>
+<h3 id="removed-2">Removed</h3>
 
 <ul>
   <li>
@@ -132,7 +172,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   </li>
 </ul>
 
-<h3 id="fixed-1">Fixed</h3>
+<h3 id="fixed-2">Fixed</h3>
 
 <ul>
   <li>Fixed <code>docs/</code> directory being cleared during <code>rake build</code> and <code>rake release</code> commands
@@ -154,7 +194,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>40.00% documented</li>
 </ul>
 
-<h3 id="added-2">Added</h3>
+<h3 id="added-3">Added</h3>
 
 <ul>
   <li>
@@ -165,7 +205,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   </li>
 </ul>
 
-<h3 id="changed-1">Changed</h3>
+<h3 id="changed-2">Changed</h3>
 
 <ul>
   <li>
@@ -188,13 +228,13 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>37.93% documented</li>
 </ul>
 
-<h3 id="added-3">Added</h3>
+<h3 id="added-4">Added</h3>
 
 <ul>
   <li>Allow disabling of yard-fence via YARD_FENCE_DISABLE=true (default false)</li>
 </ul>
 
-<h3 id="fixed-2">Fixed</h3>
+<h3 id="fixed-3">Fixed</h3>
 
 <ul>
   <li>Usage instructions in README.md
@@ -216,7 +256,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>37.93% documented</li>
 </ul>
 
-<h3 id="changed-2">Changed</h3>
+<h3 id="changed-3">Changed</h3>
 
 <ul>
   <li>Actually use custom KramdownGFM</li>
@@ -233,7 +273,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>37.93% documented</li>
 </ul>
 
-<h3 id="added-4">Added</h3>
+<h3 id="added-5">Added</h3>
 
 <ul>
   <li>Catch unrendered code blocks and attempt to convert to HTML</li>
@@ -250,7 +290,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>34.62% documented</li>
 </ul>
 
-<h3 id="added-5">Added</h3>
+<h3 id="added-6">Added</h3>
 
 <ul>
   <li>Support multi-line braces</li>
@@ -268,19 +308,19 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>29.17% documented</li>
 </ul>
 
-<h3 id="added-6">Added</h3>
+<h3 id="added-7">Added</h3>
 
 <ul>
   <li>Docs: Document importance of <code>require: false</code> in <code>Gemfile</code> for this gem</li>
 </ul>
 
-<h3 id="changed-3">Changed</h3>
+<h3 id="changed-4">Changed</h3>
 
 <ul>
   <li>Docs: Improved markdown syntax in README.md for Kramdown =&gt; HTML</li>
 </ul>
 
-<h3 id="fixed-3">Fixed</h3>
+<h3 id="fixed-4">Fixed</h3>
 
 <ul>
   <li>Use namespaced directory in <code>tmp/</code> (<code>tmp/yard-fence</code>)
@@ -302,7 +342,7 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>29.17% documented</li>
 </ul>
 
-<h3 id="added-7">Added</h3>
+<h3 id="added-8">Added</h3>
 
 <ul>
   <li>yard/fence/hoist.rb: Hoisting the customized GFM kramdown parser</li>
@@ -319,13 +359,13 @@ Please file a bug if you notice a violation of semantic versioning.</p>
   <li>29.17% documented</li>
 </ul>
 
-<h3 id="added-8">Added</h3>
+<h3 id="added-9">Added</h3>
 
 <ul>
   <li>Up to 96% lines / 93% branches test coverage</li>
 </ul>
 
-<h3 id="fixed-4">Fixed</h3>
+<h3 id="fixed-5">Fixed</h3>
 
 <ul>
   <li>handling of optional dependencies
@@ -345,9 +385,9 @@ Please file a bug if you notice a violation of semantic versioning.</p>
 </div></div>
 
       <div id="footer">
-  Generated on Tue Dec 30 05:50:17 2025 by
+  Generated on Sat May 23 22:17:26 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.38 (ruby-4.0.0).
+  0.9.43 (ruby-4.0.2).
 </div>
 
     </div>
