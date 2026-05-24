@@ -28,6 +28,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Fixed CI workflow setup for appraisal-based style and coverage jobs, locked-deps, and TruffleRuby 23.1.
+
 ### Security
 
 ## [0.9.0] - 2026-05-23

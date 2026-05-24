@@ -2,6 +2,10 @@
 
 source "https://gem.coop"
 
+platforms :truffleruby do
+  gem "psych", "< 5.3"
+end
+
 gemspec :path => "../"
 
 eval_gemfile("modular/style.gemfile")
