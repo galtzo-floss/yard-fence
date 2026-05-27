@@ -28,6 +28,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Prevented YARD from treating pipe-delimited token examples such as `{KJ|GEM_NAME}` and rendered example-table fragments as unresolved documentation links.
+
 ### Security
 
 ## [0.9.1] - 2026-05-24

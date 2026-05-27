@@ -60,6 +60,22 @@ RSpec.describe Yard::Fence do
       expect(opens).to be > 5
     end
 
+    it "replaces braces around pipe-delimited tokens in prose" do
+      sanitized = described_class.sanitize_text("Token {KJ|GEM_NAME} and escaped {KJ\\|GEM_NAME}.")
+
+      expect(sanitized).to include("｛KJ|GEM_NAME｝")
+      expect(sanitized).to include("｛KJ\\|GEM_NAME｝")
+      expect(sanitized).not_to include("{KJ|GEM_NAME}")
+      expect(sanitized).not_to include("{KJ\\|GEM_NAME}")
+    end
+
+    it "replaces braces around HTML fragments produced while rendering YARD examples" do
+      sanitized = described_class.sanitize_text("Rendered table token {X</td> <td>Y}.")
+
+      expect(sanitized).to include("｛X</td> <td>Y｝")
+      expect(sanitized).not_to include("{X</td> <td>Y}")
+    end
+
     it "does not alter non-brace content" do
       sanitized = described_class.sanitize_text(sample)
       expect(sanitized).to include("Normal prose")
@@ -473,6 +489,57 @@ RSpec.describe Yard::Fence do
         expect(result).to be(false)
         expect(output).to match(/Yard::Fence.use_kramdown_gfm!: failed to load YARD helper: NameError:/)
       end
+    end
+  end
+
+  describe "::install_html_helper_patch!" do
+    def helper_for_resolve_links
+      Class.new do
+        include YARD::Templates::Helpers::HtmlHelper
+
+        attr_reader :linkified
+
+        def object
+          Object.new
+        end
+
+        def linkify(name, title = nil)
+          @linkified = [name, title]
+          %(<a href="#{name}">#{title || name}</a>)
+        end
+      end.new
+    end
+
+    it "is installed when yard-fence loads" do
+      expect(YARD::Templates::Helpers::HtmlHelper.method_defined?(:yard_fence_unprotected_resolve_links)).to be(true)
+      expect(YARD::Templates::Template.extra_includes).to include(described_class::HTML_HELPER_TEMPLATE_PATCH)
+    end
+
+    it "leaves pipe-delimited token braces alone instead of treating them as YARD links" do
+      helper = helper_for_resolve_links
+
+      html = helper.resolve_links("Deploy {KJ|GEM_NAME} and {KJ\\|GEM_NAME}.")
+
+      expect(html).to eq("Deploy {KJ|GEM_NAME} and {KJ\\|GEM_NAME}.")
+      expect(helper.linkified).to be_nil
+    end
+
+    it "leaves rendered table fragments from token examples alone" do
+      helper = helper_for_resolve_links
+
+      html = helper.resolve_links("Token {X</td>\n<td>Y} and {KJ</td>\n<td>GEM_NAME}.")
+
+      expect(html).to eq("Token {X</td>\n<td>Y} and {KJ</td>\n<td>GEM_NAME}.")
+      expect(helper.linkified).to be_nil
+    end
+
+    it "still delegates ordinary YARD reference links" do
+      helper = helper_for_resolve_links
+
+      html = helper.resolve_links("See {Yard::Fence#install_rake_tasks!}.")
+
+      expect(html).to eq(%(See <a href="Yard::Fence#install_rake_tasks!">Yard::Fence#install_rake_tasks!</a>.))
+      expect(helper.linkified).to eq(["Yard::Fence#install_rake_tasks!", nil])
     end
   end
 end

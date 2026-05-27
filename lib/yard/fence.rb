@@ -74,6 +74,8 @@ module Yard
     INLINE_TICK_FENCE = /`([^`]+)`/
     DOUBLE_BRACE_PLACEHOLDER_REGEX = /{{([^{}]+)}}/
     SINGLE_BRACE_PLACEHOLDER_REGEX = /{([A-Za-z0-9_:\-]+)}/
+    BRACED_TOKEN_REFERENCE_REGEX = /{([^{}]*(?:\\?\|)[^{}]*)}/
+    BRACED_HTML_FRAGMENT_REGEX = /{([^{}]*<\/?[A-Za-z][^{}]*)}/
     # Lines that are part of a classic indented code block (CommonMark: 4 spaces)
     INDENTED_CODE_LINE = /^ {4,}\S/
 
@@ -131,6 +133,16 @@ module Yard
       end
     end
 
+    def sanitize_prose_braces(line)
+      ln = sanitize_inline_code(line)
+      # IMPORTANT: handle double-brace placeholders first so we don't partially
+      # convert the inner {TOKEN} and leave outer ASCII braces from `{｛TOKEN｝}`.
+      ln = ln.gsub(DOUBLE_BRACE_PLACEHOLDER_REGEX) { |m| fullwidth_braces(m) }
+      ln = ln.gsub(BRACED_TOKEN_REFERENCE_REGEX) { |m| fullwidth_braces(m) }
+      ln = ln.gsub(BRACED_HTML_FRAGMENT_REGEX) { |m| fullwidth_braces(m) }
+      ln.gsub(SINGLE_BRACE_PLACEHOLDER_REGEX) { |m| fullwidth_braces(m) }
+    end
+
     # Walk the text, toggling a simple in_fence state on ``` lines.
     # While inside a fence, convert braces to fullwidth; outside, also sanitize inline code
     # and disarm simple prose placeholders like ｛issuer｝ or ｛｛something｝｝.
@@ -151,9 +163,7 @@ module Yard
           if line.strip.empty? || !line.match?(INDENTED_CODE_LINE)
             in_indented_block = false
             # Process this line as normal prose outside block
-            ln = sanitize_inline_code(line)
-            ln = ln.gsub(DOUBLE_BRACE_PLACEHOLDER_REGEX) { |m| fullwidth_braces(m) }
-            ln.gsub(SINGLE_BRACE_PLACEHOLDER_REGEX) { |m| fullwidth_braces(m) }
+            sanitize_prose_braces(line)
           else
             fullwidth_braces(line)
           end
@@ -162,11 +172,7 @@ module Yard
           in_indented_block = true
           fullwidth_braces(line)
         else
-          ln = sanitize_inline_code(line)
-          # IMPORTANT: handle double-brace placeholders first so we don't partially
-          # convert the inner {TOKEN} and leave outer ASCII braces from `{｛TOKEN｝}`.
-          ln = ln.gsub(DOUBLE_BRACE_PLACEHOLDER_REGEX) { |m| fullwidth_braces(m) }
-          ln.gsub(SINGLE_BRACE_PLACEHOLDER_REGEX) { |m| fullwidth_braces(m) }
+          sanitize_prose_braces(line)
         end
       end.join
     end
@@ -203,6 +209,10 @@ module Yard
       content = File.read(html_filepath)
       restored = content.tr(FULLWIDTH_BRACES, ASCII_BRACES)
       File.write(html_filepath, restored)
+    end
+
+    def restore_ascii_braces(text)
+      text.tr(FULLWIDTH_BRACES, ASCII_BRACES)
     end
 
     def postprocess_html_docs
@@ -245,6 +255,43 @@ module Yard
     rescue NameError => e
       warn("Yard::Fence.use_kramdown_gfm!: failed to load YARD helper: #{e.class}: #{e.message}")
       false
+    end
+
+    module HtmlHelperPatch
+      def resolve_links(text)
+        protected_text = ::Yard::Fence.sanitize_prose_braces(text.to_s)
+        ::Yard::Fence.restore_ascii_braces(super(protected_text))
+      end
+    end
+
+    HTML_HELPER_TEMPLATE_PATCH = proc do |options|
+      HtmlHelperPatch if options.format == :html
+    end
+
+    def install_html_helper_patch!
+      begin
+        require "yard/templates/template" unless defined?(::YARD::Templates::Template)
+        require "yard/templates/helpers/html_helper" unless defined?(::YARD::Templates::Helpers::HtmlHelper)
+      rescue LoadError, NameError => e
+        warn("Yard::Fence.install_html_helper_patch!: failed to load YARD HTML helper: #{e.class}: #{e.message}")
+        return false
+      end
+
+      extra_includes = ::YARD::Templates::Template.extra_includes
+      extra_includes << HTML_HELPER_TEMPLATE_PATCH unless extra_includes.include?(HTML_HELPER_TEMPLATE_PATCH)
+
+      helper = ::YARD::Templates::Helpers::HtmlHelper
+      return true if helper.method_defined?(:yard_fence_unprotected_resolve_links)
+
+      helper.module_eval do
+        alias_method(:yard_fence_unprotected_resolve_links, :resolve_links)
+
+        def resolve_links(text)
+          protected_text = ::Yard::Fence.sanitize_prose_braces(text.to_s)
+          ::Yard::Fence.restore_ascii_braces(yard_fence_unprotected_resolve_links(protected_text))
+        end
+      end
+      true
     end
 
     # Clear the docs output directory to remove stale generated files.
@@ -301,3 +348,4 @@ end
 # Rake integration is explicit. Call Yard::Fence.install_rake_tasks! from your
 # Rakefile after defining the :yard task so prepare + postprocess only run for
 # documentation builds, never for unrelated processes that happen to load YARD.
+Yard::Fence.install_html_helper_patch!

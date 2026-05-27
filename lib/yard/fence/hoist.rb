@@ -18,4 +18,5 @@ else
   else
     warn("[yard/fence/hoist] Yard::Fence.use_kramdown_gfm! not available; skipping")
   end
+  Yard::Fence.install_html_helper_patch! if defined?(Yard::Fence) && Yard::Fence.respond_to?(:install_html_helper_patch!)
 end
