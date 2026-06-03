@@ -437,7 +437,7 @@ RSpec.describe Yard::Fence do
         providers.push(
           {lib: :redcarpet, const: "Redcarpet"},
           {lib: :kramdown, const: "KramdownGfmDocument"}, # exact match
-          {lib: "kramdown", const: :KramdownGfmDocument}, # mixed types; to_s should dedupe
+          {lib: "kramdown", const: :KramdownGfmDocument} # mixed types; to_s should dedupe
         )
 
         result = described_class.use_kramdown_gfm!

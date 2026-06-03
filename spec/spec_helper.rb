@@ -11,6 +11,9 @@ end
 
 require "kettle/test/rspec"
 
+# This library
+require "yard/fence"
+
 # Library Configs
 require_relative "config/debug"
 

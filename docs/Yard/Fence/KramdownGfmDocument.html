@@ -6,7 +6,7 @@
 <title>
   Class: Yard::Fence::KramdownGfmDocument
   
-    &mdash; Documentation by YARD 0.9.43
+    &mdash; Documentation by YARD 0.9.44
   
 </title>
 
@@ -255,7 +255,7 @@ This fallback detects that situation and re-renders with the classic parser.</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_source'>source</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:input</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>GFM</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='symbol'>:input</span><span class='rparen'>)</span>
   <span class='ivar'>@__yard_fence_source</span> <span class='op'>=</span> <span class='id identifier rubyid_source'>source</span> <span class='comment'># Keep original for potential fallback.
-</span>  <span class='kw'>super</span><span class='lparen'>(</span><span class='id identifier rubyid_source'>source</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+</span>  <span class='kw'>super</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -335,9 +335,9 @@ Opt-out via ENV[“YARD_FENCE_DISABLE_FALLBACK”] == “1”.</details></p>
 </div>
 
       <div id="footer">
-  Generated on Sat May 23 22:17:26 2026 by
+  Generated on Wed Jun  3 03:23:00 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.43 (ruby-4.0.2).
+  0.9.44 (ruby-4.0.5).
 </div>
 
     </div>

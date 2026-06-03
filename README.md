@@ -1,17 +1,10 @@
-[![Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0][🖼️galtzo-floss-i]][🖼️galtzo-floss] [![ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5][🖼️ruby-lang-i]][🖼️ruby-lang] [![yard-fence Logo by Aboling0, CC BY-SA 4.0][🖼️galtzo-floss-yard-fence-i]][🖼️galtzo-floss-yard-fence]
-
-[🖼️galtzo-floss-i]: https://logos.galtzo.com/assets/images/galtzo-floss/avatar-192px.svg
-[🖼️galtzo-floss]: https://discord.gg/3qme4XHNKN
-[🖼️ruby-lang-i]: https://logos.galtzo.com/assets/images/ruby-lang/avatar-192px.svg
-[🖼️ruby-lang]: https://www.ruby-lang.org/
-[🖼️galtzo-floss-yard-fence-i]: https://logos.galtzo.com/assets/images/galtzo-floss/yard-fence/avatar-192px.svg
-[🖼️galtzo-floss-yard-fence]: https://github.com/galtzo-floss/yard-fence
+<a href="https://github.com/galtzo-floss"><img alt="galtzo-floss Logo by Aboling0, CC BY-SA 4.0" src="https://logos.galtzo.com/assets/images/galtzo-floss/avatar-128px.svg" width="12%" align="right"/></a> <a href="https://github.com/galtzo-floss/yard-fence"><img alt="yard-fence Logo by Aboling0, CC BY-SA 4.0" src="https://logos.galtzo.com/assets/images/galtzo-floss/yard-fence/avatar-128px.svg" width="12%" align="right"/></a>
 
 # 🍲 Yard::Fence
 
-[![Version][👽versioni]][👽version] [![GitHub tag (latest SemVer)][⛳️tag-img]][⛳️tag] [![License: MIT][📄license-img]][📄license] [![Downloads Rank][👽dl-ranki]][👽dl-rank] [![CodeCov Test Coverage][🏀codecovi]][🏀codecov] [![Coveralls Test Coverage][🏀coveralls-img]][🏀coveralls] [![QLTY Test Coverage][🏀qlty-covi]][🏀qlty-cov] [![QLTY Maintainability][🏀qlty-mnti]][🏀qlty-mnt] [![CI Heads][🚎3-hd-wfi]][🚎3-hd-wf] [![CI Runtime Dependencies @ HEAD][🚎12-crh-wfi]][🚎12-crh-wf] [![CI Current][🚎11-c-wfi]][🚎11-c-wf] [![CI Truffle Ruby][🚎9-t-wfi]][🚎9-t-wf] [![CI JRuby][🚎10-j-wfi]][🚎10-j-wf] [![Deps Locked][🚎13-🔒️-wfi]][🚎13-🔒️-wf] [![Deps Unlocked][🚎14-🔓️-wfi]][🚎14-🔓️-wf] [![CI Test Coverage][🚎2-cov-wfi]][🚎2-cov-wf] [![CI Style][🚎5-st-wfi]][🚎5-st-wf] [![CodeQL][🖐codeQL-img]][🖐codeQL] [![Apache SkyWalking Eyes License Compatibility Check][🚎15-🪪-wfi]][🚎15-🪪-wf]
+[![Version][👽versioni]][👽version] [![GitHub tag (latest SemVer)][⛳️tag-img]][⛳️tag] [![License: MIT][📄license-img]][📄license] [![Downloads Rank][👽dl-ranki]][👽dl-rank] [![CodeCov Test Coverage][🏀codecovi]][🏀codecov] [![Coveralls Test Coverage][🏀coveralls-img]][🏀coveralls] [![QLTY Test Coverage][🏀qlty-covi]][🏀qlty-cov] [![QLTY Maintainability][🏀qlty-mnti]][🏀qlty-mnt] [![CI Heads][🚎3-hd-wfi]][🚎3-hd-wf] [![CI Runtime Dependencies @ HEAD][🚎12-crh-wfi]][🚎12-crh-wf] [![CI Current][🚎11-c-wfi]][🚎11-c-wf] [![CI Truffle Ruby][🚎9-t-wfi]][🚎9-t-wf] [![CI JRuby][🚎10-j-wfi]][🚎10-j-wf] [![Deps Locked][🚎13-🔒️-wfi]][🚎13-🔒️-wf] [![Deps Unlocked][🚎14-🔓️-wfi]][🚎14-🔓️-wf] [![CI Test Coverage][🚎2-cov-wfi]][🚎2-cov-wf] [![CI Style][🚎5-st-wfi]][🚎5-st-wf] [![Apache SkyWalking Eyes License Compatibility Check][🚎15-🪪-wfi]][🚎15-🪪-wf]
 
-`if ci_badges.map(&:color).detect { it != "green"}` ☝️ [let me know][🖼️galtzo-floss], as I may have missed the [discord notification][🖼️galtzo-floss].
+`if ci_badges.map(&:color).detect { it != "green"}` ☝️ [let me know][✉️discord-invite], as I may have missed the [discord notification][✉️discord-invite].
 
 ---
 
@@ -26,7 +19,7 @@ I've summarized my thoughts in [this blog post](https://dev.to/galtzo/hostile-ta
 
 </details>
 
-## 🌻 Synopsis
+## 🌻 Synopsis <a href="https://discord.gg/3qme4XHNKN"><img alt="Galtzo FLOSS Logo by Aboling0, CC BY-SA 4.0" src="https://logos.galtzo.com/assets/images/galtzo-floss/avatar-128px.svg" width="8%" align="right"/></a> <a href="https://ruby-toolbox.com"><img alt="ruby-lang Logo, Yukihiro Matsumoto, Ruby Visual Identity Team, CC BY-SA 2.5" src="https://logos.galtzo.com/assets/images/ruby-lang/avatar-128px.svg" width="8%" align="right"/></a>
 
 A brace converter for the markdown fences in your YARD docs to prevent the `InvalidLink` warning.
 
@@ -75,12 +68,14 @@ See the configuration and usage sections for more details.
 ### Compatibility
 
 Compatible with MRI Ruby 3.2.0+, and concordant releases of JRuby, and TruffleRuby.
+CI workflows and Appraisals are generated for MRI Ruby 3.2.0+.
+This test floor is configured by `ruby.test_minimum` in `.kettle-jem.yml` and
+may be higher than the gem's runtime compatibility floor when legacy Rubies are
+not practical for the current toolchain.
 
 | 🚚 _Amazing_ test matrix was brought to you by | 🔎 appraisal2 🔎 and the color 💚 green 💚 |
 |------------------------------------------------|--------------------------------------------------------|
 | 👟 Check it out! | ✨ [github.com/appraisal-rb/appraisal2][💎appraisal2] ✨ |
-
-
 
 ### Federated DVCS
 
@@ -382,6 +377,8 @@ To say "thanks!" ☝️ Join the Discord or 👇️ send money.
 
 ### Please give the project a star ⭐ ♥.
 
+Many parts of this project are actively managed by a [kettle-jem](https://github.com/structuredmerge/structuredmerge-ruby/tree/main/gems/kettle-jem) smart template utilizing [StructuredMerge.org](https://structuredmerge.org) merge contracts.
+
 Thanks for RTFM. ☺️
 
 [⛳liberapay-img]: https://img.shields.io/liberapay/goal/pboling.svg?logo=liberapay&color=a51611&style=flat
@@ -484,8 +481,6 @@ Thanks for RTFM. ☺️
 [🏀codecovi]: https://codecov.io/gh/galtzo-floss/yard-fence/graph/badge.svg
 [🏀coveralls]: https://coveralls.io/github/galtzo-floss/yard-fence?branch=main
 [🏀coveralls-img]: https://coveralls.io/repos/github/galtzo-floss/yard-fence/badge.svg?branch=main
-[🖐codeQL]: https://github.com/galtzo-floss/yard-fence/security/code-scanning
-[🖐codeQL-img]: https://github.com/galtzo-floss/yard-fence/actions/workflows/codeql-analysis.yml/badge.svg
 [🚎ruby-3.2-wf]: https://github.com/galtzo-floss/yard-fence/actions/workflows/ruby-3.2.yml
 [🚎ruby-3.3-wf]: https://github.com/galtzo-floss/yard-fence/actions/workflows/ruby-3.3.yml
 [🚎ruby-3.4-wf]: https://github.com/galtzo-floss/yard-fence/actions/workflows/ruby-3.4.yml
@@ -530,7 +525,7 @@ Thanks for RTFM. ☺️
 [🤝cb-pulls]: https://codeberg.org/galtzo-floss/yard-fence/pulls
 [🤝cb-donate]: https://donate.codeberg.org/
 [🤝contributing]: https://github.com/galtzo-floss/yard-fence/blob/main/CONTRIBUTING.md
-[🏀codecov-g]: https://codecov.io/gh/galtzo-floss/yard-fence/graphs/tree.svg
+[🏀codecov-g]: https://codecov.io/gh/galtzo-floss/yard-fence/graph/badge.svg
 [🖐contrib-rocks]: https://contrib.rocks
 [🖐contributors]: https://github.com/galtzo-floss/yard-fence/graphs/contributors
 [🖐contributors-img]: https://contrib.rocks/image?repo=galtzo-floss/yard-fence
@@ -557,6 +552,7 @@ Thanks for RTFM. ☺️
 [📄license-img]: https://img.shields.io/badge/License-MIT-259D6C.svg
 [📄license-compat]: https://www.apache.org/legal/resolved.html#category-a
 [📄license-compat-img]: https://img.shields.io/badge/Apache_Compatible:_Category_A-✓-259D6C.svg?style=flat&logo=Apache
+
 [📄ilo-declaration]: https://www.ilo.org/declaration/lang--en/index.htm
 [📄ilo-declaration-img]: https://img.shields.io/badge/ILO_Fundamental_Principles-✓-259D6C.svg?style=flat
 [🚎yard-current]: http://rubydoc.info/gems/yard-fence
@@ -575,7 +571,7 @@ Thanks for RTFM. ☺️
 | Package | yard-fence |
 | Description | 🍲 Convert ASCII braces ('{}') to full-width braces ('{}') within code fences (triple-or-single backticks) during YARD processing, and back to ASCII braces afterward |
 | Homepage | https://github.com/galtzo-floss/yard-fence |
-| Source | https://github.com/galtzo-floss/yard-fence/tree/v0.9.0 |
+| Source | https://github.com/galtzo-floss/yard-fence/tree/v0.9.1 |
 | License | `MIT` |
 | Funding | https://github.com/sponsors/pboling, https://issuehunt.io/u/pboling, https://ko-fi.com/pboling, https://liberapay.com/pboling/donate, https://opencollective.com/galtzo-floss, https://patreon.com/galtzo, https://polar.sh/pboling, https://thanks.dev/u/gh/pboling, https://tidelift.com/funding/github/rubygems/yard-fence, https://www.buymeacoffee.com/pboling |
 <!-- kettle-jem:metadata:end -->

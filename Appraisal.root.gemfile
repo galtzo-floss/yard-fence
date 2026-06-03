@@ -8,13 +8,6 @@
 
 source "https://gem.coop"
 
-# Psych 5.3 uses C APIs that TruffleRuby 23.1 does not expose while building
-# native extensions. Keep the root appraisal install path compatible with the
-# truffleruby-23.1 workflow before appraisal-specific gemfiles are available.
-platform :truffleruby do
-  gem "psych", "< 5.3"
-end
-
 # Appraisal Root Gemfile is for running appraisal to generate the Appraisal Gemfiles
 #   in gemfiles/*gemfile.
 # On CI, we use it for the Appraisal-based builds.

@@ -73,7 +73,7 @@ module Yard
     TRIPLE_TICK_FENCE = /^\s*```/
     INLINE_TICK_FENCE = /`([^`]+)`/
     DOUBLE_BRACE_PLACEHOLDER_REGEX = /{{([^{}]+)}}/
-    SINGLE_BRACE_PLACEHOLDER_REGEX = /{([A-Za-z0-9_:\-]+)}/
+    SINGLE_BRACE_PLACEHOLDER_REGEX = /{([A-Za-z0-9_:-]+)}/
     BRACED_TOKEN_REFERENCE_REGEX = /{([^{}]*(?:\\?\|)[^{}]*)}/
     BRACED_HTML_FRAGMENT_REGEX = /{([^{}]*<\/?[A-Za-z][^{}]*)}/
     # Lines that are part of a classic indented code block (CommonMark: 4 spaces)
@@ -270,7 +270,7 @@ module Yard
 
     def install_html_helper_patch!
       begin
-        require "yard/templates/template" unless defined?(::YARD::Templates::Template)
+        require "yard" unless defined?(::YARD::Templates::Template)
         require "yard/templates/helpers/html_helper" unless defined?(::YARD::Templates::Helpers::HtmlHelper)
       rescue LoadError, NameError => e
         warn("Yard::Fence.install_html_helper_patch!: failed to load YARD HTML helper: #{e.class}: #{e.message}")

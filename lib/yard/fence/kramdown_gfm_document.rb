@@ -26,7 +26,7 @@ module Yard
       def initialize(source, options = {})
         options[:input] = "GFM" unless options.key?(:input)
         @__yard_fence_source = source # Keep original for potential fallback.
-        super(source, options)
+        super
       end
 
       # Override to_html to provide a smart fallback: if the GFM parse leaves literal
