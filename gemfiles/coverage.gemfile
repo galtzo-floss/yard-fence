@@ -2,16 +2,12 @@
 
 source "https://gem.coop"
 
-platforms :truffleruby do
-  gem "psych", "< 5.3"
-end
-
 gemspec :path => "../"
 
 eval_gemfile("modular/coverage.gemfile")
 
-eval_gemfile("modular/documentation.gemfile")
-
 eval_gemfile("modular/optional.gemfile")
 
 eval_gemfile("modular/x_std_libs.gemfile")
+
+eval_gemfile("modular/documentation.gemfile")

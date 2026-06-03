@@ -28,9 +28,18 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
-- Prevented YARD from treating pipe-delimited token examples such as `{KJ|GEM_NAME}` and rendered example-table fragments as unresolved documentation links.
-
 ### Security
+
+## [0.9.2] - 2026-06-03
+
+- TAG: [v0.9.2][0.9.2t]
+- COVERAGE: 95.57% -- 194/203 lines in 5 files
+- BRANCH COVERAGE: 82.81% -- 53/64 branches in 5 files
+- 39.13% documented
+
+### Fixed
+
+- Prevented YARD from treating pipe-delimited token examples such as `{KJ|GEM_NAME}` and rendered example-table fragments as unresolved documentation links.
 
 ## [0.9.1] - 2026-05-24
 
@@ -225,7 +234,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.1...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.2...HEAD
+[0.9.2]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.1...v0.9.2
+[0.9.2t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.2
 [0.9.1]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.0...v0.9.1
 [0.9.1t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.1
 [0.9.0]: https://github.com/galtzo-floss/yard-fence/compare/v0.8.2...v0.9.0
