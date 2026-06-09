@@ -28,9 +28,18 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
-- Narrowed `YARD_FENCE_CLEAN_DOCS=true` cleanup to generated YARD HTML/CSS/JS artifacts so checked-in site metadata such as `docs/CNAME` is preserved.
-
 ### Security
+
+## [0.9.3] - 2026-06-09
+
+- TAG: [v0.9.3][0.9.3t]
+- COVERAGE: 95.65% -- 198/207 lines in 5 files
+- BRANCH COVERAGE: 83.33% -- 55/66 branches in 5 files
+- 38.30% documented
+
+### Fixed
+
+- Narrowed `YARD_FENCE_CLEAN_DOCS=true` cleanup to generated YARD HTML/CSS/JS artifacts so checked-in site metadata such as `docs/CNAME` is preserved.
 
 ## [0.9.2] - 2026-06-03
 
@@ -236,7 +245,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.2...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.3...HEAD
+[0.9.3]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.2...v0.9.3
+[0.9.3t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.3
 [0.9.2]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.1...v0.9.2
 [0.9.2t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.2
 [0.9.1]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.0...v0.9.1
