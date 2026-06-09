@@ -28,6 +28,8 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Narrowed `YARD_FENCE_CLEAN_DOCS=true` cleanup to generated YARD HTML/CSS/JS artifacts so checked-in site metadata such as `docs/CNAME` is preserved.
+
 ### Security
 
 ## [0.9.2] - 2026-06-03

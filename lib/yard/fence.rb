@@ -78,6 +78,11 @@ module Yard
     BRACED_HTML_FRAGMENT_REGEX = /{([^{}]*<\/?[A-Za-z][^{}]*)}/
     # Lines that are part of a classic indented code block (CommonMark: 4 spaces)
     INDENTED_CODE_LINE = /^ {4,}\S/
+    GENERATED_DOC_GLOBS = [
+      "**/*.html",
+      "css/**/*",
+      "js/**/*"
+    ].freeze
 
     class Error < StandardError; end
     # :nocov:
@@ -294,18 +299,25 @@ module Yard
       true
     end
 
-    # Clear the docs output directory to remove stale generated files.
+    # Clear generated docs output files to remove stale YARD artifacts.
     # Only runs when YARD_FENCE_CLEAN_DOCS=true is set.
     # This ensures that if a markdown file is deleted from the project,
-    # its corresponding HTML file won't remain in docs/.
+    # its corresponding HTML file won't remain in docs/, while preserving
+    # site metadata such as docs/CNAME.
     def clean_docs_directory
       return unless ENV.fetch("YARD_FENCE_CLEAN_DOCS", "false").casecmp?("true")
 
       docs = File.join(Dir.pwd, "docs")
       return unless Dir.exist?(docs)
 
-      FileUtils.rm_rf(docs)
-      puts "[yard/fence] Cleared docs/ directory (YARD_FENCE_CLEAN_DOCS=true)"
+      GENERATED_DOC_GLOBS.each do |pattern|
+        Dir.glob(File.join(docs, pattern), File::FNM_DOTMATCH).each do |path|
+          next unless File.file?(path)
+
+          FileUtils.rm_f(path)
+        end
+      end
+      puts "[yard/fence] Cleared generated docs artifacts (YARD_FENCE_CLEAN_DOCS=true)"
     end
 
     # Prepare for YARD documentation generation.

@@ -303,18 +303,32 @@ RSpec.describe Yard::Fence do
       end
     end
 
-    it "clears docs directory when YARD_FENCE_CLEAN_DOCS is true" do
+    it "clears generated docs artifacts when YARD_FENCE_CLEAN_DOCS is true" do
       with_tmp_project do |dir|
         docs = File.join(dir, "docs")
         FileUtils.mkdir_p(File.join(docs, "nested"))
+        FileUtils.mkdir_p(File.join(docs, "css"))
+        FileUtils.mkdir_p(File.join(docs, "js"))
         File.write(File.join(docs, "index.html"), "<html></html>")
         File.write(File.join(docs, "nested", "page.html"), "<html></html>")
+        File.write(File.join(docs, "css", "style.css"), "body {}")
+        File.write(File.join(docs, "js", "app.js"), "console.log('docs')")
+        File.write(File.join(docs, "CNAME"), "example.com")
+        File.write(File.join(docs, ".nojekyll"), "")
+        File.write(File.join(docs, "custom.txt"), "keep me")
 
         stub_env("YARD_FENCE_CLEAN_DOCS" => "true")
         output = capture(:stdout) { described_class.clean_docs_directory }
 
-        expect(Dir.exist?(docs)).to be(false)
-        expect(output).to include("Cleared docs/ directory")
+        expect(Dir.exist?(docs)).to be(true)
+        expect(File.exist?(File.join(docs, "index.html"))).to be(false)
+        expect(File.exist?(File.join(docs, "nested", "page.html"))).to be(false)
+        expect(File.exist?(File.join(docs, "css", "style.css"))).to be(false)
+        expect(File.exist?(File.join(docs, "js", "app.js"))).to be(false)
+        expect(File.read(File.join(docs, "CNAME"))).to eq("example.com")
+        expect(File.exist?(File.join(docs, ".nojekyll"))).to be(true)
+        expect(File.read(File.join(docs, "custom.txt"))).to eq("keep me")
+        expect(output).to include("Cleared generated docs artifacts")
       end
     end
 
