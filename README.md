@@ -571,7 +571,7 @@ Thanks for RTFM. ☺️
 | Package | yard-fence |
 | Description | 🍲 Convert ASCII braces ('{}') to full-width braces ('{}') within code fences (triple-or-single backticks) during YARD processing, and back to ASCII braces afterward |
 | Homepage | https://github.com/galtzo-floss/yard-fence |
-| Source | https://github.com/galtzo-floss/yard-fence/tree/v0.9.1 |
+| Source | https://github.com/galtzo-floss/yard-fence/tree/v0.9.2 |
 | License | `MIT` |
 | Funding | https://github.com/sponsors/pboling, https://issuehunt.io/u/pboling, https://ko-fi.com/pboling, https://liberapay.com/pboling/donate, https://opencollective.com/galtzo-floss, https://patreon.com/galtzo, https://polar.sh/pboling, https://thanks.dev/u/gh/pboling, https://tidelift.com/funding/github/rubygems/yard-fence, https://www.buymeacoffee.com/pboling |
 <!-- kettle-jem:metadata:end -->
