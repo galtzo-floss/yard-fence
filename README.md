@@ -551,7 +551,7 @@ Thanks for RTFM. ☺️
 [📄license-ref]: MIT.md
 [📄license-img]: https://img.shields.io/badge/License-MIT-259D6C.svg
 [📄license-compat]: https://www.apache.org/legal/resolved.html#category-a
-[📄license-compat-img]: https://img.shields.io/badge/Apache_Compatible:_Category_A-%E2%9C%93-259D6C.svg?style=flat&logo=Apache
+[📄license-compat-img]: https://img.shields.io/badge/Apache_Compatible:_Category_A-✓-259D6C.svg?style=flat&logo=Apache
 
 [📄ilo-declaration]: https://www.ilo.org/declaration/lang--en/index.htm
 [📄ilo-declaration-img]: https://img.shields.io/badge/ILO_Fundamental_Principles-✓-259D6C.svg?style=flat
@@ -571,7 +571,7 @@ Thanks for RTFM. ☺️
 | Package | yard-fence |
 | Description | 🍲 Convert ASCII braces ('{}') to full-width braces ('{}') within code fences (triple-or-single backticks) during YARD processing, and back to ASCII braces afterward |
 | Homepage | https://github.com/galtzo-floss/yard-fence |
-| Source | https://github.com/galtzo-floss/yard-fence/tree/v0.9.3 |
+| Source | https://github.com/galtzo-floss/yard-fence/tree/v0.9.4 |
 | License | `MIT` |
 | Funding | https://github.com/sponsors/pboling, https://issuehunt.io/u/pboling, https://ko-fi.com/pboling, https://liberapay.com/pboling/donate, https://opencollective.com/galtzo-floss, https://patreon.com/galtzo, https://polar.sh/pboling, https://thanks.dev/u/gh/pboling, https://tidelift.com/funding/github/rubygems/yard-fence, https://www.buymeacoffee.com/pboling |
 <!-- kettle-jem:metadata:end -->
