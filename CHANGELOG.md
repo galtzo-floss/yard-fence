@@ -22,6 +22,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
+- Retemplated project metadata, workflow pins, and dependency floors with the
+  latest `kettle-jem` template, including resilient templating bootstrap updates.
+
 ### Deprecated
 
 ### Removed
@@ -29,6 +32,7 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Fixed
 
 - Restored `docs/CNAME` so the generated documentation site keeps its custom domain.
+
 ### Security
 
 ## [0.9.3] - 2026-06-09

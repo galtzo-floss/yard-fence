@@ -1,7 +1,6 @@
 module Yard
   module Fence
     # Constants (refined literal types where possible)
-    VERSION: String
     ASCII_BRACES: "{}"
     FULLWIDTH_BRACES: "｛｝"
     RAKE_INTEGRATIONS: ::Hash[String, bool]
@@ -54,7 +53,6 @@ module Yard
     def __reset_rake_integrations__: () -> nil
 
     module Version
-      VERSION: String
     end
 
     class KramdownGfmDocument < ::Kramdown::Document
