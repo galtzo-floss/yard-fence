@@ -22,18 +22,29 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
-- Retemplated project metadata, workflow pins, and dependency floors with the
-  latest `kettle-jem` template, including resilient templating bootstrap updates.
-
 ### Deprecated
 
 ### Removed
 
 ### Fixed
 
-- Restored `docs/CNAME` so the generated documentation site keeps its custom domain.
-
 ### Security
+
+## [0.9.4] - 2026-06-14
+
+- TAG: [v0.9.4][0.9.4t]
+- COVERAGE: 95.65% -- 198/207 lines in 5 files
+- BRANCH COVERAGE: 83.33% -- 55/66 branches in 5 files
+- 38.30% documented
+
+### Changed
+
+- Retemplated project metadata, workflow pins, and dependency floors with the
+  latest `kettle-jem` template, including resilient templating bootstrap updates.
+
+### Fixed
+
+- Restored `docs/CNAME` so the generated documentation site keeps its custom domain.
 
 ## [0.9.3] - 2026-06-09
 
@@ -250,7 +261,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.3...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.4...HEAD
+[0.9.4]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.3...v0.9.4
+[0.9.4t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.4
 [0.9.3]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.2...v0.9.3
 [0.9.3t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.3
 [0.9.2]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.1...v0.9.2

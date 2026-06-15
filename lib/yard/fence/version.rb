@@ -3,7 +3,7 @@
 module Yard
   module Fence
     module Version
-      VERSION = "0.9.3"
+      VERSION = "0.9.4"
     end
     VERSION = Version::VERSION # Traditional Constant Location
   end
