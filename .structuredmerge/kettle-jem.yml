@@ -328,7 +328,7 @@ yard_host: "yard-fence.galtzo.com"
 # Full URL used for gemspec metadata["homepage_uri"].
 # Defaults to https://yard-fence.galtzo.com.
 # ENV override: KJ_HOMEPAGE_URI
-homepage_uri: "https://structuredmerge.org"
+homepage_uri: "https://yard-fence.galtzo.com"
 # Template source inventory.
 # The packaged inventory is the canonical kettle-jem project template. It
 # includes the detailed GitHub Actions workflow set, modular gemfiles,
