@@ -44,7 +44,7 @@ require "version_gem"
 # includes gem files
 require_relative "fence/version"
 
-# :nocov:
+# simplecov:disable
 begin
   require_relative "fence/kramdown_gfm_document"
 # Not covering, because kramdown support is tested, so this rescue is not hit in test runs.
@@ -56,7 +56,7 @@ rescue LoadError => error
     raise error
   end
 end
-# :nocov:
+# simplecov:enable
 module Yard
   module Fence
     ASCII_BRACES = "{}"
@@ -85,10 +85,10 @@ module Yard
     ].freeze
 
     class Error < StandardError; end
-    # :nocov:
+    # simplecov:disable
     # This is a runtime sanity check to ensure our fullwidth braces differ from ASCII braces.
     raise Error, "ASCII braces are not the same as Unicode Fullwidth braces" if ASCII_BRACES == FULLWIDTH_BRACES
-    # :nocov:
+    # simplecov:enable
 
     module_function
 
@@ -222,9 +222,9 @@ module Yard
 
     def postprocess_html_docs
       if ENV.fetch("YARD_FENCE_DISABLE", "false").casecmp?("true")
-        # :nocov:
+        # simplecov:disable
         warn("[yard/fence] postprocess_html_docs disabled via YARD_FENCE_DISABLE")
-        # :nocov:
+        # simplecov:enable
       else
         docs = File.join(Dir.pwd, "docs")
         return unless Dir.exist?(docs)
@@ -243,12 +243,12 @@ module Yard
     # require warnings when YARD is in the middle of loading itself. Call this
     # from a file loaded via .yardopts (e.g. `-e 'require "yard/fence/kramdown_gfm"; Yard::Fence.use_kramdown_gfm!'`).
     def use_kramdown_gfm!
-      # :nocov:
+      # simplecov:disable
       # Not covering, because kramdown support is tested, so this rescue is not hit in test runs.
       unless defined?(Yard::Fence::KramdownGfmDocument)
         raise Error, "Yard::Fence: Kramdown GFM provider not loaded. Add kramdown and kramdown-parser-gfm to your Gemfile."
       end
-      # :nocov:
+      # simplecov:enable
       providers = ::YARD::Templates::Helpers::MarkupHelper::MARKUP_PROVIDERS[:markdown]
       # NOTE: Intentionally using String for :const in KRAMDOWN_PROVIDER.
       # YARD performs string concatenation with this value (e.g., "::" + const).
@@ -325,9 +325,9 @@ module Yard
     # It cleans the docs directory (if YARD_FENCE_CLEAN_DOCS=true) and prepares tmp files.
     def prepare_for_yard
       if ENV.fetch("YARD_FENCE_DISABLE", "false").casecmp?("true")
-        # :nocov:
+        # simplecov:disable
         warn("[yard/fence] prepare_for_yard disabled via YARD_FENCE_DISABLE")
-        # :nocov:
+        # simplecov:enable
       else
         Yard::Fence.clean_docs_directory
         Yard::Fence.prepare_tmp_files
