@@ -20,11 +20,7 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
-- Added support for JRuby 10.1 and TruffleRuby 34.0.
-
 ### Changed
-
-- Retemplated project metadata and CI/development automation with `kettle-jem` v7.0.0.
 
 ### Deprecated
 
@@ -32,11 +28,29 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+### Security
+
+## [0.9.5] - 2026-06-22
+
+- TAG: [v0.9.5][0.9.5t]
+- COVERAGE: 90.83% -- 198/218 lines in 6 files
+- BRANCH COVERAGE: 71.79% -- 56/78 branches in 6 files
+- 38.30% documented
+
+### Added
+
+- Added support for JRuby 10.1 and TruffleRuby 34.0.
+
+### Changed
+
+- Retemplated project metadata and CI/development automation with `kettle-jem` v7.0.0.
+
+### Fixed
+
 - Corrected RubyGems homepage metadata to point at the gem documentation site.
+
 - Avoided a circular require warning when YARD's plugin loader requires
   `yard-fence` while `yard/fence` is already loading.
-
-### Security
 
 ## [0.9.4] - 2026-06-14
 
@@ -269,7 +283,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.4...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.5...HEAD
+[0.9.5]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.4...v0.9.5
+[0.9.5t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.5
 [0.9.4]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.3...v0.9.4
 [0.9.4t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.4
 [0.9.3]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.2...v0.9.3
