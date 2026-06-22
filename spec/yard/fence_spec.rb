@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "rake"
+require "open3"
+require "rbconfig"
 require "tempfile"
 require "yard/fence"
 
@@ -19,6 +21,13 @@ RSpec.describe Yard::Fence do
   it "is loadable via require 'yard-fence'" do
     expect { require "yard-fence" }.not_to raise_error
     expect(defined?(described_class)).to be_truthy
+  end
+
+  it "does not re-enter yard/fence when YARD loads the yard-fence plugin" do
+    _stdout, stderr, status = Open3.capture3(RbConfig.ruby, "-Ilib", "-e", %(require "yard/fence"))
+
+    expect(status).to be_success
+    expect(stderr).not_to include("circular require considered harmful")
   end
 
   describe "::sanitize_text" do

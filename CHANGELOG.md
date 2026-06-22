@@ -33,6 +33,8 @@ Please file a bug if you notice a violation of semantic versioning.
 ### Fixed
 
 - Corrected RubyGems homepage metadata to point at the gem documentation site.
+- Avoided a circular require warning when YARD's plugin loader requires
+  `yard-fence` while `yard/fence` is already loading.
 
 ### Security
 
