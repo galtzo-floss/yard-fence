@@ -28,9 +28,18 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
-- Package configured license files in gem release file lists.
-
 ### Security
+
+## [0.9.6] - 2026-07-02
+
+- TAG: [v0.9.6][0.9.6t]
+- COVERAGE: 90.83% -- 198/218 lines in 6 files
+- BRANCH COVERAGE: 71.79% -- 56/78 branches in 6 files
+- 38.30% documented
+
+### Fixed
+
+- Package configured license files in gem release file lists.
 
 ## [0.9.5] - 2026-06-22
 
@@ -285,7 +294,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.5...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.6...HEAD
+[0.9.6]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.5...v0.9.6
+[0.9.6t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.6
 [0.9.5]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.4...v0.9.5
 [0.9.5t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.5
 [0.9.4]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.3...v0.9.4
