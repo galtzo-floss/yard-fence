@@ -5,6 +5,7 @@ require "open3"
 require "rbconfig"
 require "tempfile"
 require "yard/fence"
+require "yard/fence/rake_task"
 
 RSpec.describe Yard::Fence do
   def with_tmp_project
@@ -28,6 +29,43 @@ RSpec.describe Yard::Fence do
 
     expect(status).to be_success
     expect(stderr).not_to include("circular require considered harmful")
+  end
+
+  describe "plugin loaders" do
+    let(:hoist_path) { File.expand_path("../../lib/yard/fence/hoist.rb", __dir__) }
+
+    it "loads yard-fence without re-requiring the implementation when already defined" do
+      expect { load File.expand_path("../../lib/yard-fence.rb", __dir__) }.not_to raise_error
+    end
+
+    it "can disable the hoist loader" do
+      stub_env("YARD_FENCE_DISABLE" => "true")
+
+      output = capture(:stderr) { load hoist_path }
+
+      expect(output).to include("Hoist disabled")
+    end
+
+    it "hoists and registers the Kramdown GFM provider" do
+      hide_const("KramdownGfmDocument") if defined?(KramdownGfmDocument)
+      allow(described_class).to receive(:use_kramdown_gfm!).and_return(true)
+      allow(described_class).to receive(:install_html_helper_patch!)
+
+      output = capture(:stdout) { load hoist_path }
+
+      expect(output).to include("KramdownGfmDocument hoisted")
+      expect(output).to include("Kramdown GFM provider registered")
+      expect(described_class).to have_received(:install_html_helper_patch!)
+    end
+
+    it "warns when provider registration fails" do
+      hide_const("KramdownGfmDocument") if defined?(KramdownGfmDocument)
+      allow(described_class).to receive(:use_kramdown_gfm!).and_return(false)
+
+      output = capture(:stderr) { load hoist_path }
+
+      expect(output).to include("provider registration failed")
+    end
   end
 
   describe "::sanitize_text" do
@@ -431,6 +469,36 @@ RSpec.describe Yard::Fence do
       Rake::Task[:yard].invoke
 
       expect(described_class).to have_received(:postprocess_html_docs).once
+    end
+  end
+
+  describe Yard::Fence::RakeTask do
+    before do
+      Rake::Task.clear
+    end
+
+    it "yields itself for configuration and defines the clean task" do
+      task = described_class.new do |config|
+        config.name = "custom:fence:prepare"
+      end
+
+      expect(task.name).to eq("custom:fence:prepare")
+      expect(Rake::Task.task_defined?("yard:fence:clean")).to be(true)
+    end
+
+    it "runs the clean rake task" do
+      described_class.new
+      allow(Yard::Fence).to receive(:clean_docs_directory)
+
+      Rake::Task["yard:fence:clean"].invoke
+
+      expect(Yard::Fence).to have_received(:clean_docs_directory)
+    end
+
+    it "does not enhance yard when the yard task is absent" do
+      described_class.new
+
+      expect(Rake::Task.task_defined?(:yard)).to be(false)
     end
   end
 

@@ -47,6 +47,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Fixed
 
+- Added coverage for YARD plugin loader and rake task integration paths so the
+  suite meets release coverage thresholds.
+
 ### Security
 
 ## [0.9.6] - 2026-07-02
