@@ -51,8 +51,8 @@ module Yard
 
     def self.__reset_rake_integrations__: () -> nil
     def __reset_rake_integrations__: () -> nil
-
     module Version
+      VERSION: String
     end
 
     class KramdownGfmDocument < ::Kramdown::Document
@@ -70,6 +70,7 @@ module Yard
       def needs_fallback?: (String html) -> bool
       def fallback_improved?: (String fb_html) -> bool
     end
+    VERSION: String
   end
 end
 
