@@ -19,7 +19,6 @@ module Yard
     #
     #   # This creates a `yard:fence:prepare` task that is automatically added
     #   # as a prerequisite to the yard task.
-    #
     class RakeTask < ::Rake::TaskLib
       # @return [String] the name of the prepare task (default: "yard:fence:prepare")
       attr_accessor :name
