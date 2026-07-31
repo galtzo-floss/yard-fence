@@ -20,6 +20,25 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.9.7] - 2026-07-31
+
+- TAG: [v0.9.7][0.9.7t]
+- COVERAGE: 92.66% -- 202/218 lines in 6 files
+- BRANCH COVERAGE: 79.49% -- 62/78 branches in 6 files
+- 42.55% documented
+
+### Added
+
 - Documentation linting now has its generated `yard-lint` dependency and severity config available in the local bundle.
 
 - kettle-jem-template-20260726-001 - Projects now include YARD lint
@@ -64,10 +83,6 @@ Please file a bug if you notice a violation of semantic versioning.
   setup-ruby-flash planning and can prepare appraisal-only jobs without
   installing the main Gemfile bundle.
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 
 - Added coverage for YARD plugin loader and rake task integration paths so the
@@ -109,8 +124,6 @@ Please file a bug if you notice a violation of semantic versioning.
 - kettle-jem-template-20260730-001 - Gemspec package file enumeration now runs
   relative to the gemspec directory, so packaged template assets are included
   even when the gemspec is loaded from another working directory.
-
-### Security
 
 ## [0.9.6] - 2026-07-02
 
@@ -376,7 +389,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.6...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.7...HEAD
+[0.9.7]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.6...v0.9.7
+[0.9.7t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.7
 [0.9.6]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.5...v0.9.6
 [0.9.6t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.6
 [0.9.5]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.4...v0.9.5
