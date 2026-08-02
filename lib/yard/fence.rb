@@ -40,9 +40,9 @@ require "fileutils"
 
 # third party gems
 require "version_gem"
+require_relative "fence/version"
 
 # includes gem files
-require_relative "fence/version"
 
 # simplecov:disable
 begin
