@@ -7,5 +7,32 @@
         22
       ]
     }
+  ],
+  "action: remove_modular_gem\nreason: \"The gemspec owns the project's documentation dependency.\"": [
+    {
+      "file": ".structuredmerge/kettle-jem.yml",
+      "lines": [
+        103,
+        108
+      ]
+    }
+  ],
+  "direct: yard-fence.gemspec\nmodular: gemfiles/modular/documentation.gemfile": [
+    {
+      "file": ".structuredmerge/kettle-jem.yml",
+      "lines": [
+        101,
+        106
+      ]
+    }
+  ],
+  "modular: gemfiles/modular/documentation.gemfile\naction: remove_modular_gem": [
+    {
+      "file": ".structuredmerge/kettle-jem.yml",
+      "lines": [
+        102,
+        107
+      ]
+    }
   ]
 }
