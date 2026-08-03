@@ -39,8 +39,6 @@
 require "fileutils"
 
 # third party gems
-require "version_gem"
-require_relative "fence/version"
 
 # includes gem files
 
@@ -353,9 +351,6 @@ module Yard
 end
 
 # Extend the Version with VersionGem::Basic to provide semantic version helpers.
-Yard::Fence::Version.class_eval do
-  extend VersionGem::Basic
-end
 
 # Rake integration is explicit. Call Yard::Fence.install_rake_tasks! from your
 # Rakefile after defining the :yard task so prepare + postprocess only run for
