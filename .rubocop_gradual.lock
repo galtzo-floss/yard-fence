@@ -1,4 +1,7 @@
 {
+  "gemfiles/modular/templating.gemfile:3018447732": [
+    [14, 3, 47, "Bundler/DuplicatedGem: Gem `tree_sitter_language_pack` requirements already given on line 10 of the Gemfile.", 3843603197]
+  ],
   "spec/yard/fence/kramdown_gfm_document_spec.rb:731168151": [
     [101, 9, 40, "Env/Assign: Mock the return value of an ENV variable instead of assigning to ENV directly.", 801164848]
   ]
