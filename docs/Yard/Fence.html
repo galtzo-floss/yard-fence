@@ -640,13 +640,13 @@ but does nothing at load time. Call prepare_for_yard from a rake task.</p>
       <pre class="lines">
 
 
+119
+120
 121
-122
-123
-124</pre>
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid___reset_rake_integrations__'>__reset_rake_integrations__</span>
   <span class='const'><span class='object_link'><a href="#RAKE_INTEGRATIONS_MUTEX-constant" title="Yard::Fence::RAKE_INTEGRATIONS_MUTEX (constant)">RAKE_INTEGRATIONS_MUTEX</a></span></span><span class='period'>.</span><span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='const'><span class='object_link'><a href="#RAKE_INTEGRATIONS-constant" title="Yard::Fence::RAKE_INTEGRATIONS (constant)">RAKE_INTEGRATIONS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_clear'>clear</span> <span class='rbrace'>}</span>
@@ -685,16 +685,16 @@ but does nothing at load time. Call prepare_for_yard from a rake task.</p>
       <pre class="lines">
 
 
+339
+340
 341
 342
 343
 344
-345
-346
-347</pre>
+345</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 341</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 339</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_at_load_hook'>at_load_hook</span>
   <span class='comment'># INTENTIONALLY EMPTY
@@ -737,6 +737,8 @@ site metadata such as docs/CNAME.</p>
       <pre class="lines">
 
 
+305
+306
 307
 308
 309
@@ -749,12 +751,10 @@ site metadata such as docs/CNAME.</p>
 316
 317
 318
-319
-320
-321</pre>
+319</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 307</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 305</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clean_docs_directory'>clean_docs_directory</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='const'>ENV</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>YARD_FENCE_CLEAN_DOCS</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>false</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_casecmp?'>casecmp?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -802,12 +802,12 @@ Visual effect in browsers is the same, but YARD’s link matcher won’t recogni
       <pre class="lines">
 
 
-128
-129
-130</pre>
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_fullwidth_braces'>fullwidth_braces</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_tr'>tr</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#ASCII_BRACES-constant" title="Yard::Fence::ASCII_BRACES (constant)">ASCII_BRACES</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="#FULLWIDTH_BRACES-constant" title="Yard::Fence::FULLWIDTH_BRACES (constant)">FULLWIDTH_BRACES</a></span></span><span class='rparen'>)</span>
@@ -832,6 +832,8 @@ Visual effect in browsers is the same, but YARD’s link matcher won’t recogni
       <pre class="lines">
 
 
+274
+275
 276
 277
 278
@@ -854,12 +856,10 @@ Visual effect in browsers is the same, but YARD’s link matcher won’t recogni
 295
 296
 297
-298
-299
-300</pre>
+298</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 276</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 274</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_install_html_helper_patch!'>install_html_helper_patch!</span>
   <span class='kw'>begin</span>
@@ -906,6 +906,8 @@ Visual effect in browsers is the same, but YARD’s link matcher won’t recogni
       <pre class="lines">
 
 
+93
+94
 95
 96
 97
@@ -928,12 +930,10 @@ Visual effect in browsers is the same, but YARD’s link matcher won’t recogni
 114
 115
 116
-117
-118
-119</pre>
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_install_rake_tasks!'>install_rake_tasks!</span><span class='lparen'>(</span><span class='id identifier rubyid_yard_task_name'>yard_task_name</span> <span class='op'>=</span> <span class='symbol'>:yard</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='op'>::</span><span class='const'>Rake</span><span class='op'>::</span><span class='const'>Task</span><span class='rparen'>)</span>
@@ -980,6 +980,8 @@ Visual effect in browsers is the same, but YARD’s link matcher won’t recogni
       <pre class="lines">
 
 
+221
+222
 223
 224
 225
@@ -992,12 +994,10 @@ Visual effect in browsers is the same, but YARD’s link matcher won’t recogni
 232
 233
 234
-235
-236
-237</pre>
+235</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 223</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 221</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_postprocess_html_docs'>postprocess_html_docs</span>
   <span class='kw'>if</span> <span class='const'>ENV</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>YARD_FENCE_DISABLE</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>false</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_casecmp?'>casecmp?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -1046,6 +1046,8 @@ It cleans the docs directory (if YARD_FENCE_CLEAN_DOCS=true) and prepares tmp fi
       <pre class="lines">
 
 
+324
+325
 326
 327
 328
@@ -1055,12 +1057,10 @@ It cleans the docs directory (if YARD_FENCE_CLEAN_DOCS=true) and prepares tmp fi
 332
 333
 334
-335
-336
-337</pre>
+335</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 326</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 324</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_prepare_for_yard'>prepare_for_yard</span>
   <span class='kw'>if</span> <span class='const'>ENV</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>YARD_FENCE_DISABLE</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>false</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_casecmp?'>casecmp?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -1105,6 +1105,8 @@ Clears the staging directory first to prevent stale files from persisting.</p>
       <pre class="lines">
 
 
+190
+191
 192
 193
 194
@@ -1121,12 +1123,10 @@ Clears the staging directory first to prevent stale files from persisting.</p>
 205
 206
 207
-208
-209
-210</pre>
+208</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 192</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 190</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_prepare_tmp_files'>prepare_tmp_files</span>
   <span class='id identifier rubyid_root'><span class='object_link'><a href="../top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span> <span class='op'>=</span> <span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_pwd'>pwd</span>
@@ -1167,12 +1167,12 @@ Clears the staging directory first to prevent stale files from persisting.</p>
       <pre class="lines">
 
 
-219
-220
-221</pre>
+217
+218
+219</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 219</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 217</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_restore_ascii_braces'>restore_ascii_braces</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_tr'>tr</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#FULLWIDTH_BRACES-constant" title="Yard::Fence::FULLWIDTH_BRACES (constant)">FULLWIDTH_BRACES</a></span></span><span class='comma'>,</span> <span class='const'><span class='object_link'><a href="#ASCII_BRACES-constant" title="Yard::Fence::ASCII_BRACES (constant)">ASCII_BRACES</a></span></span><span class='rparen'>)</span>
@@ -1197,15 +1197,15 @@ Clears the staging directory first to prevent stale files from persisting.</p>
       <pre class="lines">
 
 
+210
+211
 212
 213
 214
-215
-216
-217</pre>
+215</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 212</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 210</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_restore_ascii_braces_in_html_file'>restore_ascii_braces_in_html_file</span><span class='lparen'>(</span><span class='id identifier rubyid_html_filepath'>html_filepath</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>unless</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_file?'>file?</span><span class='lparen'>(</span><span class='id identifier rubyid_html_filepath'>html_filepath</span><span class='rparen'>)</span>
@@ -1245,6 +1245,8 @@ and disarm simple prose placeholders like {issuer} or {{something}}.</p>
       <pre class="lines">
 
 
+152
+153
 154
 155
 156
@@ -1272,12 +1274,10 @@ and disarm simple prose placeholders like {issuer} or {{something}}.</p>
 178
 179
 180
-181
-182
-183</pre>
+181</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 152</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sanitize_fenced_blocks'>sanitize_fenced_blocks</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_in_fence'>in_fence</span> <span class='op'>=</span> <span class='kw'>false</span>
@@ -1339,16 +1339,16 @@ and disarm simple prose placeholders like {issuer} or {{something}}.</p>
       <pre class="lines">
 
 
+131
+132
 133
 134
 135
 136
-137
-138
-139</pre>
+137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 133</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 131</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sanitize_inline_code'>sanitize_inline_code</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
   <span class='comment'># Use Regexp.last_match to safely access capture; to_s guards against nil
@@ -1377,18 +1377,18 @@ and disarm simple prose placeholders like {issuer} or {{something}}.</p>
       <pre class="lines">
 
 
+139
+140
 141
 142
 143
 144
 145
 146
-147
-148
-149</pre>
+147</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 141</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 139</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sanitize_prose_braces'>sanitize_prose_braces</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_ln'>ln</span> <span class='op'>=</span> <span class='id identifier rubyid_sanitize_inline_code'>sanitize_inline_code</span><span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='rparen'>)</span>
@@ -1419,13 +1419,13 @@ and disarm simple prose placeholders like {issuer} or {{something}}.</p>
       <pre class="lines">
 
 
+183
+184
 185
-186
-187
-188</pre>
+186</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 185</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 183</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sanitize_text'>sanitize_text</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_text'>text</span> <span class='kw'>unless</span> <span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span>
@@ -1466,6 +1466,8 @@ from a file loaded via .yardopts (e.g. <code>-e 'require "yard/fence/kramdown_gf
       <pre class="lines">
 
 
+243
+244
 245
 246
 247
@@ -1482,12 +1484,10 @@ from a file loaded via .yardopts (e.g. <code>-e 'require "yard/fence/kramdown_gf
 258
 259
 260
-261
-262
-263</pre>
+261</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 245</span>
+      <pre class="code"><span class="info file"># File 'lib/yard/fence.rb', line 243</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_use_kramdown_gfm!'>use_kramdown_gfm!</span>
   <span class='comment'># simplecov:disable

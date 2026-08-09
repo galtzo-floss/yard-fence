@@ -22,12 +22,25 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
-- kettle-jem-template-20260801-001 - Generated README gem dashboard links now
-  use ClickGems instead of BestGems.
-
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+### Security
+
+## [0.9.8] - 2026-08-09
+
+- TAG: [v0.9.8][0.9.8t]
+- COVERAGE: 95.41% -- 208/218 lines in 6 files
+- BRANCH COVERAGE: 84.62% -- 66/78 branches in 6 files
+- 42.55% documented
+
+### Changed
+
+- kettle-jem-template-20260801-001 - Generated README gem dashboard links now
+  use ClickGems instead of BestGems.
 
 ### Fixed
 
@@ -43,8 +56,6 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - kettle-jem-template-20260802-001 - Devcontainer JSON files now merge as JSONC,
   preserving comments and trailing commas during template updates.
-
-### Security
 
 ## [0.9.7] - 2026-07-31
 
@@ -383,7 +394,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.7...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.8...HEAD
+[0.9.8]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.7...v0.9.8
+[0.9.8t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.8
 [0.9.7]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.6...v0.9.7
 [0.9.7t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.7
 [0.9.6]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.5...v0.9.6
