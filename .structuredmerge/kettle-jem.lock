@@ -18,8 +18,10 @@ template_state:
     - gemfiles/modular/templating_local.gemfile
     - yard-fence.gemspec
     kettle-jem/template:
+    - ".github/workflows/framework-ci.yml"
     - ".simplecov"
     - Gemfile
+    - Rakefile
     - gemfiles/modular/documentation.gemfile
     - gemfiles/modular/templating.gemfile
   checksums:
