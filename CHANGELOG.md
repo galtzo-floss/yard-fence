@@ -22,6 +22,23 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Changed
 
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.9.9] - 2026-09-11
+
+- TAG: [v0.9.9][0.9.9t]
+- COVERAGE: 95.41% -- 208/218 lines in 6 files
+- BRANCH COVERAGE: 84.62% -- 66/78 branches in 6 files
+- 42.55% documented
+
+### Changed
+
 - [kc] kettle-jem/prepare: updated 9 project files:
   - dependencies (9)
 
@@ -30,14 +47,6 @@ Please file a bug if you notice a violation of semantic versioning.
   - dependencies (3)
   - other (1)
   - workflows (1)
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 
 ## [0.9.8] - 2026-08-09
 
@@ -403,7 +412,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.8...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.9...HEAD
+[0.9.9]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.8...v0.9.9
+[0.9.9t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.9
 [0.9.8]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.7...v0.9.8
 [0.9.8t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.8
 [0.9.7]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.6...v0.9.7
