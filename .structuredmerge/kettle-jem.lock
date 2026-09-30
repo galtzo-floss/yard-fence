@@ -639,7 +639,7 @@ files:
   CHANGELOG.md:
     recipe: template_source_application_CHANGELOG_md
     action: write
-    dest_sha256: 50807aa37f97cf7c9f5dcd78a655eb5a105a402a700c823329bbab0166e5f601
+    dest_sha256: 4c12721c6a63e69365b6ab2f7dcb20345643f9781e85285e9d8938bbd93a1914
     input_fingerprint: 5e3dc7f07c59ee0fb4a875e0f316d6ac99aab0f091c9be5ac1505169621daab7
     template_sources:
     - CHANGELOG.md.example
