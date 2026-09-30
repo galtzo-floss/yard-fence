@@ -20,6 +20,25 @@ Please file a bug if you notice a violation of semantic versioning.
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.9.10] - 2026-09-30
+
+- TAG: [v0.9.10][0.9.10t]
+- COVERAGE: 92.66% -- 202/218 lines in 6 files
+- BRANCH COVERAGE: 79.49% -- 62/78 branches in 6 files
+- 42.55% documented
+
+### Added
+
 - kettle-jem-template-20260913-001 - Templating now also surfaces a review
   entry in `dependency_conflicts.resolve` when a direct development
   dependency doesn't support one or more of this project's declared
@@ -37,14 +56,6 @@ Please file a bug if you notice a violation of semantic versioning.
   - dependencies (3)
   - other (2)
   - workflows (19)
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 
 ## [0.9.9] - 2026-09-11
 
@@ -428,7 +439,9 @@ Please file a bug if you notice a violation of semantic versioning.
 
 - Initial release
 
-[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.9...HEAD
+[Unreleased]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.10...HEAD
+[0.9.10]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.9...v0.9.10
+[0.9.10t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.10
 [0.9.9]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.8...v0.9.9
 [0.9.9t]: https://github.com/galtzo-floss/yard-fence/releases/tag/v0.9.9
 [0.9.8]: https://github.com/galtzo-floss/yard-fence/compare/v0.9.7...v0.9.8
