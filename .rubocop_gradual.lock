@@ -1,4 +1,7 @@
 {
+  "gemfiles/modular/style_local.gemfile:2349284340": [
+    [71, 23, 20, "Style/SafeNavigation: Use safe navigation (`&.`) instead of checking if an object exists before calling the method.", 1851388465]
+  ],
   "spec/yard/fence/kramdown_gfm_document_spec.rb:731168151": [
     [101, 9, 40, "Env/Assign: Mock the return value of an ENV variable instead of assigning to ENV directly.", 801164848]
   ]
