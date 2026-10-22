@@ -12,8 +12,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Peter H. Boling"]
   spec.email = ["floss@galtzo.com"]
 
-  spec.summary = "🍲 A brace converter for the markdown fences in your YARD"
-  spec.description = "🍲 Convert ASCII braces ('{}') to full-width braces ('{}') within code fences (triple-or-single backticks) during YARD processing, and back to ASCII braces afterward"
+  spec.summary = "🤺 A brace converter for the markdown fences in your YARD"
+  spec.description = "🤺 Convert ASCII braces ('{}') to full-width braces ('{}') within code fences (triple-or-single backticks) during YARD processing, and back to ASCII braces afterward"
   spec.homepage = "https://github.com/galtzo-floss/yard-fence"
   spec.licenses = ["MIT"]
   spec.required_ruby_version = ">= 3.2.0"

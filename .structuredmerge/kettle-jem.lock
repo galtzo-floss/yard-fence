@@ -2,7 +2,7 @@
 version: 1
 template_state:
   version: 7.1.38
-  applied_at: '2026-10-21'
+  applied_at: '2026-10-22'
   changelog_replay:
     last_entry_key: kettle-jem-template-20260913-001
     last_entry_date: '2026-09-13'
@@ -38,6 +38,7 @@ template_state:
     - ".github/workflows/unlocked_deps.yml"
     - ".simplecov"
     - Gemfile
+    - README.md
     - Rakefile
     - gemfiles/modular/coverage_local.gemfile
     - gemfiles/modular/documentation.gemfile
@@ -45,6 +46,7 @@ template_state:
     - gemfiles/modular/templating.gemfile
     - gemfiles/modular/templating_local.gemfile
     - spec/yard/fence/version_spec.rb
+    - yard-fence.gemspec
   checksums:
     ".aiignore.example": 48a5dfdd93afd1a15fdce39cc28ca9920263f00018b0968ab031fa744521e5ce
     ".config/mise/env.sh": aeea5a2ab489ba6e5467ae8de6e386ec8c8fe4ff31a044e69d0cd6a092dd6654
@@ -696,8 +698,8 @@ files:
   README.md:
     recipe: template_source_application_README_md
     action: write
-    dest_sha256: 74f6852908719c6d7ecdb4940cd73feeb1a4f558f69999607c256ecfe6105e32
-    input_fingerprint: 27ed0dc93f023cc468328378006f48ce49ad934299fc211c14cf53a8f0ded169
+    dest_sha256: c77a4839ad500892e9e31f632231efe892910cd1ba02265420aa71545675287e
+    input_fingerprint: 68473c128d602c881f1234cee426221cfdb2e38283c9680e8a05cc66303971ab
     template_sources:
     - README.md.example
   REEK:
@@ -1081,7 +1083,7 @@ files:
   yard-fence.gemspec:
     recipe: template_source_application_yard_fence_gemspec
     action: write
-    dest_sha256: 2918d2c08090b45a11711452bd5862365d7e95d5ea40dccd75b8362d6b4baf0c
-    input_fingerprint: ba86d6acb20873035488d2ef25a68aa389b53bd83d1c977e955bbd35042006f5
+    dest_sha256: 79f06efb7be7ee2ca223ca43f7560c5243acb9f075b1f352fb9df4931f9a08b8
+    input_fingerprint: 19989b4a2fd00450b78af37cd7c950721988aeb6714277fea07b1245c622d9b1
     template_sources:
     - gem.gemspec.example
